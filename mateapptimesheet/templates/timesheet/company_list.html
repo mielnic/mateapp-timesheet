@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="row mt-3 justify-content-md-center">
+    <div class="col shadow p-2 col-lg-10 rounded bg-light">
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid px-4">
+          <a class="navbar-brand" href="#"><h2>{% trans "Customers" %}</h2></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#customersNavbar" aria-controls="customersNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="customersNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if user.is_staff %}
+              <li class="nav-item">
+                <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Company' %}">{% trans "Add Customer" %}</a>
+              </li>
+              {% endif %}
+            </ul>
+            <form class="d-flex btn-sm" role="search">
+                {{searchform.q}}
+              <button class="btn btn-primary mx-2" type="submit">{% trans "Search" %}</button>
+            </form>
+            <div>
+              <a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+</div> 
+<div class="row mt-3 justify-content-md-center" id="companies-table-block">
+    <div class="col shadow p-3 border rounded col-lg-10">
+    {% if companies_list %}
+    <div class="table-responsive">
+    <table class="table table-hover" id="companies_list" name="Companies_List">
+    <!-- Cabecera de Tabla -->
+    
+        <thead class="table-primary">
+            <th class="px-3">{% trans "Name" %}</th>
+            <th>{% trans "Tax ID" %}</th>
+        </thead>
+
+    <!-- Cuerpo de Tabla -->
+    
+    <tbody>
+        {% for Company in companies_list %}
+        <tr>
+            <td><a class="nav-link px-3" href={% url 'timesheet:Company' id=Company.id a=0 b=5 %}>{{ Company.companyName }}</a></td>
+            <td>{{ Company.tax_id }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    </div>
+    {% if links %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="/timesheet/companies/{{idxPL}}/{{idxPR}}/" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% for link in links %}
+          <li class="page-item"><a class="page-link" id="page-link" href="/timesheet/companies/{{link.pl}}/{{link.pr}}/">{{link.page}}</a></li>
+          {% endfor %}
+          <li class="page-item">
+            <a class="page-link" href="/timesheet/companies/{{idxNL}}/{{idxNR}}/" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+    {% endif %}
+
+    {% else %}
+        <p>{% trans "No customers available." %}</p>
+    {% endif %}
+    </div>
+</div>
+<script src="{% static 'timesheet/js/companies_helper.js' %}"></script>
+{% endblock %}

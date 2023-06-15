@@ -1,0 +1,1 @@
+document.getElementById('id_seniority').setAttribute('class', 'form-select')

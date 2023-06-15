@@ -1,0 +1,98 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <div class="row row-col-1 py-3 justify-content-center">
+        <div class="col shadow m-5 p-4 border col-lg-5 rounded">
+            <div style="text-align: center;">
+                <h2>{% trans "Create User" %}</h2>
+                </div>
+            <br>
+            <p>
+                <div class="form-floating">
+                    {{usercreateform.email}}
+                    <label for="email" class="form-label">{% trans "eMail:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{usercreateform.first_name}}
+                    <label for="first_name" class="form-label">{% trans "First Name:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{usercreateform.last_name}}
+                    <label for="last_name" class="form-label">{% trans "Last Name:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{usercreateform.title}}
+                    <label for="title" class="form-label">{% trans "Job Title:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-select" id="id_seniority">
+                    {{usercreateform.seniority}}
+                </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{usercreateform.practice}}
+                    <label for="practice" class="form-label">{% trans "Practice:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{usercreateform.password1}}
+                    <label for="id_new_password1" class="form-label">{% trans "Password:" %}</label>
+                </div>
+            </p>
+            <p>
+            <div class="px-3">
+                <ul class="list-unstyled">
+                    <li><small>{% trans "Your password can’t be too similar to your other personal information." %}</small></li>
+                    <li><small>{% trans "Your password must contain at least 8 characters." %}</small></li>
+                    <li><small>{% trans "Your password can’t be a commonly used password." %}</small></li>
+                    <li><small>{% trans "Your password can’t be entirely numeric." %}</small></li>
+                </ul>
+            </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{usercreateform.password2}}
+                    <label for="id_new_password2" class="form-label">{% trans "Re-type Password:" %}</label>
+                </div>
+            </p>
+            <div>
+                <div class="form-check">
+                    {{usercreateform.is_active}}
+                    <label for="is_active" class="form-check-label">{% trans "Is Active?" %}</label>
+                </div>
+                <div class="form-check">
+                    {{usercreateform.is_staff}}
+                    <label for="is_staff" class="form-check-label">{% trans "Is Staff?" %}</label>
+                </div>
+            </div>
+
+            <p>
+                <div class="col d-flex justify-content-center px-5 py-3 col-lg-15">
+                    <p><button class="btn btn-primary px-4 mx-2" type="submit">{% trans "Save" %}</button></p>
+                    <p><a href={% url 'users:Users' a=0 b=10 %} class="btn btn-secondary px-4 mx-2" role="button">{% trans "Cancel" %}</a></p>
+                </div>
+            </p>
+        </div>
+    </div>
+
+
+</form>
+{% comment %} <script src="{% static 'timesheet/js/create_user_helper.js' %}"></script> {% endcomment %}
+
+{% endblock %}

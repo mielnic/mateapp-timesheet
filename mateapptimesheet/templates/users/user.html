@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="row row-col-2 py-3 justify-content-center">
+    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-lg-5 rounded">
+        <div style="text-align: center">
+            <h2>{% trans "User Profile" %}</h2>
+            </div>
+        <br>
+        <h4>{{muser.first_name}} {{muser.last_name}}</h4>
+        <br>
+        <h6> <strong>{% trans "eMail:" %}</strong> {{muser.email}}</h6>
+        <br>
+        {% if muser.is_superuser %} 
+        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Administrator" %}</h6>
+        {% elif muser.is_staff %} 
+        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Staff" %}</h6>
+        {% else %}
+        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Regular" %}</h6> 
+        {% endif %}
+        <br>
+        {% if muser.is_active %} 
+        <h6><strong>{% trans "User Status:" %}</strong> {% trans "Active" %}</h6>
+        {% else %}
+        <h6><strong>{% trans "User Status:" %}</strong> {% trans "Inactive" %}</h6> 
+        {% endif %}
+        <br>
+        <div  class="col d-flex justify-content-center px-5 py-3 col-lg-15">
+            <p><a href="/users/edit_user/{{ muser.id }}" class="btn btn-success px-4 mx-2" role="button">{% trans "Edit" %}</a></p>
+            <p><a href="/users/users/0/10/" class="btn btn-secondary px-4 mx-2" role="button">{% trans "Back" %}</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

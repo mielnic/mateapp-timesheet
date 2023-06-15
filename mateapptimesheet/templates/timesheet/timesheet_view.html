@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% block content %}
+
+<div class="row py-3 justify-content-center">
+    <div class="col shadow p-3 col-lg-10 rounded bg-light">
+        <h2>{{timesheet.timeDate}}</h2>
+        <a class='nav-link' href={% url 'timesheet:Project' id=timesheet.project.id a=0 b=5%}><h5>{{timesheet.project}}</h5></a>
+        <h5>{{timesheet.user}}</h5>
+    </div>
+</div>
+
+
+<div class="row py-3 justify-content-center">
+    <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-10">       
+        <p><a href={% url 'timesheet:Edit_Timesheet' id=timesheet.id %} class="btn btn-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
+        <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id %} class="btn btn-danger" role="button">{% trans "Delete" %}</a></p>
+    </div>
+    </div>
+
+{% endblock %}

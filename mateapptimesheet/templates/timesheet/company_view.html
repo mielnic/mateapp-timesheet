@@ -1,0 +1,70 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% block content %}
+
+<div class="row py-3 justify-content-center">
+    <div class="col shadow p-3 col-lg-10 rounded bg-light">
+        <h2>{{company.companyName}}</h2>
+        <h5>{{company.tax_id}}</h5>
+    </div>
+</div>
+
+<div class="row mt-3 justify-content-center">
+    <div class="col shadow p-3 border rounded col-lg-10">
+    {% if project_list %}
+    <div class="table-responsive">
+    <table class="table table-hover" id="person_list" name="Person_List">
+        <!-- Cabecera de Tabla -->
+        <thead class="table-primary">
+            <th>{% trans "Name" %}</th>
+            </th>
+        </thead>
+
+        <!-- Cuerpo de Tabla -->
+
+        <tbody>
+            {% for Project in project_list %}
+            <tr>
+                <td><a class="nav-link" href= {% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName }}</a></td>
+                {% comment %} <td><a class="nav-link" href="mailto:{{Person.email}}">{{Person.email}}</a></td>
+                <td>{{ Person.celphone }}</td> {% endcomment %}
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="/timesheet/company/{{company.id}}/{{idxPL}}/{{idxPR}}/" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% for link in links %}
+          <li class="page-item"><a class="page-link" id="page-link" href="/timesheet/company/{{company.id}}/{{link.pl}}/{{link.pr}}/">{{link.page}}</a></li>
+          {% endfor %}
+          <li class="page-item">
+            <a class="page-link" href="/timesheet/company/{{company.id}}/{{idxNL}}/{{idxNR}}/" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    {% else %}
+        <p>{% trans "No projects available." %}</p>
+    {% endif %}
+    </div>
+</div>
+{% if user.is_staff %}
+<div class="row py-3 justify-content-center">
+    <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-10">       
+        <p><a href={% url 'timesheet:Edit_Company' id=company.id %} class="btn btn-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
+        <p><a href={% url 'timesheet:Delete_Company' id=company.id %} class="btn btn-danger" role="button">{% trans "Delete" %}</a></p>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

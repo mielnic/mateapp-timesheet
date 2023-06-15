@@ -1,0 +1,80 @@
+{% load static %}
+{% load i18n %}
+<nav class="navbar navbar-expand-lg custom_nav">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="#">
+      <img src="{% static 'main/images/mate_plain.svg' %}" alt="MateApp" height="36">
+    </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          {% if user.is_authenticated %}
+
+          <li class="nav-item">
+            <a class="nav-link" href={% url 'timesheet:Self_Timesheets' a=0 b=10 %}><h5>{% trans "My Timesheets" %}</h5></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% url 'timesheet:Companies' a=0 b=10 %}><h5>{% trans "Customers" %}</h5></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% url 'timesheet:Projects' a=0 b=10 %}><h5>{% trans "Projects" %}</h5></a>
+          </li>
+          {% if user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link" href={% url 'timesheet:Timesheets' a=0 b=10 %}><h5>{% trans "Timesheets" %}</h5></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% url 'users:Users' a=0 b=10 %}><h5>{% trans "Users" %}</h5></a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="/"><h5>{% trans "Search" %}</h5></a>
+          </li>
+          {% endif %}
+
+        </ul>
+        <ul class="navbar-nav mx-4 ms-auto mb-2 mb-lg-0">
+
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/user_trash/0/10">
+                <img src="{% static 'main/images/trash.svg' %}" alt="Trash">
+              </a>
+            </li>
+          {% if user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/admin_home/0/10/">
+              <img src="{% static 'users/images/braces.svg' %}" alt="Admin">
+            </a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/users/profile/">
+              <img src="{% static 'users/images/person.svg' %}" alt="Profile">
+            </a>
+         
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/signout/">
+              <img src="{% static 'main/images/logout.svg' %}" alt="Logout">
+            </a>
+          </li>
+
+          {% else %}
+
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/users/register"><h5>{% trans "Register" %}  
+              <img src="{% static 'users/images/register.svg' %}" alt="Register"></h5>
+            </a>
+          </li>
+
+
+          {% endif %}
+   
+        </ul>
+      </div>
+    </div>
+  </nav>

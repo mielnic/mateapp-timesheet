@@ -1,0 +1,70 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% block content %}
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <div class="row row-col-1 py-3 justify-content-center">
+        <div class="col shadow border p-4 col-lg-5 rounded">
+            <div style="text-align: center;">
+                <h2>{% trans "User Registration" %}</h2>
+                </div>
+            <br>
+            <p>
+                <div class="form-floating">
+                    {{registerform.email}}
+                    <label for="email" class="form-label">{% trans "eMail:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="px-3">
+                    <p><small>{% trans "Only" %} <strong>@alphaworks.com.ar</strong> {% trans "addresses will be processed." %}</small></p>
+                </div>
+                </p>
+            <p>
+                <div class="form-floating">
+                    {{registerform.first_name}}
+                    <label for="first_name" class="form-label">{% trans "First Name:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{registerform.last_name}}
+                    <label for="last_name" class="form-label">{% trans "Last Name:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{registerform.password1}}
+                    <label for="id_password1" class="form-label">{% trans "Password:" %}</label>
+                </div>
+            </p>
+            <p>
+            <div class="px-3">
+                <ul class="list-unstyled">
+                    <li><small>{% trans "Your password can’t be too similar to your other personal information." %}</small></li>
+                    <li><small>{% trans "Your password must contain at least 8 characters." %}</small></li>
+                    <li><small>{% trans "Your password can’t be a commonly used password." %}</small></li>
+                    <li><small>{% trans "Your password can’t be entirely numeric." %}</small></li>
+                </ul>
+            </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{registerform.password2}}
+                    <label for="password2" class="form-label">{% trans "Re-type Password:" %}</label>
+                </div>
+            </p>
+            <div class="col d-flex justify-content-center my-4 col-lg-15">
+                <button class="btn btn-primary mx-2" type="submit">{% trans "Register" %}</button>
+                <a href="/" class="btn btn-secondary mx-2 px-4" role="button">{% trans "Cancel" %}</a>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+
+<div class="row py-3 justify-content-center">
+    <div class="col shadow p-3 col-lg-10 rounded bg-light">
+        {% if title %}
+        <h2>{{title}}</h2>
+        {% else %}
+        <h2>{{company.companyName}}</h2>
+        {% endif %}
+    </div>
+</div>
+
+<form action="" method="post">
+
+{% csrf_token %}
+
+<div class="row row-col-2 py-3 justify-content-center">
+    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-lg-5 rounded">
+        <p>
+        <div class="form-floating">
+           {{companyform.companyName}}
+            <label for="id_company">{% trans "Customer Name:" %}</label>
+        </div>
+        </p>
+        <p>
+        <div class="form-floating">
+            {{companyform.tax_id}}
+            <label for="id_tax_id">{% trans "Tax ID:" %}</label>
+        </div>
+        </p>
+    </div>
+    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-lg-5 rounded">
+    
+            <div class="col d-flex justify-content-between px-5 py-3 col-lg-10">
+        
+                <p><button type="submit" class="btn btn-primary px-3 mx-2">{% trans "Save" %}</button></p>
+            
+                {% if company.id %}
+                <p><a href={% url 'timesheet:Company' id=company.id a=0 b=5%} class="btn btn-secondary" role="button">{% trans "Cancel" %}</a></p>
+                {% else %}
+                <p><a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-secondary" role="button">{% trans "Cancel" %}</a></p>
+                {% endif %}
+    
+            </div>
+    </div>
+</div>
+{% endblock %}

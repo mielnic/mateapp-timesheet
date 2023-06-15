@@ -1,0 +1,34 @@
+# Archivos
+*.doc
+*.docx
+log*.*
+blame*.*
+*.temp
+*.tmp
+*.swp
+*.sql
+*.sqlite3
+sandbox.py
+sandbox.html
+notepad.txt
+*.pyc
+settings.py
+todo.txt
+Search-Materialized-View.pgsql
+document.pgsql
+!login.html
+!logout.svg
+!login.svg
+!login.js
+
+# Carpetas
+docs/
+temp/
+tmp/
+node_modules/
+*vsc/
+*vcode/
+_pycache_/
+fixtures/
+zzz-varios/
+static/

@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="row row-col-1 py-3 justify-content-center">
+    <div class="col shadow m-5 p-4 border col-lg-5 rounded">
+        <div style="text-align: center">
+        <h2>MateApp Directory</h2>
+        <br>
+        </div>
+        <form method="GET">
+            <div class="d-flex">
+                {{searchform.q}}
+            </div>
+            <br>
+            <button type="submit" class="w-100 btn btn-lg-5 btn-primary">{% trans "Search" %}</button>
+        </form>
+       
+        {% for result in results %}
+        <div class="col my-3 shadow p-4 border rounded">
+        {% if result.lastName %}
+        <strong><a class="nav-link" href="/directory/person/{{ result.id }}/">{{ result }}</a></strong>
+        <p>{{ result.celphone }}</p>
+        {% else %}
+        <strong><a class="nav-link" href="/directory/company/{{ result.id }}/0/5/">{{ result }}</a></strong>
+        <p>{{ result.tax_id }} </p>
+        {% endif %}
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>
+<script src="{% static 'main/js/search_helper.js' %}"></script>
+{% endblock content %}
+

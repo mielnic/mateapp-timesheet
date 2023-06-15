@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="row row-col-1 py-3 justify-content-center">
+    <div class="col shadow m-5 p-4 border col-lg-5 rounded">
+        <div style="text-align: center;">
+        <h2>MateApp Login</h2>
+        <br>
+        </div>
+            <div class="form-floating">
+                {{form.username}}
+                <label for="Username" class="form-label">{% trans "Username:" %}</label>
+            </div>
+            <br>
+            <div class="form-floating">
+                {{form.password}}
+                <label for="Password" class="form-label">{% trans "Password:" %}</label>
+            </div>
+            <br>
+        <button type="submit" class="w-100 btn btn-lg-5 btn-primary">Login</button>
+        <div>
+            <br>
+            <a class="nav-link" href="/users/password_reset/">{% trans "Forgot Password?" %}</a>
+            <br>
+        </div>
+    </div>
+</div>
+<script src="{% static 'main/js/login.js' %}"></script>
+{% endblock %}
