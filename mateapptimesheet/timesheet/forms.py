@@ -3,6 +3,11 @@ from .models import Company, Project, Time
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
+TYPE_CHOICES = [
+    (_("Business"), _("Business Hours")),
+    (_("Non Business"), _("Non Business Hours")),
+]
+
 class CompanyForm(forms.ModelForm):
 
     class Meta:
@@ -38,6 +43,12 @@ class ProjectForm(forms.ModelForm):
 
 class TimesheetForm(forms.ModelForm):
 
+    timeType= forms.ChoiceField(
+        choices=TYPE_CHOICES
+    )
+
+    timeType.widget.attrs.update({'class': 'form-select'})
+
     class Meta:
         model = Time
 
@@ -54,7 +65,6 @@ class TimesheetForm(forms.ModelForm):
             'timeItem': forms.DateInput(attrs={'class':'form-control','placeholder':'Duration'}),
             'timeDate': forms.DateInput(attrs={'class':'form-control'}),
             'project': forms.Select(attrs={'class':'form-select'}),
-            'timeType' : forms.TextInput(attrs={'class':'form-control','placeholder':'Type'}),
             'timeNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
             'user': forms.Select(attrs={'class':'form-select'})
         }

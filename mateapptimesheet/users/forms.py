@@ -8,9 +8,9 @@ from .models import CustomUser
 from django.utils.translation import gettext_lazy as _
 
 SENIORITY_CHOICES = [
-    ("Senior", "Senior"),
-    ("Semi-Senior", "Semi-Senior"),
     ("Junior", "Junior"),
+    ("Semi-Senior", "Semi-Senior"),
+    ("Senior", "Senior"),
 ]
 
 class CustomUserCreationForm(UserCreationForm):
@@ -26,6 +26,7 @@ class CustomUserCreationForm(UserCreationForm):
     seniority = forms.ChoiceField(
         choices=SENIORITY_CHOICES,
     )
+    seniority.widget.attrs.update({'class': 'form-select'})
 
     class Meta:
         model = CustomUser

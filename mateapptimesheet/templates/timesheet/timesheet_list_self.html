@@ -7,14 +7,14 @@
     <div class="col shadow p-2 col-lg-10 rounded bg-light">
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-4">
-          <a class="navbar-brand" href="#"><h2>{% trans "Timesheets" %}</h2></a>
+          <a class="navbar-brand" href="#"><h2>{% trans "My Timesheets" %}</h2></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#timesheetsNavbar" aria-controls="timesheetsNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="timesheetsNavbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Self_Timesheet' %}">{% trans "Add Timesheet" %}</a>
+                <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Self_Timesheet' %}">{% trans "Log Timesheet" %}</a>
               </li>
             </ul>
             <form class="d-flex btn-sm" role="search">
@@ -47,8 +47,8 @@
     <tbody>
         {% for Timesheet in timesheets_list %}
         <tr>
-          <td><a class="nav-link px-3" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
-          <td><a class="nav-link px-3" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
+          <td><a class="nav-link px-3" href={% url 'timesheet:Timesheet_Self' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
+          <td><a class="nav-link px-3" href={% url 'timesheet:Timesheet_Self' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
           <td><a class="nav-link px-3" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
         </tr>
         {% endfor %}

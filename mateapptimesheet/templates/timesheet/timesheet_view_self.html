@@ -13,8 +13,8 @@
 
 <div class="row py-3 justify-content-center">
     <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-10">       
-        <p><a href={% url 'timesheet:Edit_Timesheet' id=timesheet.id %} class="btn btn-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-        <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id u=1 %} class="btn btn-danger" role="button">{% trans "Delete" %}</a></p>
+        <p><a href={% url 'timesheet:Edit_Self_Timesheet' id=timesheet.id %} class="btn btn-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
+        <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id u=0%} class="btn btn-danger" role="button">{% trans "Delete" %}</a></p>
     </div>
     </div>
 

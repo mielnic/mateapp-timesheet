@@ -33,10 +33,12 @@ urlpatterns += [
     path('create_timesheet/', views.create_timesheet, name='Create_Timesheet'),
     path('create_self_timesheet/', views.create_self_timesheet, name='Create_Self_Timesheet'),
     path('edit_timesheet/<int:id>/', views.edit_timesheet, name='Edit_Timesheet'),
-    path('delete_timesheet/<int:id>/', views.delete_timesheet, name='Delete_Timesheet'),
+    path('edit_self_timesheet/<int:id>/', views.edit_self_timesheet, name='Edit_Self_Timesheet'),
+    path('delete_timesheet/<int:id>/<int:u>/', views.delete_timesheet, name='Delete_Timesheet'),
     path('restore_timesheet/<int:id>/<int:u>/', views.restore_timesheet, name='Restore_Timesheet'),
     path('full_delete_timesheet/<int:id>/', views.full_delete_timesheet, name='Full_Delete_Timesheet'),
     path('timesheets/<int:a>/<int:b>/', views.timesheets , name='Timesheets'),
     path('timesheets_self/<int:a>/<int:b>/', views.self_timesheets , name='Self_Timesheets'),
     path('timesheet/<int:id>/', views.timesheet , name='Timesheet'),
+    path('timesheet_self/<int:id>/', views.timesheet_self , name='Timesheet_Self'),
 ]

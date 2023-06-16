@@ -40,6 +40,8 @@
     
         <thead class="table-primary">
             <th class="px-3">{% trans "Name" %}</th>
+            <th class="px-3">{% trans "Customer" %}</th>
+            <th class="px-3">{% trans "Type" %}</th>
         </thead>
 
     <!-- Cuerpo de Tabla -->
@@ -48,6 +50,8 @@
         {% for Project in projects_list %}
         <tr>
             <td><a class="nav-link px-3" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName }}</a></td>
+            <td><a class="nav-link px-3" href={% url 'timesheet:Company' id=Project.company.id a=0 b=5 %}>{{ Project.company }}</a></td>
+            <td>{{ project.type }}</td>
         </tr>
         {% endfor %}
     </tbody>

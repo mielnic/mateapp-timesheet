@@ -207,7 +207,7 @@ def create_project(request):
         if projectform.is_valid():
             projectform.save()
             id = Project.objects.last().id
-            return HttpResponseRedirect(f'/timesheet/project/{id}/0/10/')     
+            return HttpResponseRedirect(f'/timesheet/project/{id}/0/5/')     
 
     else:
         projectform = ProjectForm()
@@ -349,6 +349,17 @@ def timesheet(request, id):
     }
     return HttpResponse(template.render(context, request))
 
+# Timesheet View Self
+
+@login_required
+def timesheet_self(request, id):
+    timesheet = Time.objects.get(id=id)
+    template = loader.get_template('timesheet/timesheet_view_self.html')
+    context = {
+        'timesheet' : timesheet,
+    }
+    return HttpResponse(template.render(context, request))
+
 
 # Timesheet Create
 
@@ -360,14 +371,14 @@ def create_timesheet(request):
         if timesheetform.is_valid():
             timesheetform.save()
             id = Time.objects.last().id
-            return HttpResponseRedirect(f'/timesheet/timesheet/{id}')     
+            return HttpResponseRedirect('/timesheet/timesheets/0/10/')     
 
     else:
         timesheetform = TimesheetForm()
 
     context = {
         'timesheetform': timesheetform,
-        'title': _("New Timesheet")
+        'title': _("Log Timesheet")
     }
     return render(request, 'timesheet/timesheet_create.html', context)
 
@@ -385,14 +396,14 @@ def create_self_timesheet(request):
             timesheet = Time.objects.get(id=id)
             timesheet.user = user
             timesheet.save()
-            return HttpResponseRedirect(f'/timesheet/timesheet/{id}')     
+            return HttpResponseRedirect('/timesheet/timesheets_self/0/10/')
 
     else:
         timesheetform = TimesheetForm()
 
     context = {
         'timesheetform': timesheetform,
-        'title': _("New Timesheet")
+        'title': _("Log Timesheet")
     }
     return render(request, 'timesheet/timesheet_create_self.html', context)
 
@@ -405,7 +416,7 @@ def edit_timesheet(request, id):
     timesheetform = TimesheetForm(request.POST or None, instance=timesheet)
     if timesheetform.is_valid():
         timesheetform.save()
-        return HttpResponseRedirect(f'/timesheet/timesheet/{id}/')
+        return HttpResponseRedirect('/timesheet/timesheets/0/10/')
     
     context = {
         'timesheetform': timesheetform,
@@ -413,16 +424,39 @@ def edit_timesheet(request, id):
     }
     return render(request, 'timesheet/timesheet_create.html', context)
 
+# Timesheet Update Self
+
+@login_required
+def edit_self_timesheet(request, id):
+    uid = request.user.id
+    user = get_user_model().objects.get(id=uid)
+    timesheet = Time.objects.get(id=id)
+    timesheetform = TimesheetForm(request.POST or None, instance=timesheet)
+    if timesheetform.is_valid():
+        timesheetform.save()
+        timesheet.user = user
+        timesheet.save()
+        return HttpResponseRedirect('/timesheet/timesheets_self/0/10/')
+    
+    context = {
+        'timesheetform': timesheetform,
+        'timesheet' : timesheet,
+    }
+    return render(request, 'timesheet/timesheet_create_self.html', context)
+
 # Timesheet Delete
 
 @login_required
-def delete_timesheet(request, id):
+def delete_timesheet(request, id, u):
     uid = request.user.id
     timesheet = Time.objects.get(id=id)
     timesheet.deleted = 1
     timesheet.deletedBy = uid
     timesheet.save()
-    return redirect('/timesheet/timesheets/0/10/')
+    if u == 0:
+        return redirect('/timesheet/timesheets_self/0/10/')
+    else:
+        return redirect('/timesheet/timesheets/0/10/')
 
 # Timesheet Restore
 

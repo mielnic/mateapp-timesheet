@@ -173,9 +173,8 @@ def admin_home(request, a=0, b=10):
 
 # Efectúa un backup manualmente
 
-""" @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@login_required
+@allowed_users(allowed_roles=['admin'])
 def do_backup(request):
-    print('hola')
     call_command('dbbackup', clean=True, interactive=False)
-    return redirect('/admin_home/0/10/') """
+    return redirect('/admin_home/0/10/')
