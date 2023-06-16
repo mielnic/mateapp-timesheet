@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
 from main.decorators import user_not_authenticated, allowed_users
 from django.contrib.auth import get_user_model
+import itertools
 
 
 
@@ -181,7 +182,7 @@ def projects(request, a, b):
 @login_required
 def project(request, id, a, b):
     project = Project.objects.get(id=id)
-    timesheet_list = Time.objects.filter(project_id=id).filter(deleted=False).order_by('-timeDate') [a:b]
+    timesheet_list = Time.objects.filter(project_id=id, deleted=False).order_by('-timeDate') [a:b]
     length = Time.objects.filter(project_id=id).filter(deleted=False).count()
     links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 5)
     template = loader.get_template('timesheet/project_view.html')
@@ -281,7 +282,7 @@ def timesheets(request, a, b):
         searchform = SearchForm(request.GET)
         if searchform.is_valid():
             q = searchform.cleaned_data['q']
-            timesheets_list = Time.objects.filter(project__icontains=q, deleted=False).order_by('-timeDate')
+            timesheets_list = Time.objects.filter(projectName__icontains=q, deleted=False, timeRevenue=False).order_by('-timeDate')
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/timesheet_list.html')
             if not timesheets_list:
@@ -484,3 +485,9 @@ def full_delete_timesheet(request, id):
 # View Project (users w/sumarized time?)
 
 # View Users (projects w/sumarized time?)
+
+def dev_button(request):
+    timesheets_queryset = Time.objects.values().order_by('-timeDate').filter(deleted=False)
+    timesheets_list=list(timesheets_queryset)
+    print(timesheets_list)
+    return redirect('/timesheet/timesheets/0/10/')

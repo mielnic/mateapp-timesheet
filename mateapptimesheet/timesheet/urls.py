@@ -42,3 +42,7 @@ urlpatterns += [
     path('timesheet/<int:id>/', views.timesheet , name='Timesheet'),
     path('timesheet_self/<int:id>/', views.timesheet_self , name='Timesheet_Self'),
 ]
+
+urlpatterns += [
+    path('dev', views.dev_button, name='Dev'),
+]
