@@ -19,7 +19,8 @@ document.pgsql
 !login.html
 !logout.svg
 !login.svg
-!login.js
+!login.js\
+.DS_Store
 
 # Carpetas
 docs/
@@ -32,3 +33,4 @@ _pycache_/
 fixtures/
 zzz-varios/
 static/
+venv/
