@@ -4,8 +4,17 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
 TYPE_CHOICES = [
-    (_("Business"), _("Business Hours")),
-    (_("Non Business"), _("Non Business Hours")),
+    ("Business", _("Business Hours")),
+    ("Non Business", _("Non Business Hours")),
+]
+
+FILTER_CHOICES = [
+    (None, _("Select Filter")),
+    ("Current_Month", _("Current Month")),
+    ("Last_Month", _("Last Month")),
+    ("Last_Trimester", _("Last Quarter")),
+    ("Last_Semester", _("Last Semester")),
+    ("Last_Year", _("Last Year"))
 ]
 
 class CompanyForm(forms.ModelForm):
@@ -43,7 +52,7 @@ class ProjectForm(forms.ModelForm):
 
 class TimesheetForm(forms.ModelForm):
 
-    timeType= forms.ChoiceField(
+    timeType = forms.ChoiceField(
         choices=TYPE_CHOICES
     )
 
@@ -77,3 +86,17 @@ class TimesheetForm(forms.ModelForm):
 
         self.fields['user'].queryset = get_user_model().objects.order_by('last_name')
         self.fields['user'].empty_label = _("Select User")
+
+class FilterForm(forms.Form):
+
+    f = forms.ChoiceField(
+        choices=FILTER_CHOICES,
+        required=False,
+    )
+    f.widget.attrs.update({'class': 'form-select'})
+
+    q = forms.CharField(
+        label="Search",
+        required=False,
+        widget=forms.TextInput(attrs={'class':'form-control me-2', 'placeholder':_('Search:'), 'type':'search', 'aria-label':'search'}),
+    )

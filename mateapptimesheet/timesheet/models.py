@@ -45,7 +45,7 @@ class Time(models.Model):
     timeDate = models.DateField(blank=False, null=True, default=date.today)
     project = models.ForeignKey(Project, on_delete=models.DO_NOTHING, blank=True, null=True)
     timeType = models.CharField(max_length=100, blank=True)
-    timeRevenue = models.BooleanField(blank=True, default=1)
+    timeRevenue = models.BooleanField(blank=True, default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, blank=True, null=True)
     timeNotes = models.CharField(max_length=500, blank=True)
     deleted = models.BooleanField(blank=True, default=0)

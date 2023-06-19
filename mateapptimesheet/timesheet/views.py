@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect, response, request
 from django.template import loader
 from django.contrib import messages
 from .models import Address, Company, Project, Time
-from .forms import CompanyForm, ProjectForm, TimesheetForm
+from .forms import CompanyForm, ProjectForm, TimesheetForm, FilterForm
+from .functions import timeRange, timeSum
 from main.forms import SearchForm
 from main.functions import paginator
 from django.contrib.auth.decorators import login_required
@@ -11,6 +12,8 @@ from django.utils.translation import gettext_lazy as _
 from main.decorators import user_not_authenticated, allowed_users
 from django.contrib.auth import get_user_model
 import datetime
+from itertools import chain
+from operator import attrgetter
 
 
 
@@ -197,7 +200,6 @@ def project(request, id, a, b):
     }
     return HttpResponse(template.render(context, request))
 
-
 # Project Create
 
 @login_required
@@ -281,8 +283,17 @@ def timesheets(request, a, b):
     if 'q' in request.GET:
         searchform = SearchForm(request.GET)
         if searchform.is_valid():
+            print('valid q!')
             q = searchform.cleaned_data['q']
-            timesheets_list = Time.objects.filter(projectName__icontains=q, deleted=False, timeRevenue=False).order_by('-timeDate')
+            project_list = Time.objects.filter(project__projectName__icontains=q, deleted=False)
+            user_fn_list = Time.objects.filter(user__last_name__icontains=q, deleted=False)
+            user_ln_list = Time.objects.filter(user__first_name__icontains=q, deleted=False)
+            timesheets_list = sorted(chain(project_list, user_ln_list, user_fn_list),
+                                     key=attrgetter('timeDate'),
+                                     reverse=True,
+                                     )
+            print(len(timesheets_list))
+            print(timesheets_list[2].timeItem,)
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/timesheet_list.html')
             if not timesheets_list:
@@ -311,18 +322,25 @@ def timesheets(request, a, b):
 def self_timesheets(request, a, b):
     id = request.user.id
     user = get_user_model().objects.get(id=id)
-    searchform = SearchForm
-    if 'q' in request.GET:
-        searchform = SearchForm(request.GET)
-        if searchform.is_valid():
-            q = searchform.cleaned_data['q']
-            timesheets_list = Time.objects.filter(project__icontains=q, deleted=False, user=user).order_by('-timeDate')
+    filterform = FilterForm
+    s = ''
+    if 'q' in request.GET or 'f' in request.GET:
+        filterform = FilterForm(request.GET)
+        if filterform.is_valid():   
+            f = filterform.cleaned_data['f']
+            timesheets_list = timeRange(f)
+            if 'q' in request.GET:
+                if filterform.is_valid():
+                    q = filterform.cleaned_data['q']
+                    timesheets_list = timesheets_list.filter(project__projectName__icontains=q, deleted=False)
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/timesheet_list_self.html')
+            s = timeSum(timesheets_list)
             if not timesheets_list:
                 messages.warning(request, _("The search didn't return any result."))
 
     else:
+        print('standard!')
         timesheets_list = Time.objects.order_by('-timeDate').filter(user=user, deleted=False) [a:b]
         length = Time.objects.filter(user=user, deleted=False).count()
         links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
@@ -330,7 +348,8 @@ def self_timesheets(request, a, b):
 
     context = {
         'timesheets_list': timesheets_list,
-        'searchform' : searchform,
+        'filterform' : filterform,
+        's' : s,
         'links' : links,
         'idxPL' : idxPL,
         'idxPR' : idxPR,
@@ -487,7 +506,8 @@ def full_delete_timesheet(request, id):
 # View Users (projects w/sumarized time?)
 
 def dev_button(request):
-    timesheets_queryset = Time.objects.values().order_by('-timeDate').filter(deleted=False)
-    timesheets_list=list(timesheets_queryset)
+    dateref = datetime.datetime(2023, 6, 15)
+    timesheets_list = Time.objects.order_by('-timeDate').filter(deleted=False, timeDate__lt=dateref)
+    timesheets_list=list(timesheets_list)
     print(timesheets_list)
     return redirect('/timesheet/timesheets/0/10/')
