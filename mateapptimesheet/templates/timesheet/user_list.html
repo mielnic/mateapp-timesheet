@@ -1,0 +1,82 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% block content %}
+{% include 'includes/navbar_mgmt.html' %}
+
+<div class="row mt-3 justify-content-md-center">
+    <div class="col shadow p-3 border rounded col-lg-10">
+      <nav class="navbar navbar-expand-lg table_nav">
+        <div class="container-fluid px-4">
+          <a class="navbar-brand" href=""><h4>Users</h4></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usersNavbar" aria-controls="usersNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="usersNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <form class="d-flex btn-sm" role="search" id="qform">
+              {{filterform.q}}
+              {{filterform.f}}
+            <button class="btn btn-primary mx-2" type="submit">{% trans "Filter" %}</button>
+          </form>
+          <div>
+            <a href="{% url 'timesheet:Users' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+          </div>
+          </div>
+        </div>
+
+      </nav>
+    {% if users_list %}
+    <div class="table-responsive">
+    <table class="table table-hover" id="users_list" name="Users_List">
+        <!-- Cabecera de Tabla -->
+        <thead class="table-primary">
+            <th>{% trans "Name" %}</th>
+            <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th>
+            <th class="text-center">{% trans "Unallocated Time: " %}{{ total_unalloc_time.unalloc_time__sum }} hs.</th>
+        </thead>
+
+        <!-- Cuerpo de Tabla -->
+
+        <tbody>
+            {% for User in users_list %}
+            {% if User.alloc_time == 0 and User.is_active == False %}
+            {% else %}
+            <tr>
+                <td><a class="nav-link" href={% url 'timesheet:User' id=User.id a=0 b=10 %}>{{ User.last_name }}, {{ User.first_name }}</a></td>
+                <td class="text-center">{{ User.alloc_time}} hs.</td>
+                <td class="text-center">{{ User.unalloc_time }} hs.</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+
+    </table>
+    </div>
+    {% if links %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="/timesheet/users/{{idxPL}}/{{idxPR}}/" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% for link in links %}
+          <li class="page-item"><a class="page-link" id="page-link" href="/timesheet/users/{{link.pl}}/{{link.pr}}/">{{link.page}}</a></li>
+          {% endfor %}
+          <li class="page-item">
+            <a class="page-link" href="/timesheet/users/{{idxNL}}/{{idxNR}}/" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    
+      {% endif %}
+
+    {% else %}
+    <div class='mx-5 my-3'>{% trans "No Users available." %}</div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

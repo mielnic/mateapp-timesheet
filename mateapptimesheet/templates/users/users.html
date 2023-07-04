@@ -1,17 +1,18 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
 {% block content %}
+{% include 'includes/navbar_admin.html' %}
 <div class="row mt-3 justify-content-md-center">
     <div class="col shadow p-2 col-lg-10 rounded bg-light">
         <nav class="navbar navbar-expand-lg bg-light">
           <div class="container-fluid px-4">
-            <a class="navbar-brand" href=""><h2>Users</h2></a>
+            <a class="navbar-brand" href=""><h4>Users</h4></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usersNavbar" aria-controls="usersNavbar" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="usersNavbar">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item m-1">
+            <ul class="navbar-nav ms-auto mb-lg-0">
+              <li class="nav-item me-1 my-1">
                 <a class="btn btn-outline-secondary btn-sm" href={% url 'users:createUser' %}>{% trans "Create User" %}</a>
               </li>
             </ul>
@@ -19,8 +20,7 @@
           </div>
 
         </nav>
-    </div>
-    
+    </div> 
 </div>
 <div class="row mt-3 justify-content-md-center">
     <div class="col shadow p-3 border rounded col-lg-10">
@@ -32,7 +32,7 @@
             <th>{% trans "Name" %}</th>
             <th>{% trans "eMail" %}</th>
             <th>{% trans "Status" %}</th>
-            <th>{% trans "Is Staff?" %}</th>
+            <th>{% trans "Is Supervisor?" %}</th>
         </thead>
 
         <!-- Cuerpo de Tabla -->

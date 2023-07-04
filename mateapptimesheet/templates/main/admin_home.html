@@ -2,18 +2,19 @@
 {% load i18n %}
 
 {% block content %}
+{% include 'includes/navbar_admin.html' %}
 <!-- Backup Module -->
 <div class="row mt-3 justify-content-md-center">
   <div class="col shadow p-2 col-lg-10 rounded bg-light">
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-4">
-          <a class="navbar-brand" href=""><h2>{% trans "Backups" %}</h2></a>
+          <a class="navbar-brand" href=""><h4>{% trans "Backups" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#backupNavbar" aria-controls="backupNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="backupNavbar">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item m-1">
+          <ul class="navbar-nav ms-auto mb-lg-0">
+            <li class="nav-item me-1 my-1">
               <a class="btn btn-outline-secondary btn-sm" href="/backup/">{% trans "New Backup" %}</a>
             </li>
           </ul>
@@ -51,91 +52,5 @@
       <p>{% trans "No backups available." %}</p>
   {% endif %}
   </div>
-</div>
-<!-- Users y Admin Trash Module-->
-
-<div class="row mt-3 justify-content-md-center">
-    <div class="col shadow p-2 col-lg-10 rounded bg-light">
-        <nav class="navbar navbar-expand-lg bg-light">
-          <div class="container-fluid px-4">
-            <a class="navbar-brand" href=""><h2>{% trans "Inactive Users" %}</h2></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usersNavbar" aria-controls="usersNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="usersNavbar">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item m-1">
-                <a class="btn btn-outline-secondary btn-sm" href="/admin_trash/0/10/">{% trans "Admin Trash" %}</a>
-              </li>
-            </ul>
-            </div>
-          </div>
-        </nav>
-    </div>
-    
-</div>
-<div class="row mt-3 justify-content-md-center">
-    <div class="col shadow p-3 border rounded col-lg-10">
-    {% if users_list %}
-    <div class="table-responsive">
-    <table class="table table-hover" id="users_list" name="Users_List">
-        <!-- Cabecera de Tabla -->
-        <thead class="table-primary">
-            <th>{% trans "Name" %}</th>
-            <th>{% trans "eMail" %}</th>
-            <th>{% trans "Status" %}</th>
-            <th>{% trans "Is Staff?" %}</th>
-        </thead>
-
-        <!-- Cuerpo de Tabla -->
-
-        <tbody>
-            {% for User in users_list %}
-            <tr>
-                <td><a class="nav-link" href="/users/user/{{ User.id }}/">{{ User.last_name }}, {{ User.first_name }}</a></td>
-                <td>{{ User.email}}</td>
-                {% if User.is_active %}
-                <td class='text-primary'>{% trans "Active" %}</td>
-                {% else %}
-                <td class='text-danger'>{% trans "Inactive" %}</td>
-                {% endif %}
-                {% if User.is_staff %}
-                <td class='text-success'>{% trans "Yes" %}</td>
-                {% else %}
-                <td>{% trans "No" %}</td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </tbody>
-
-    </table>
-    </div>
-
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="/admin_home/{{idxPL}}/{{idxPR}}/" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          {% for link in links %}
-          <li class="page-item"><a class="page-link" id="page-link" href="/admin_home/{{link.pl}}/{{link.pr}}/">{{link.page}}</a></li>
-          {% endfor %}
-          <li class="page-item">
-            <a class="page-link" href="/admin_home/{{idxNL}}/{{idxNR}}/" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-    {% else %}
-        <p>{% trans "No inactive users available." %}</p>
-    {% endif %}
-    </div>
-</div>
-
-<div>
-  <br>
 </div>
 {% endblock %}

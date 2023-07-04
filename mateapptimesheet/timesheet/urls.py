@@ -43,6 +43,14 @@ urlpatterns += [
     path('timesheet_self/<int:id>/', views.timesheet_self , name='Timesheet_Self'),
 ]
 
+# Users
+
+urlpatterns += [
+    path('users/<int:a>/<int:b>/', views.users, name='Users'),
+    path('user/<int:id>/<int:a>/<int:b>/', views.user_detail, name='User'),
+]
+
+
 urlpatterns += [
     path('dev', views.dev_button, name='Dev'),
 ]

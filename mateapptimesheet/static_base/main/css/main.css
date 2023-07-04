@@ -5,3 +5,21 @@ thead {
 .custom_nav {
     background-color: rgba(16,131,192,0.1);
 }
+
+.table_nav {
+    background-color: white;
+}
+
+.border-cus-left {
+    border-left: 2px solid grey;
+    height: 2em;
+}
+
+.custom-border {
+    display: inline-block;
+    width: 0;
+    height: 1.3em;
+    margin-top: 0.75em;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}

@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+{% include 'includes/navbar_mgmt.html' %}
 <div class="row mt-3 justify-content-md-center">
     <div class="col shadow p-2 col-lg-10 rounded bg-light">
       <nav class="navbar navbar-expand-lg bg-light">
@@ -33,24 +34,24 @@
 </div> 
 <div class="row mt-3 justify-content-md-center" id="companies-table-block">
     <div class="col shadow p-3 border rounded col-lg-10">
-    {% if projects_list %}
+    {% if project_list %}
     <div class="table-responsive">
-    <table class="table table-hover" id="projects_list" name="Projects_List">
+    <table class="table table-hover" id="project_list" name="Project_List">
     <!-- Cabecera de Tabla -->
     
         <thead class="table-primary">
             <th class="px-3">{% trans "Name" %}</th>
-            <th class="px-3">{% trans "Customer" %}</th>
+            <th class="text-center">{% trans "Allocated" %}</th>
             <th class="px-3">{% trans "Type" %}</th>
         </thead>
 
     <!-- Cuerpo de Tabla -->
     
     <tbody>
-        {% for Project in projects_list %}
+        {% for Project in project_list %}
         <tr>
-            <td><a class="nav-link px-3" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName }}</a></td>
-            <td><a class="nav-link px-3" href={% url 'timesheet:Company' id=Project.company.id a=0 b=5 %}>{{ Project.company }}</a></td>
+            <td><a class="nav-link px-3" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project}}</a></td>
+            <td class="text-center">{{ Project.alloc_time }} hs.</td>
             <td>{{ project.type }}</td>
         </tr>
         {% endfor %}

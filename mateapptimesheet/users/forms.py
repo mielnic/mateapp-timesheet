@@ -41,6 +41,7 @@ class CustomUserCreationForm(UserCreationForm):
             "title",
             "seniority",
             "practice",
+            "allocTarget",
             ]
 
         widgets = {
@@ -48,7 +49,8 @@ class CustomUserCreationForm(UserCreationForm):
             'first_name' : forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}),
             'last_name': forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}),
             'title': forms.TextInput(attrs={'class':'form-control','placeholder':'Title'}),
-            'practice': forms.TextInput(attrs={'class':'form-control','placeholder':'Practise'}),
+            'practice': forms.TextInput(attrs={'class':'form-control','placeholder':'Practice'}),
+            'allocTarget' : forms.NumberInput(attrs={'class':'form-control'}),
             'is_staff' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_active' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
         }
@@ -71,6 +73,11 @@ class CustomUserChangeForm(UserChangeForm):
 
 class CustomUserEditForm(UserChangeForm):
 
+    seniority = forms.ChoiceField(
+        choices=SENIORITY_CHOICES,
+    )
+    seniority.widget.attrs.update({'class': 'form-select'})
+
     class Meta:
         model = CustomUser
         fields = [
@@ -78,11 +85,18 @@ class CustomUserEditForm(UserChangeForm):
             "last_name",
             "is_active",
             "is_staff",
+            "title",
+            "seniority",
+            "practice",
+            "allocTarget",
             ]
         
         widgets = {
             'first_name' : forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}),
             'last_name': forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}),
+            'title': forms.TextInput(attrs={'class':'form-control','placeholder':'Title'}),
+            'practice': forms.TextInput(attrs={'class':'form-control','placeholder':'Practice'}),
+            'allocTarget' : forms.NumberInput(attrs={'class':'form-control'}),
             'is_staff' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_active' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
         }

@@ -32,13 +32,16 @@ class Company(models.Model):
 class Project(models.Model):
     projectName = models.CharField(max_length=100, blank=True)
     company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, blank=True, null=True)
-    projectStatus = models.BooleanField(blank=True, default=0)
+    projectStatus = models.BooleanField(blank=True, default=1)
     projectType = models.CharField(max_length=15, blank=True)
+    budget = models.IntegerField(default=0, blank=True)
+    startDate = models.DateField(blank=False, null=True, default=date.today)
+    projectNotes = models.CharField(max_length=500, blank=True)
     deleted = models.BooleanField(blank=True, default=0)
     deletedBy = models.BigIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.projectName
+        return f'{self.projectName} - {self.company}'
     
 class Time(models.Model):
     timeItem = models.IntegerField(blank=False, null=True)

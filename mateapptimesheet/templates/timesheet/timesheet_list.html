@@ -3,18 +3,19 @@
 {% load static %}
 
 {% block content %}
+{% include 'includes/navbar_mgmt.html' %}
 <div class="row mt-3 justify-content-md-center">
     <div class="col shadow p-2 col-lg-10 rounded bg-light">
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-4">
-          <a class="navbar-brand" href="#"><h2>{% trans "Timesheets" %}</h2></a>
+          <a class="navbar-brand" href="#"><h4>{% trans "Timesheets" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#timesheetsNavbar" aria-controls="timesheetsNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="timesheetsNavbar">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-lg-0">
               <li class="nav-item">
-                <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Timesheet' %}">{% trans "Add Timesheet" %}</a>
+                <a class="btn btn-outline-secondary btn-sm me-1 my-1" href="{% url 'timesheet:Create_Timesheet' %}">{% trans "Add Timesheet" %}</a>
               </li>
             </ul>
             <form class="d-flex btn-sm" role="search">
@@ -79,7 +80,7 @@
     {% endif %}
 
     {% else %}
-        <p>{% trans "No timesheets available." %}</p>
+     <div class='mx-5 my-3'>{% trans "No timesheets available." %}</div>
     {% endif %}
     </div>
 </div>

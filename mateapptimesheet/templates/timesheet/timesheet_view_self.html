@@ -3,18 +3,23 @@
 {% block content %}
 
 <div class="row py-3 justify-content-center">
-    <div class="col shadow p-3 col-lg-10 rounded bg-light">
+    <div class="col shadow p-3 col-lg-5 rounded bg-light">
         <h2>{{timesheet.timeDate}}</h2>
-        <a class='nav-link' href={% url 'timesheet:Project' id=timesheet.project.id a=0 b=5%}><h5>{{timesheet.project}}</h5></a>
-        <h5>{{timesheet.user}}</h5>
+        <br>
+        <h5>{% trans "Logged Time: " %}<b>{{timesheet.timeItem}} Hs.</b>{% trans " for " %} <a class='text-reset text-decoration-none link-primary' href={% url 'timesheet:Project' id=timesheet.project.id a=0 b=5%}>{{timesheet.project}}</a></h5>
+        <br>
+        <h5>{% trans "Type: " %}{{timesheet.timeType}}</h5>
+        <br>
+        <p><b>{% trans "Notes: " %}</b>{{timesheet.timeNotes}}</p>
     </div>
 </div>
 
 
 <div class="row py-3 justify-content-center">
-    <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-10">       
+    <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-5">       
         <p><a href={% url 'timesheet:Edit_Self_Timesheet' id=timesheet.id %} class="btn btn-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-        <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id u=0%} class="btn btn-danger" role="button">{% trans "Delete" %}</a></p>
+        <p><a href={% url 'timesheet:Self_Timesheets' a=0 b=5 %} class="btn btn-secondary px-3 mx-3" role="button">{% trans "Cancel" %}</a></p>
+        <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id u=0%} class="btn btn-danger mx-3" role="button">{% trans "Delete" %}</a></p>
     </div>
     </div>
 

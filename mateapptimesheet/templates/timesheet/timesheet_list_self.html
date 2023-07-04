@@ -34,9 +34,9 @@
         <a class="btn btn-outline-secondary my-1" href="{% url 'timesheet:Create_Self_Timesheet' %}">{% trans "Log Timesheet" %}</a>
       </div>
         {% if s %}
-        <div class="col col-lg-3 mb-4">
-        <p><h5>Total Time: {{ s }} hs.</h5></p>
-      </div>
+          <div class="col col-lg-3 mb-4">
+          <p><h5>Total Time: {{ s }} hs.</h5></p>
+          </div>
         {% endif %}  
     </div>
     {% if timesheets_list %}
@@ -85,7 +85,7 @@
     {% endif %}
 
     {% else %}
-        <p>{% trans "No timesheets available." %}</p>
+    <div class='mx-5 my-3'>{% trans "No timesheets available." %}</div>
     {% endif %}
     </div>
 </div>

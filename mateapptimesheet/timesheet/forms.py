@@ -17,6 +17,32 @@ FILTER_CHOICES = [
     ("Last_Year", _("Last Year"))
 ]
 
+HOUR_CHOICES = [
+    (1, "1 Hs."),
+    (2, "2 Hs."),
+    (3, "3 Hs."),
+    (4, "4 Hs."),
+    (5, "5 Hs."),
+    (6, "6 Hs."),
+    (7, "7 Hs."),
+    (8, "8 Hs."),
+    (9, "9 Hs."),
+    (10, "10 Hs."),
+    (11, "11 Hs."),
+    (12, "12 Hs."),
+]
+
+PROJECT_TYPE_CHOICES = [
+    ("onetime", _("One-Time")),
+    ("recurrent", _("Recurrent")),
+]
+
+PROJECT_STATUS_CHOICES = [
+    (1, _("Active")),
+    (0, _("Finished")),
+]
+
+
 class CompanyForm(forms.ModelForm):
 
     class Meta:
@@ -33,16 +59,34 @@ class CompanyForm(forms.ModelForm):
 
 class ProjectForm(forms.ModelForm):
 
+    projectStatus = forms.ChoiceField(
+        choices=PROJECT_STATUS_CHOICES
+    )
+    projectType = forms.ChoiceField(
+        choices=PROJECT_TYPE_CHOICES
+    )
+
+    projectStatus.widget.attrs.update({'class': 'form-select'})
+    projectType.widget.attrs.update({'class': 'form-select'})
+
     class Meta:
         model = Project
         fields = [
             'projectName',
             'company',
+            'projectStatus',
+            'projectType',
+            'startDate',
+            'budget',
+            'projectNotes',
         ]
     
         widgets = {
             'projectName': forms.TextInput(attrs={'class':'form-control','placeholder':'Project Name'}),
             'company': forms.Select(attrs={'class':'form-select'}),
+            'startDate' : forms.DateInput(attrs={'class':'form-control'}),
+            'budget' : forms.NumberInput(attrs={'class':'form-control'}),
+            'projectNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
         }
     
     def __init__(self, *args, **kwargs):
@@ -55,8 +99,12 @@ class TimesheetForm(forms.ModelForm):
     timeType = forms.ChoiceField(
         choices=TYPE_CHOICES
     )
+    timeItem = forms.ChoiceField(
+        choices=HOUR_CHOICES
+    )
 
     timeType.widget.attrs.update({'class': 'form-select'})
+    timeItem.widget.attrs.update({'class': 'form-select'})
 
     class Meta:
         model = Time
@@ -71,7 +119,6 @@ class TimesheetForm(forms.ModelForm):
         ]
 
         widgets = {
-            'timeItem': forms.DateInput(attrs={'class':'form-control','placeholder':'Duration'}),
             'timeDate': forms.DateInput(attrs={'class':'form-control'}),
             'project': forms.Select(attrs={'class':'form-select'}),
             'timeNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),

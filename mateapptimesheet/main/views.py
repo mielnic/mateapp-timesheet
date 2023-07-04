@@ -149,10 +149,6 @@ def admin_trash(request, a, b):
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def admin_home(request, a=0, b=10):
-    # Users List
-    users_list = get_user_model().objects.order_by('last_name').filter(is_active=False) [a:b]
-    length = get_user_model().objects.filter(is_active=False).count()
-    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
     # Backup files List
     folder = f'{settings.MEDIA_ROOT}/backup/'
     file_list = os.listdir(folder)
@@ -160,12 +156,6 @@ def admin_home(request, a=0, b=10):
     path = f'{settings.MEDIA_URL}backup/'
     template = loader.get_template('main/admin_home.html')
     context = {
-        'users_list': users_list,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
         'file_list': file_list,
         'path': path,
     }

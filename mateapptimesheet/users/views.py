@@ -214,6 +214,25 @@ def users(request, a=0, b=10):
     }
     return HttpResponse(template.render(context, request))
 
+# Deleted Users List
+
+@login_required
+@allowed_users(allowed_roles=['admin', 'staff'])
+def users_deleted(request, a=0, b=10):
+    users_list = get_user_model().objects.order_by('last_name').filter(is_active=False) [a:b]
+    length = get_user_model().objects.filter(is_active=False).count()
+    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
+    template = loader.get_template('users/users.html')
+    context = {
+        'users_list': users_list,
+        'links' : links,
+        'idxPL' : idxPL,
+        'idxPR' : idxPR,
+        'idxNL' : idxNL,
+        'idxNR' : idxNR,
+    }
+    return HttpResponse(template.render(context, request))
+
 # User profile view (Admin)
 
 @login_required

@@ -12,6 +12,7 @@ urlpatterns = [
     path('password_reset/', views.passwordResetRequest, name = 'passwordReset'),
     path('password_reset_confirm/<uidb64>/<token>/', views.passwordResetConfirm, name='passwordResetConfirm'),
     path('users/<int:a>/<int:b>/', views.users, name = 'Users'),
+    path('deleted_users/<int:a>/<int:b>/', views.users_deleted, name = 'deletedUsers'),
     path('user/<int:id>/', views.user, name='User'),
     path('create_user/', views.create_user, name = 'createUser'),
     path('edit_user/<int:id>', views.edit_user, name = 'editUser'),

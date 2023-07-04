@@ -14,10 +14,18 @@
         <br>
         <h6> <strong>{% trans "eMail:" %}</strong> {{muser.email}}</h6>
         <br>
+        <h6> <strong>{% trans "Title:" %}</strong> {{muser.title}}</h6>
+        <br>
+        <h6> <strong>{% trans "Practice:" %}</strong> {{muser.practice}}</h6>
+        <br>
+        <h6> <strong>{% trans "Seniority:" %}</strong> {{muser.seniority}}</h6>
+        <br>
+        <h6> <strong>{% trans "Monthly Allocation Target:" %}</strong> {{muser.allocTarget}} hs.</h6>
+        <br>
         {% if muser.is_superuser %} 
         <h6><strong>{% trans "User Type:" %}</strong> {% trans "Administrator" %}</h6>
         {% elif muser.is_staff %} 
-        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Staff" %}</h6>
+        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Supervisor" %}</h6>
         {% else %}
         <h6><strong>{% trans "User Type:" %}</strong> {% trans "Regular" %}</h6> 
         {% endif %}
