@@ -43,9 +43,9 @@
             <div class="col d-flex justify-content-center my-3 px-5 py-3">
                 <button type="submit" class="btn btn-primary px-3 mx-2">{% trans "Save" %}</button>
                 {% if project.id %}
-                <a href={% url 'timesheet:Timesheet' id=timesheet.id%} class="btn btn-secondary mx-2 px-4" role="button">{% trans "Cancel" %}</a>
+                <a href={% url 'timesheet:Timesheet' id=timesheet.id%} class="btn btn-secondary" role="button">{% trans "Cancel" %}</a>
                 {% else %}
-                <a href="{% url 'timesheet:Self_Timesheets' a=0 b=10 %}" class="btn btn-secondary mx-2 px-4" role="button">{% trans "Cancel" %}</a>
+                <a href="{% url 'timesheet:Self_Timesheets' a=0 b=10 %}" class="btn btn-secondary" role="button">{% trans "Cancel" %}</a>
                 {% endif %}
             </div>
     </div>

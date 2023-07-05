@@ -1,23 +1,62 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
-{% block content %}
 
+{% block content %}
+{% include 'includes/navbar_mgmt.html' %}
 <div class="row py-3 justify-content-center">
-    <div class="col shadow p-3 col-lg-10 rounded bg-light">
-        <h2>{{project.projectName}}</h2>
-        <a class="nav-link" href={% url 'timesheet:Company' id=project.company.id a=0 b=5 %}><h5>{{project.company}}</h5></a>
+    <div class="row row-col-2 justify-content-between shadow p-2 col-lg-10 rounded bg-light">
+      <div class="col px-5 py-3 mb-2 col-lg-5">
+        <h3>{{project.projectName}}</h3>
+        <a class="nav-link" href={% url 'timesheet:Company' id=project.company.id a=0 b=5 %}><h6>{{project.company}}</h6></a>
+        <h6>{% trans "Start Date: " %}{{ project.startDate }}</h6>
+
+        {% if project.projectType == 'onetime' %}
+        <h6>{% trans "Type: One-Time" %}</h6>
+        {% else %}
+        <h6>{% trans "Type: Recurrent" %}</h6>
+        {% endif %}
+
+        {% if project.projectStatus %}
+        <h6>{% trans "Status: Active" %}</h6>
+        {% else %}
+        <h6>{% trans "Status: Finished" %}</h6>
+        {% endif %}
+      </div>
+      <div class="col align-text-bottom px-5 py-3 mb-2 col-lg-5">
+        <h4>{% trans "Project Budget: " %}{{ project.budget }} hs.</h4>
+    </div>
     </div>
 </div>
 
 <div class="row mt-3 justify-content-center">
     <div class="col shadow p-3 border rounded col-lg-10">
+      <nav class="navbar navbar-expand-lg table_nav">
+        <div class="container-fluid px-4">
+          <a class="navbar-brand" href=""><h4>Project Timesheets:</h4></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usersNavbar" aria-controls="usersNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="usersNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <form class="d-flex btn-sm" role="search" id="qform">
+              {{filterform.q}}
+              {{filterform.f}}
+            <button class="btn btn-primary mx-2" type="submit">{% trans "Filter" %}</button>
+          </form>
+          <div>
+            <a href="{% url 'timesheet:Project' id=id a=0 b=5 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+          </div>
+          </div>
+        </div>
+      </nav>
     {% if timesheet_list %}
     <div class="table-responsive">
     <table class="table table-hover" id="timesheet_list" name="timesheet_List">
         <!-- Cabecera de Tabla -->
         <thead class="table-primary">
             <th>{% trans "Name" %}</th>
-            <th>{% trans "Hours" %}</th>
+            <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.timeItem__sum }} hs.</th>
             <th>{% trans "User" %}</th>
         </thead>
 
@@ -29,7 +68,7 @@
             {% for Timesheet in timesheet_list %}
             <tr>
                 <td><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
-                <td>{{ Timesheet.timeItem }}</td>
+                <td class="text-center">{{ Timesheet.timeItem }} hs.</td>
                 <td>{{ Timesheet.user }}</td>
             </tr>
             {% endfor %}
@@ -61,7 +100,7 @@
 
     </table>
     </div>
-
+    {% if links %}
     <nav aria-label="Page navigation">
         <ul class="pagination">
           <li class="page-item">
@@ -79,9 +118,9 @@
           </li>
         </ul>
       </nav>
-
+    {% endif %}
     {% else %}
-        <p>{% trans "No timesheets available." %}</p>
+    <div class='mx-5 my-3'>{% trans "No Timesheets available." %}</div>
     {% endif %}
     </div>
 </div>
@@ -90,7 +129,8 @@
 <div class="row py-3 justify-content-center">
     <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-10">       
         <p><a href={% url 'timesheet:Edit_Project' id=project.id %} class="btn btn-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-        <p><a href={% url 'timesheet:Delete_Project' id=project.id %} class="btn btn-danger" role="button">{% trans "Delete" %}</a></p>
+        <p><a href={% url 'timesheet:Projects' a=0 b=10 %} class="btn btn-secondary px-3 mx-3" role="button">{% trans "Cancel" %}</a></p>
+        <p><a href={% url 'timesheet:Delete_Project' id=project.id %} class="btn btn-danger mx-3" role="button">{% trans "Delete" %}</a></p>
     </div>
 </div>
 {% endif %}

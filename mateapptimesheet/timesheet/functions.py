@@ -95,10 +95,23 @@ def userAllocTime(f):
     return user_dataset
 
 def getProjectList():
+    start, end, target = timeRange('Current_Month')
     project_dataset = Project.objects.order_by('projectName').filter(deleted=False
-        ).annotate(alloc_time_sum=Sum('time__timeItem', filter=Q(time__deleted=False))
-        ).annotate(alloc_time = Case(
-            When(alloc_time_sum = None, then = Value(0, output_field=IntegerField())), default='alloc_time_sum'
+        ).annotate(total_alloc_time_sum=Sum('time__timeItem', filter=Q(time__deleted=False))
+        ).annotate(month_alloc_time_sum=Sum('time__timeItem', filter=Q(time__deleted=False, time__timeDate__gte=start, time__timeDate__lte=end))
+        ).annotate(total_alloc_time = Case(
+            When(total_alloc_time_sum = None, then = Value(0, output_field=IntegerField())), default='total_alloc_time_sum'
             )
-        )
+        ).annotate(month_alloc_time = Case(
+            When(month_alloc_time_sum = None, then = Value(0, output_field=IntegerField())), default='month_alloc_time_sum'
+            )
+        ).annotate(alloc_time = Case(
+            When(projectType='onetime', then='total_alloc_time'), default='month_alloc_time'
+            )
+        ).annotate(unalloc_time = F('budget') - F('alloc_time'))
     return project_dataset
+
+def getProjectTimesheets(f, pid):
+    start, end, target = timeRange(f)
+    timesheet_dataset = Time.objects.filter(deleted=False, timeDate__gte=start, timeDate__lte=end, project_id=pid).order_by('-timeDate')
+    return timesheet_dataset

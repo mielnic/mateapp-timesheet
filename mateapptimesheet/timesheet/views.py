@@ -4,7 +4,7 @@ from django.template import loader
 from django.contrib import messages
 from .models import Address, Company, Project, Time
 from .forms import CompanyForm, ProjectForm, TimesheetForm, FilterForm
-from .functions import timeRange, timeSum, timesheetDateFilter, userAllocTime, getProjectList
+from .functions import timeRange, timeSum, timesheetDateFilter, userAllocTime, getProjectList, getProjectTimesheets
 from main.forms import SearchForm
 from main.functions import paginator
 from django.contrib.auth.decorators import login_required
@@ -12,9 +12,10 @@ from django.utils.translation import gettext_lazy as _
 from main.decorators import user_not_authenticated, allowed_users
 from django.contrib.auth import get_user_model
 import datetime
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from itertools import chain
 from operator import attrgetter
+from django.contrib.postgres.search import SearchVector, SearchQuery
 
 
 
@@ -158,14 +159,21 @@ def projects(request, a, b):
         searchform = SearchForm(request.GET)
         if searchform.is_valid():
             q = searchform.cleaned_data['q']
-            project_list = Project.objects.filter(projectName__icontains=q, deleted=False)
+            q = q.lower()
+            status = True
+            if 'inactive' in q:
+                status = False
+                q = q.replace('inactive', '').strip()
+                print(q, status)
+            project_dataset = getProjectList()
+            if q:
+                project_list = project_dataset.annotate(search=SearchVector("projectName", "company__companyName")).filter(search=SearchQuery(q), projectStatus=status)
+            else:
+                project_list = project_dataset.filter(projectStatus=status)
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/project_list.html')
-            if not project_list:
-                messages.warning(request, _("The search didn't return any result."))
-
     else:
-        project_dataset = getProjectList()
+        project_dataset = getProjectList().filter(projectStatus=True)
         project_list = project_dataset [a:b]
         length = project_dataset.count()
         links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
@@ -185,15 +193,40 @@ def projects(request, a, b):
 # Project View
 
 @login_required
+@allowed_users(allowed_roles=['admin', 'staff'])
 def project(request, id, a, b):
     project = Project.objects.get(id=id)
-    timesheet_list = Time.objects.filter(project_id=id, deleted=False).order_by('-timeDate') [a:b]
-    length = Time.objects.filter(project_id=id).filter(deleted=False).count()
-    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 5)
-    template = loader.get_template('timesheet/project_view.html')
+    if 'q' in request.GET or 'f' in request.GET:
+        filterform = FilterForm(request.GET)
+        if filterform.is_valid():   
+            f = filterform.cleaned_data['f']
+            q = filterform.cleaned_data['q']
+            timesheet_list = getProjectTimesheets(f, project.id)
+            if q:       
+                timesheet_list = timesheet_list.annotate(search=SearchVector("user__last_name", "user__first_name")).filter(search=SearchQuery(q))
+            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+            template = loader.get_template('timesheet/project_view.html')
+            total_alloc_time = timesheet_list.aggregate(Sum('timeItem'))
+            
+    else:
+        if project.projectType == 'onetime':
+            timesheet_dataset = getProjectTimesheets('All', project.id)
+            filterform = FilterForm(initial={'f':'All'})
+        else:
+            timesheet_dataset = getProjectTimesheets('Current_Month', project.id)
+            filterform = FilterForm(initial={'f':'Current_Month'})
+        timesheet_list = timesheet_dataset [a:b]
+        total_alloc_time = timesheet_dataset.aggregate(Sum('timeItem'))
+        length = timesheet_dataset.count()
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 5)
+        template = loader.get_template('timesheet/project_view.html')
+        
     context = {
         'project' : project,
         'timesheet_list' : timesheet_list,
+        'filterform' : filterform,
+        'total_alloc_time' : total_alloc_time,
+        'id' : id,
         'links' : links,
         'idxPL' : idxPL,
         'idxPR' : idxPR,
@@ -507,25 +540,22 @@ def full_delete_timesheet(request, id):
 @login_required
 @allowed_users(allowed_roles=['admin', 'staff'])
 def users(request, a=0, b=10):
-    filterform = FilterForm
+    #filterform = FilterForm
     if 'q' in request.GET or 'f' in request.GET:
         filterform = FilterForm(request.GET)
         if filterform.is_valid():   
             f = filterform.cleaned_data['f']
+            q = filterform.cleaned_data['q']
             users_list = userAllocTime(f)
-            if 'q' in request.GET:
-                if filterform.is_valid():
-                    q = filterform.cleaned_data['q']
-                    users_list = users_list.filter(last_name__icontains=q)
+            if q:       
+                users_list = users_list.annotate(search=SearchVector("last_name", "first_name")).filter(search=SearchQuery(q))
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/user_list.html')
             total_alloc_time = users_list.aggregate(Sum('alloc_time'))
             total_unalloc_time = users_list.aggregate(Sum('unalloc_time'))
-            if not users_list:
-                messages.warning(request, _("The search didn't return any result."))
-
     else:
         users_dataset = userAllocTime('Current_Month')
+        filterform = FilterForm(initial={'f':'Current_Month'})
         users_list =  users_dataset [a:b]
         total_alloc_time = users_dataset.aggregate(Sum('alloc_time'))
         total_unalloc_time = users_dataset.aggregate(Sum('unalloc_time'))

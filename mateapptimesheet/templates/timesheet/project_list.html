@@ -4,9 +4,9 @@
 
 {% block content %}
 {% include 'includes/navbar_mgmt.html' %}
-<div class="row mt-3 justify-content-md-center">
-    <div class="col shadow p-2 col-lg-10 rounded bg-light">
-      <nav class="navbar navbar-expand-lg bg-light">
+<div class="row mt-3 justify-content-md-center" id="companies-table-block">
+    <div class="col shadow p-3 border rounded col-lg-10">
+      <nav class="navbar navbar-expand-lg table_nav">
         <div class="container-fluid px-4">
           <a class="navbar-brand" href="#"><h2>{% trans "Projects" %}</h2></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#projectsNavbar" aria-controls="projectsNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,10 +30,6 @@
           </div>
         </div>
       </nav>
-    </div>
-</div> 
-<div class="row mt-3 justify-content-md-center" id="companies-table-block">
-    <div class="col shadow p-3 border rounded col-lg-10">
     {% if project_list %}
     <div class="table-responsive">
     <table class="table table-hover" id="project_list" name="Project_List">
@@ -42,6 +38,7 @@
         <thead class="table-primary">
             <th class="px-3">{% trans "Name" %}</th>
             <th class="text-center">{% trans "Allocated" %}</th>
+            <th class="text-center">{% trans "Remaining" %}</th>
             <th class="px-3">{% trans "Type" %}</th>
         </thead>
 
@@ -52,7 +49,16 @@
         <tr>
             <td><a class="nav-link px-3" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project}}</a></td>
             <td class="text-center">{{ Project.alloc_time }} hs.</td>
-            <td>{{ project.type }}</td>
+            {% if Project.unalloc_time < 0 %}
+            <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>
+            {% else %}
+            <td class="text-center">{{ Project.unalloc_time }} hs.</td>
+            {% endif %}
+            {% if Project.projectType == 'onetime' %}
+            <td>{% trans "One-Time" %}</td>
+            {% else %}
+            <td>{% trans "Recurrent" %}</td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
@@ -80,9 +86,9 @@
     {% endif %}
 
     {% else %}
-        <p>{% trans "No projects available." %}</p>
+    <div class='mx-5 my-3'>{% trans "No Projects available." %}</div>
     {% endif %}
     </div>
 </div>
-<script src="{% static 'timesheet/js/companies_helper.js' %}"></script>
+<script src="{% static 'timesheet/js/project_list_helper.js' %}"></script>
 {% endblock %}

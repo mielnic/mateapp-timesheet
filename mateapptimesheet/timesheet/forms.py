@@ -14,7 +14,8 @@ FILTER_CHOICES = [
     ("Last_Month", _("Last Month")),
     ("Last_Trimester", _("Last Quarter")),
     ("Last_Semester", _("Last Semester")),
-    ("Last_Year", _("Last Year"))
+    ("Last_Year", _("Last Year")),
+    ("All", _("All")),
 ]
 
 HOUR_CHOICES = [
