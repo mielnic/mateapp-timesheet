@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, response, request
-from .forms import CustomUserCreationForm, CustomUserChangeForm, ChangePasswordForm, PasswordResetForm, CustomUserEditForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, ChangePasswordForm, PasswordResetForm, CustomUserEditForm, CustomUserRegisterForm
 from main.decorators import user_not_authenticated, allowed_users
 from .models import CustomUser
 from .managers import CustomUserManager
@@ -62,7 +62,7 @@ def activationEmail(request, user, to_email):
 
 @user_not_authenticated
 def register(request):
-    registerform = CustomUserCreationForm(request.POST)
+    registerform = CustomUserRegisterForm(request.POST)
     if request.method == 'POST':  
         if registerform.is_valid():
             user = registerform.save(commit=False)
@@ -148,7 +148,7 @@ def passwordResetRequest(request):
                 'token' : account_activation_token.make_token(associated_user),
                 'protocol' : 'https' if request.is_secure() else 'http'
                 })
-                email = EmailMessage(mail_subject, message, to=[associated_user])
+                email = EmailMessage(mail_subject, message, to=[associated_user.email])
                 try:
                     email.send()
                     messages.success(request, _("Please go to your email inbox and click on the included link to reset your password. <b>Note:</b> Remember to check your spam folder."))
