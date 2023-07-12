@@ -24,13 +24,14 @@ def updateMaxAllocMonths():
             user.maxAllocMonths = 1
         user.save()
 
-def getMtdFactor():
-    todayDate = datetime.date.today()
-    firstDay = todayDate.replace(day=1)
-    mtd = todayDate.day - firstDay.day + 1
-    if mtd > 30: mtd = 30
-    mtd_factor = mtd/30
-    return mtd_factor
+def updateProjectAge():
+    l = Project.objects.count()
+    today = datetime.date.today()
+    for i in range(1, l+1):
+        project = Project.objects.get(id=i)
+        months = ((today.year - project.startDate.year) * 12 + (today.month - project.startDate.month))
+        project.projectAge = months
+        project.save()
 
 def timeRange(c):
     todayDate = datetime.date.today()
@@ -68,7 +69,6 @@ def timesheetDateFilter(f):
     timesheet_list = Time.objects.filter(deleted=False, timeDate__gte=start, timeDate__lte=end).order_by('-timeDate')
     return timesheet_list
 
-
 def timeSum(timesheets_list):
     l = len(timesheets_list)
     s = 0
@@ -95,6 +95,7 @@ def userAllocTime(f):
     return user_dataset
 
 def getProjectList():
+    updateProjectAge()
     start, end, target = timeRange('Current_Month')
     project_dataset = Project.objects.order_by('projectName').filter(deleted=False
         ).annotate(total_alloc_time_sum=Sum('time__timeItem', filter=Q(time__deleted=False))
@@ -108,7 +109,13 @@ def getProjectList():
         ).annotate(alloc_time = Case(
             When(projectType='onetime', then='total_alloc_time'), default='month_alloc_time'
             )
-        ).annotate(unalloc_time = F('budget') - F('alloc_time'))
+        ).annotate(unalloc_time = Case(
+            When(projectStatus=True, then=F('budget') - F('alloc_time')), default=0
+            )
+        ).annotate(balance = Case(
+            When(projectType='recurrent', then=(F('budget') * F('projectAge')) - (F('total_alloc_time') - F('month_alloc_time'))), default=F('budget') - F('alloc_time')
+            )
+        )
     return project_dataset
 
 def getProjectTimesheets(f, pid):

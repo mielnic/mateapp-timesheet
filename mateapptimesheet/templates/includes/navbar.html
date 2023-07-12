@@ -17,11 +17,9 @@
           <li class="nav-item">
             <a class="nav-link" href={% url 'timesheet:Self_Timesheets' a=0 b=10 %}><h5>{% trans "My Timesheets" %}</h5></a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href={% url 'timesheet:Companies' a=0 b=10 %}><h5>{% trans "Customers" %}</h5></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href={% url 'timesheet:Projects' a=0 b=10 %}><h5>{% trans "Projects" %}</h5></a>
+            <a class="nav-link" href={% url 'timesheet:Create_Self_Timesheet'%}><h5>{% trans "Log Timesheet" %}</h5></a>
           </li>
           {% if user.is_staff %}
           <li class="nav-item">
@@ -35,29 +33,29 @@
 
           {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/">
+              <a class="nav-link" aria-current="page" href="/" data-bs-toggle="tooltip" data-bs-title={% trans "Search" %} data-bs-placement="bottom">
                 <img src="{% static 'main/images/search.svg' %}" alt="Search">
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/user_trash/0/10">
+              <a class="nav-link" aria-current="page" href="/user_trash/0/10" data-bs-toggle="tooltip" data-bs-title={% trans "Trash" %} data-bs-placement="bottom">
                 <img src="{% static 'main/images/trash.svg' %}" alt="Trash">
               </a>
             </li>
           {% if user.is_superuser %}
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/admin_home/0/10/">
+            <a class="nav-link" aria-current="page" href="/admin_home/0/10/" data-bs-toggle="tooltip" data-bs-title={% trans "Admin" %} data-bs-placement="bottom">
               <img src="{% static 'users/images/braces.svg' %}" alt="Admin">
             </a>
           </li>
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/users/profile/">
+            <a class="nav-link" aria-current="page" href="/users/profile/" data-bs-toggle="tooltip" data-bs-title={% trans "Profile" %} data-bs-placement="bottom">
               <img src="{% static 'users/images/person.svg' %}" alt="Profile">
             </a>
          
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/signout/">
+            <a class="nav-link" aria-current="page" href="/signout/" data-bs-toggle="tooltip" data-bs-title={% trans "Logout" %} data-bs-placement="bottom">
               <img src="{% static 'main/images/logout.svg' %}" alt="Logout">
             </a>
           </li>

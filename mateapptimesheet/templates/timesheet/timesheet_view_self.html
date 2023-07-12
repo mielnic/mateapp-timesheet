@@ -4,11 +4,19 @@
 
 <div class="row py-3 justify-content-center">
     <div class="col shadow p-3 col-lg-5 rounded bg-light">
-        <h2>{{timesheet.timeDate}}</h2>
+        <h4><b>{% trans "Timesheet for: " %}{{timesheet.timeDate}}</b></h4>
         <br>
-        <h5>{% trans "Logged Time: " %}<b>{{timesheet.timeItem}} Hs.</b>{% trans " for " %} <a class='text-reset text-decoration-none link-primary' href={% url 'timesheet:Project' id=timesheet.project.id a=0 b=5%}>{{timesheet.project}}</a></h5>
+        <h5>{% trans "Logged Time: " %}<b>{{timesheet.timeItem}} Hs.</b></h5>
         <br>
-        <h5>{% trans "Type: " %}{{timesheet.timeType}}</h5>
+        <h5>{% trans "Project: " %}{{timesheet.project.projectName}}</h5>
+        <br>
+        <h5>{% trans "Customer: " %}{{timesheet.project.company}}</h5>
+        <br>
+        {% if timesheet.timeType == "Business" %}
+        <h5>{% trans "Type: Business Hours" %}</h5>
+        {% else %}
+        <h5>{% trans "Type: Non Business Hours" %}</h5>
+        {% endif %}
         <br>
         <p><b>{% trans "Notes: " %}</b>{{timesheet.timeNotes}}</p>
     </div>

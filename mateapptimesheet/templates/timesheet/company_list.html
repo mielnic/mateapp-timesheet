@@ -3,11 +3,12 @@
 {% load static %}
 
 {% block content %}
-<div class="row mt-3 justify-content-md-center">
-    <div class="col shadow p-2 col-lg-10 rounded bg-light">
-      <nav class="navbar navbar-expand-lg bg-light">
+{% include 'includes/navbar_mgmt.html' %}
+<div class="row mt-3 justify-content-md-center" id="companies-table-block">
+    <div class="col shadow p-3 border rounded col-lg-10">
+      <nav class="navbar navbar-expand-lg table_nav">
         <div class="container-fluid px-4">
-          <a class="navbar-brand" href="#"><h2>{% trans "Customers" %}</h2></a>
+          <a class="navbar-brand" href="#"><h4>{% trans "Customers" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#customersNavbar" aria-controls="customersNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -15,7 +16,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               {% if user.is_staff %}
               <li class="nav-item">
-                <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Company' %}">{% trans "Add Customer" %}</a>
+                <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Company' %}"><b>+</b> {% trans "Add Customer" %}</a>
               </li>
               {% endif %}
             </ul>
@@ -29,10 +30,6 @@
           </div>
         </div>
       </nav>
-    </div>
-</div> 
-<div class="row mt-3 justify-content-md-center" id="companies-table-block">
-    <div class="col shadow p-3 border rounded col-lg-10">
     {% if companies_list %}
     <div class="table-responsive">
     <table class="table table-hover" id="companies_list" name="Companies_List">
@@ -48,7 +45,7 @@
     <tbody>
         {% for Company in companies_list %}
         <tr>
-            <td><a class="nav-link px-3" href={% url 'timesheet:Company' id=Company.id a=0 b=5 %}>{{ Company.companyName }}</a></td>
+            <td class="px-3"><a class="nav-link" href={% url 'timesheet:Company' id=Company.id a=0 b=5 %}>{{ Company.companyName }}</a></td>
             <td>{{ Company.tax_id }}</td>
         </tr>
         {% endfor %}

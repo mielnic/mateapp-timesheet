@@ -1,11 +1,16 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
 {% block content %}
-
+{% include 'includes/navbar_mgmt.html' %}
 <div class="row py-3 justify-content-center">
-    <div class="col shadow p-3 col-lg-10 rounded bg-light">
+    <div class="row row-col-2 justify-content-between shadow p-2 col-lg-10 rounded bg-light">
+      <div class="col px-5 py-3 mb-2 col-lg-5">
         <h2>{{company.companyName}}</h2>
         <h5>{{company.tax_id}}</h5>
+      </div>
+      <div class="col align-text-bottom px-5 py-3 mb-2 col-lg-5">
+        <h4>{% trans "Customer Balance: " %}{{ total_balance.balance__sum }} hs.</h4>
+    </div>
     </div>
 </div>
 
@@ -17,7 +22,10 @@
         <!-- Cabecera de Tabla -->
         <thead class="table-primary">
             <th>{% trans "Name" %}</th>
-            </th>
+            <th class="text-center">{% trans "Allocated" %}</th>
+            <th class="text-center">{% trans "Backlog" %}</th>
+            <th>{% trans "Status" %}</th>
+            <th class="text-center">{% trans "Balance" %}</th>
         </thead>
 
         <!-- Cuerpo de Tabla -->
@@ -26,8 +34,18 @@
             {% for Project in project_list %}
             <tr>
                 <td><a class="nav-link" href= {% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName }}</a></td>
-                {% comment %} <td><a class="nav-link" href="mailto:{{Person.email}}">{{Person.email}}</a></td>
-                <td>{{ Person.celphone }}</td> {% endcomment %}
+                <td class="text-center">{{ Project.alloc_time }} hs.</td>
+                {% if Project.unalloc_time < 0 %}
+                <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>
+                {% else %}
+                <td class="text-center">{{ Project.unalloc_time }} hs.</td>
+                {% endif %}
+                {% if Project.projectStatus %}
+                <td>{% trans "Active" %}</td>
+                {% else %}
+                <td>{% trans "Finished" %}</td>
+                {% endif %}
+                <td class="text-center">{{ Project.balance }} hs.</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -62,7 +80,10 @@
 <div class="row py-3 justify-content-center">
     <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-10">       
         <p><a href={% url 'timesheet:Edit_Company' id=company.id %} class="btn btn-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-        <p><a href={% url 'timesheet:Delete_Company' id=company.id %} class="btn btn-danger" role="button">{% trans "Delete" %}</a></p>
+        <p><a href={% url 'timesheet:Companies' a=0 b=10 %} class="btn btn-secondary px-3 mx-3" role="button">{% trans "Cancel" %}</a></p>
+        {% if not project_list %}
+        <p><a href={% url 'timesheet:Delete_Company' id=company.id %} class="btn btn-danger mx-3" role="button">{% trans "Delete" %}</a></p>
+        {% endif %}
     </div>
 </div>
 {% endif %}

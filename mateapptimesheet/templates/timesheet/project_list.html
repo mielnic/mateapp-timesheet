@@ -8,7 +8,7 @@
     <div class="col shadow p-3 border rounded col-lg-10">
       <nav class="navbar navbar-expand-lg table_nav">
         <div class="container-fluid px-4">
-          <a class="navbar-brand" href="#"><h2>{% trans "Projects" %}</h2></a>
+          <a class="navbar-brand" href="#"><h4>{% trans "Projects" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#projectsNavbar" aria-controls="projectsNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -39,7 +39,7 @@
             <th class="px-3">{% trans "Name" %}</th>
             <th class="text-center">{% trans "Allocated" %}</th>
             <th class="text-center">{% trans "Remaining" %}</th>
-            <th class="px-3">{% trans "Type" %}</th>
+            <th>{% trans "Type" %}</th>
         </thead>
 
     <!-- Cuerpo de Tabla -->
@@ -47,7 +47,7 @@
     <tbody>
         {% for Project in project_list %}
         <tr>
-            <td><a class="nav-link px-3" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project}}</a></td>
+            <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project}}</a></td>
             <td class="text-center">{{ Project.alloc_time }} hs.</td>
             {% if Project.unalloc_time < 0 %}
             <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>

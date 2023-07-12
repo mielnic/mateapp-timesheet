@@ -45,9 +45,9 @@
     <!-- Cabecera de Tabla -->
     
         <thead class="table-primary">
-            <th class="px-3">{% trans "Date" %}</th>
+            <th class="px-4">{% trans "Date" %}</th>
             <th class="text-center">{% trans "Allocated Time: " %}{{ s }} hs.</th>
-            <th class="px-3">{% trans "Project" %}</th>
+            <th>{% trans "Project" %}</th>
         </thead>
 
     <!-- Cuerpo de Tabla -->
@@ -55,9 +55,9 @@
     <tbody>
         {% for Timesheet in timesheets_list %}
         <tr>
-          <td><a class="nav-link px-3" href={% url 'timesheet:Timesheet_Self' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
+          <td class="px-4"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
           <td class="text-center">{{ Timesheet.timeItem }}</td>
-          <td><a class="nav-link px-3" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
+          <td><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -89,5 +89,5 @@
     {% endif %}
     </div>
 </div>
-<script src="{% static 'timesheet/js/timesheet_self_helper.js' %}"></script>
+<script src="{% static 'timesheet/js/user_detail_helper.js' %}"></script>
 {% endblock %}

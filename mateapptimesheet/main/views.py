@@ -38,7 +38,7 @@ def login(request):
                 })
         else:
             auth_login(request, user)
-            return redirect('../timesheet/create_self_timesheet/')
+            return redirect('../timesheet/timesheets_self/0/10/')
 
 # Logout
 

@@ -120,7 +120,7 @@ class TimesheetForm(forms.ModelForm):
         ]
 
         widgets = {
-            'timeDate': forms.DateInput(attrs={'class':'form-control'}),
+            'timeDate': forms.DateInput(attrs={'type':'date', 'class':'form-control'}),
             'project': forms.Select(attrs={'class':'form-select'}),
             'timeNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
             'user': forms.Select(attrs={'class':'form-select'})

@@ -36,6 +36,7 @@ class Project(models.Model):
     projectType = models.CharField(max_length=15, blank=True)
     budget = models.IntegerField(default=0, blank=True)
     startDate = models.DateField(blank=False, null=True, default=date.today)
+    projectAge = models.IntegerField(default=0, blank=True)
     projectNotes = models.CharField(max_length=500, blank=True)
     deleted = models.BooleanField(blank=True, default=0)
     deletedBy = models.BigIntegerField(blank=True, null=True)
