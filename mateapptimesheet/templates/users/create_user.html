@@ -51,6 +51,18 @@
             </p>
             <p>
                 <div class="form-floating">
+                    {{usercreateform.allocTarget}}
+                    <label for="allocTarget" class="form-label">{% trans "Monthly Allocation Target:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-floating my-3">
+                    {{usercreateform.startDate}}
+                     <label for="id_startdate">{% trans "Start Date:" %}</label>
+                 </div>
+            </p>
+            <p>
+                <div class="form-floating">
                     {{usercreateform.password1}}
                     <label for="id_new_password1" class="form-label">{% trans "Password:" %}</label>
                 </div>

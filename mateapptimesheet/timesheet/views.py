@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from main.decorators import allowed_users
 from django.contrib.auth import get_user_model
 import datetime
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.contrib.postgres.search import SearchVector, SearchQuery
 
 
@@ -59,7 +59,7 @@ def company(request, id, a, b):
     company = Company.objects.get(id=id)
     project_dataset = getProjectList()
     project_list = project_dataset.filter(company_id=id).order_by('-projectStatus', 'projectName') [a:b]
-    total_balance = project_dataset.filter(company_id=id).aggregate(Sum('balance'))
+    total_balance = project_dataset.filter(company_id=id).filter(Q(projectType='recurrent') | Q(projectStatus=False)).aggregate(Sum('balance'))
     length = Project.objects.filter(company_id=id).filter(deleted=False).count()
     links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, (b-a))
     template = loader.get_template('timesheet/company_view.html')

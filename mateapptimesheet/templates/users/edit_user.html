@@ -50,6 +50,12 @@
                     <label for="allocTarget" class="form-label">{% trans "Monthly Allocation Target:" %}</label>
                 </div>
             </p>
+            <p>
+                <div class="form-floating my-3">
+                    {{usercreateform.startDate}}
+                     <label for="id_startdate">{% trans "Start Date:" %}</label>
+                 </div>
+            </p>
             <div>
                 <div class="form-check">
                     {{usercreateform.is_active}}

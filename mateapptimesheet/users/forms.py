@@ -42,6 +42,7 @@ class CustomUserCreationForm(UserCreationForm):
             "seniority",
             "practice",
             "allocTarget",
+            "startDate",
             ]
 
         widgets = {
@@ -53,6 +54,7 @@ class CustomUserCreationForm(UserCreationForm):
             'allocTarget' : forms.NumberInput(attrs={'class':'form-control'}),
             'is_staff' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_active' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
+            'startDate': forms.DateInput(attrs={'class':'form-control'}),
         }
 
 class CustomUserRegisterForm(UserCreationForm):
@@ -114,6 +116,7 @@ class CustomUserEditForm(UserChangeForm):
             "seniority",
             "practice",
             "allocTarget",
+            "startDate",
             ]
         
         widgets = {
@@ -124,6 +127,7 @@ class CustomUserEditForm(UserChangeForm):
             'allocTarget' : forms.NumberInput(attrs={'class':'form-control'}),
             'is_staff' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_active' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
+            'startDate': forms.DateInput(attrs={'class':'form-control'}),
         }
 
 class ChangePasswordForm(UserCreationForm):
