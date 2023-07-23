@@ -587,216 +587,223 @@ msgstr ""
 msgid ""
 "This link can only be used once. If you need to reset your password again, "
 "please visit"
-msgstr "gi"
+msgstr ""
+"Este link solo puede utilizado una sola vez. Si necesita restablecer su"
+"contraseña nuevamente, por favor visite"
 
 #: .\templates\users\password_reset_email.html:9
 msgid "and request another reset."
-msgstr ""
+msgstr "y solicite nuevamente el reseteo."
 
 #: .\templates\users\password_reset_email.html:11
 msgid "If you did not make this request, you can simply ignore this email."
-msgstr ""
+msgstr "Si usted no efectuó este requerimiento, simplemente ignore este email."
 
 #: .\templates\users\profile.html:9 .\templates\users\user.html:10
 msgid "User Profile"
-msgstr ""
+msgstr "Perfil de Usuario"
 
 #: .\templates\users\profile.html:17 .\templates\users\profile.html:19
 #: .\templates\users\profile.html:21 .\templates\users\user.html:28
 #: .\templates\users\user.html:30 .\templates\users\user.html:32
 msgid "User Type:"
-msgstr ""
+msgstr "Tipo de Usuario:"
 
 #: .\templates\users\profile.html:17 .\templates\users\user.html:28
 msgid "Administrator"
-msgstr ""
+msgstr "Administrador"
 
 #: .\templates\users\profile.html:19 .\templates\users\user.html:30
 msgid "Supervisor"
-msgstr ""
+msgstr "Supervisor"
 
 #: .\templates\users\profile.html:21 .\templates\users\user.html:32
 msgid "Regular"
-msgstr ""
+msgstr "Regular"
 
 #: .\templates\users\profile.html:25 .\templates\users\profile.html:27
 #: .\templates\users\user.html:36 .\templates\users\user.html:38
 msgid "User Status:"
-msgstr ""
+msgstr "Estado:"
 
 #: .\templates\users\profile.html:27 .\templates\users\user.html:38
 #: .\templates\users\users.html:48
 msgid "Inactive"
-msgstr ""
+msgstr "Inactivo"
 
 #: .\templates\users\profile_edit.html:12
 msgid "Profile Update for:"
-msgstr ""
+msgstr "Actualización del perfil de:"
 
 #: .\templates\users\profile_edit.html:29
 msgid "Change Password"
-msgstr ""
+msgstr "Cambiar Contraseña"
 
 #: .\templates\users\registration.html:12
 msgid "User Registration"
-msgstr ""
+msgstr "Registro de Usuario"
 
 #: .\templates\users\registration.html:23
 msgid "Only"
-msgstr ""
+msgstr "Solamente se procesarán direcciones del dominio"
 
 #: .\templates\users\registration.html:23
 msgid "addresses will be processed."
-msgstr ""
+msgstr "."
 
 #: .\templates\users\user.html:21
 msgid "Seniority:"
-msgstr ""
+msgstr "Seniority:"
 
 #: .\templates\users\user.html:43
 msgid "Back"
-msgstr ""
+msgstr "Volver"
 
 #: .\templates\users\users.html:33 .\users\forms.py:154
 msgid "eMail"
-msgstr ""
+msgstr "eMail"
 
 #: .\templates\users\users.html:51
 msgid "Yes"
-msgstr ""
+msgstr "Si"
 
 #: .\templates\users\users.html:53
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: .\templates\users\users.html:81
 msgid "No users available."
-msgstr ""
+msgstr "No existen usuarios disponibles."
 
 #: .\timesheet\forms.py:7
 msgid "Business Hours"
-msgstr ""
+msgstr "Horario Hábil"
 
 #: .\timesheet\forms.py:8
 msgid "Non Business Hours"
-msgstr ""
+msgstr "Horario Inábil"
 
 #: .\timesheet\forms.py:12
 msgid "Select Filter"
-msgstr ""
+msgstr "Seleccionar Filtro"
 
 #: .\timesheet\forms.py:13
 msgid "Current Month"
-msgstr ""
+msgstr "Mes Corriente"
 
 #: .\timesheet\forms.py:14
 msgid "Last Month"
-msgstr ""
+msgstr "Mes Pasado"
 
 #: .\timesheet\forms.py:15
 msgid "Last Quarter"
-msgstr ""
+msgstr "Último Trimestre"
 
 #: .\timesheet\forms.py:16
 msgid "Last Semester"
-msgstr ""
+msgstr "Último Semestre"
 
 #: .\timesheet\forms.py:17
 msgid "Last Year"
-msgstr ""
+msgstr "Último Año"
 
 #: .\timesheet\forms.py:18
 msgid "All"
-msgstr ""
+msgstr "Todo"
 
 #: .\timesheet\forms.py:96
 msgid "Select Customer:"
-msgstr ""
+msgstr "Seleccione Cliente:"
 
 #: .\timesheet\forms.py:133
 msgid "Select Project:"
-msgstr ""
+msgstr "Seleccione Proyecto:"
 
 #: .\timesheet\forms.py:136
 msgid "Select User"
-msgstr ""
+msgstr "Seleccione Usuario"
 
 #: .\timesheet\views.py:96
 msgid "New Customer"
-msgstr ""
+msgstr "Nuevo Cliente"
 
 #: .\timesheet\views.py:256
 msgid "New Project"
-msgstr ""
+msgstr "Nuevo Proyecto"
 
 #: .\users\forms.py:19 .\users\forms.py:63 .\users\forms.py:136
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: .\users\forms.py:23 .\users\forms.py:67 .\users\forms.py:140
 msgid "Confirm password"
-msgstr ""
+msgstr "Confirmar Contraseña"
 
 #: .\users\managers.py:15
 msgid "The Email must be set"
-msgstr ""
+msgstr "El email es obligatorio"
 
 #: .\users\managers.py:31
 msgid "Superuser must have is_staff=True."
-msgstr ""
+msgstr "El superusuario debe tener is_staff=True."
 
 #: .\users\managers.py:33
 msgid "Superuser must have is_superuser=True."
-msgstr ""
+msgstr "El superusuario debe tener is_superuser=True"
 
 #: .\users\models.py:11
 msgid "email address"
-msgstr ""
+msgstr "dirección de email"
 
 #: .\users\views.py:36
 msgid "Thank you for your confirmation. Your account is now active"
-msgstr ""
+msgstr "Gracias por su confirmación. Su cuenta ha sido activada."
 
 #: .\users\views.py:39
 msgid "Activation link is invalid. Contact the administrator"
-msgstr ""
+msgstr "El link de activación es inválido. Por favor contacte al administrador."
 
 #: .\users\views.py:45
 msgid "Activate your user account."
-msgstr ""
+msgstr "Active su cuenta."
 
 #: .\users\views.py:56
 msgid ""
 "Please go to your email inbox and click on the included activation link to "
 "enable your account. <b>Note:</b> Remember to check your spam folder."
 msgstr ""
+"Por favor busque nuestro mail en su bandeja de entrada y clickee en el link "
+"incluido a fin de activar su cuenta. <b>Nota:</b> Recuerde revisar su carpeta de spam."
 
 #: .\users\views.py:59 .\users\views.py:157
 msgid "There was a problem sending the email. Please contact the Administrator"
-msgstr ""
+msgstr "Hubo un problema al enviar el email. Por favor contacte al Administrador"
 
 #: .\users\views.py:143
 msgid "Password Reset Request"
-msgstr ""
+msgstr "Solicitud de restablecimiento de contraseña"
 
 #: .\users\views.py:154
 msgid ""
 "Please go to your email inbox and click on the included link to reset your "
 "password. <b>Note:</b> Remember to check your spam folder."
 msgstr ""
+"Por favor busque nuestro mail en su bandeja de entrada y clickee en el link "
+"incluido a fin de restablecer su contraseña. <b>Nota:</b> Recuerde revisar "
+"su carpeta de spam."
 
 #: .\users\views.py:159
 msgid "The email address provided is not registered."
-msgstr ""
+msgstr "El email proporcionado no esta registrado."
 
 #: .\users\views.py:184
 msgid "Your password has been set. You may go ahead and <b>login</b> now."
-msgstr ""
+msgstr "Su contraseña ha sido actualizada. Puede continuar al <b>Login</>."
 
 #: .\users\views.py:193
 msgid "Link is expired"
-msgstr ""
+msgstr "El link esta expirado"
 
 #: .\users\views.py:195
 msgid "Something went wrong, redirecting back to Homepage"
-msgstr ""
+msgstr "Algo salió mal. Lo estamos redireccionado a la pagina principal."
