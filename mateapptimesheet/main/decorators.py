@@ -42,8 +42,7 @@ def allowed_users(allowed_roles=[]):
 
 def self_registration_enabled(function=None, redirect_url='/'):
     """
-    Decorator for views that checks that the user is NOT logged in, redirecting
-    to the homepage if necessary by default.
+    Decorator to check if self registration is enabled.
     """
     def decorator(view_func):
         def _wrapped_view(request, *args, **kwargs):

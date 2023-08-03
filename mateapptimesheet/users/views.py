@@ -83,7 +83,7 @@ def register(request):
     
     context = {
         'registerform' : registerform,
-        'mdomain' : mdomain
+        'mdomain' : mdomain,
     }
     
     return render(request, 'users/registration.html', context)

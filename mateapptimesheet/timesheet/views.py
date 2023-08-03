@@ -363,6 +363,7 @@ def self_timesheets(request, a, b):
             f = filterform.cleaned_data['f']
             q = filterform.cleaned_data['q']
             timesheets_list = timesheetDateFilter(f)
+            timesheets_list = timesheets_list.filter(user=user)
             if q:
                 timesheets_list = timesheets_list.annotate(search=SearchVector("project__projectName", "project__company__companyName")).filter(search=SearchQuery(q), user=user, deleted=False).order_by('-timeDate')
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''

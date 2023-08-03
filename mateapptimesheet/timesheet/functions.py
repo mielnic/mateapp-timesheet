@@ -36,25 +36,26 @@ def updateProjectAge():
 def timeRange(c):
     todayDate = datetime.date.today()
     monthFirst = todayDate.replace(day = 1)
+    lastMonthLast = monthFirst -datetime.timedelta(days=1)
 
     if c == 'Current_Month':
         end = todayDate
         start = monthFirst
         ind_alloc_target = 1
     elif c == 'Last_Month':
-        end = monthFirst
+        end = lastMonthLast
         start = monthRewind(todayDate, 1)
         ind_alloc_target = 1
     elif c == 'Last_Trimester':
-        end = monthFirst
+        end = lastMonthLast
         start = monthRewind(todayDate, 3)
         ind_alloc_target = 3
     elif c == 'Last_Semester':
-        end = monthFirst
+        end = lastMonthLast
         start = monthRewind(todayDate, 6)
         ind_alloc_target = 6
     elif c == 'Last_Year':
-        end = monthFirst
+        end = lastMonthLast
         start = monthRewind(todayDate, 12)
         ind_alloc_target = 12
     else:
