@@ -17,6 +17,7 @@ from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from django.db.models.query_utils import Q
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 
 # Create your views here.
 
@@ -31,10 +32,16 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        messages.success(request, _('Thank you for your confirmation. Your account is now active'))
-        return redirect('/login/')
+        if settings.REGISTRATION_PARKING == False: 
+            user.is_active = True
+            user.save()
+            messages.success(request, _('Thank you for your confirmation. Your account is now active'))
+            return redirect('/login/')
+        else:
+            user.is_active = False
+            user.save()
+            messages.success(request, _('Thank you for your confirmation. The Administrator will enable your account soon.'))
+            return redirect('/login/')
     else:
         messages.error(request, _("Activation link is invalid. Contact the administrator"))
     return redirect('/login/')
@@ -63,6 +70,7 @@ def activationEmail(request, user, to_email):
 @user_not_authenticated
 def register(request):
     registerform = CustomUserRegisterForm(request.POST)
+    mdomain = settings.REGISTRATION_DOMAIN
     if request.method == 'POST':  
         if registerform.is_valid():
             user = registerform.save(commit=False)
@@ -76,6 +84,7 @@ def register(request):
     
     context = {
         'registerform' : registerform,
+        'mdomain' : mdomain
     }
     
     return render(request, 'users/registration.html', context)

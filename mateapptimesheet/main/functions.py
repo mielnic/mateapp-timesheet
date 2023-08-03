@@ -1,10 +1,4 @@
 import math
-import os
-from django.conf import settings
-from django.shortcuts import render
-from django.urls import reverse
-from itertools import cycle, islice
-from django.core.management import call_command
 
 def paginator(index, length, l):
 

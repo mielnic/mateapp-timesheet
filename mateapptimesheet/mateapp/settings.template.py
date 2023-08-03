@@ -184,3 +184,9 @@ CRONJOBS = [
     ('0 0 * * *', 'main.cron.backup')
 ] """
 
+# Registration Settings
+
+# If true, new users remain INACTIVE until manually activated by the administrator.
+REGISTRATION_PARKING = True
+#To restrict new user registration to a mail domain use '@domain.com', else use '@'.
+REGISTRATION_DOMAIN = '@'

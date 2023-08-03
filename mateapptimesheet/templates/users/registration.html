@@ -18,12 +18,14 @@
                     <label for="email" class="form-label">{% trans "eMail:" %}</label>
                 </div>
             </p>
+            {% if mdomain != '@' %}
             <p>
                 <div class="px-3">
-                    <p><small>{% trans "Only" %} <strong>@alphaworks.com.ar</strong> {% trans "addresses will be processed." %}</small></p>
+                    <p><small>{% trans "Only" %} <strong>{{mdomain}}</strong> {% trans "addresses will be processed." %}</small></p>
                 </div>
                 </p>
             <p>
+            {% endif %}
                 <div class="form-floating">
                     {{registerform.first_name}}
                     <label for="first_name" class="form-label">{% trans "First Name:" %}</label>
