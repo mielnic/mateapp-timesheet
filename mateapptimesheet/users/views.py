@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, response, request
 from .forms import CustomUserCreationForm, CustomUserChangeForm, ChangePasswordForm, PasswordResetForm, CustomUserEditForm, CustomUserRegisterForm
-from main.decorators import user_not_authenticated, allowed_users
-from .models import CustomUser
-from .managers import CustomUserManager
+from main.decorators import user_not_authenticated, allowed_users, self_registration_enabled
 from main.functions import paginator
 from django.contrib import messages
 from django.contrib.auth import login as auth_login, logout, authenticate, get_user_model
@@ -68,6 +66,7 @@ def activationEmail(request, user, to_email):
 # Handles registration form.
 
 @user_not_authenticated
+@self_registration_enabled
 def register(request):
     registerform = CustomUserRegisterForm(request.POST)
     mdomain = settings.REGISTRATION_DOMAIN

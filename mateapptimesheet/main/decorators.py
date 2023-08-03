@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.conf import settings
 
 def user_not_authenticated(function=None, redirect_url='/'):
     """
@@ -37,4 +38,24 @@ def allowed_users(allowed_roles=[]):
                 messages.error(request, 'You are not allowed to access that page.')
                 return redirect('/')
         return _wrapped_view
+    return decorator
+
+def self_registration_enabled(function=None, redirect_url='/'):
+    """
+    Decorator for views that checks that the user is NOT logged in, redirecting
+    to the homepage if necessary by default.
+    """
+    def decorator(view_func):
+        def _wrapped_view(request, *args, **kwargs):
+            if not settings.REGISTRATION_SELF_ENABLE:
+                messages.error(request, 'You are not allowed to access that page.')
+                return redirect(redirect_url)
+                
+            return view_func(request, *args, **kwargs)
+
+        return _wrapped_view
+
+    if function:
+        return decorator(function)
+
     return decorator

@@ -62,12 +62,13 @@
 
           {% else %}
 
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/users/register"><h5>{% trans "Register" %}  
-              <img src="{% static 'users/images/register.svg' %}" alt="Register"></h5>
-            </a>
-          </li>
-
+            {% if REGISTRATION_SELF_ENABLE %}
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/users/register"><h5>{% trans "Register" %}  
+                <img src="{% static 'users/images/register.svg' %}" alt="Register"></h5>
+              </a>
+            </li>
+            {% endif %}
 
           {% endif %}
    

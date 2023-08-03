@@ -186,6 +186,8 @@ CRONJOBS = [
 
 # Registration Settings
 
+# Enables Self Registration
+REGISTRATION_SELF_ENABLE = False
 # If true, new users remain INACTIVE until manually activated by the administrator.
 REGISTRATION_PARKING = True
 #To restrict new user registration to a mail domain use '@domain.com', else use '@'.
