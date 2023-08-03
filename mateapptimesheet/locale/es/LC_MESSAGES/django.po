@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 14:04-0300\n"
+"POT-Creation-Date: 2023-08-03 16:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\main\forms.py:8 .\timesheet\forms.py:149
 msgid "Search:"
 msgstr "Búsqueda"
@@ -65,7 +66,7 @@ msgstr "Perfil"
 msgid "Logout"
 msgstr "Logout"
 
-#: .\templates\includes\navbar.html:66 .\templates\users\registration.html:61
+#: .\templates\includes\navbar.html:66 .\templates\users\registration.html:63
 msgid "Register"
 msgstr "Registro"
 
@@ -154,7 +155,7 @@ msgstr "Usuario"
 
 #: .\templates\main\login.html:23 .\templates\users\create_user.html:67
 #: .\templates\users\password_change.html:19
-#: .\templates\users\registration.html:41
+#: .\templates\users\registration.html:43
 msgid "Password:"
 msgstr "Contraseña"
 
@@ -204,7 +205,7 @@ msgstr "Guardar"
 #: .\templates\users\password_change.html:41
 #: .\templates\users\password_reset.html:26
 #: .\templates\users\profile_edit.html:33
-#: .\templates\users\registration.html:62
+#: .\templates\users\registration.html:64
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -217,8 +218,10 @@ msgid "Tax ID"
 msgstr "ID Fiscal"
 
 #: .\templates\timesheet\company_list.html:77
-msgid "No Customers available."
-msgstr ""
+#, fuzzy
+#| msgid "No users available."
+msgid "No customers available."
+msgstr "No existen usuarios disponibles."
 
 #: .\templates\timesheet\company_view.html:12
 msgid "Customer Balance: "
@@ -252,6 +255,7 @@ msgid "Finished"
 msgstr "Terminado"
 
 #: .\templates\timesheet\company_view.html:75
+#: .\templates\timesheet\project_list.html:89
 msgid "No projects available."
 msgstr "No hay proyectos disponibles."
 
@@ -303,10 +307,6 @@ msgstr "One-Time"
 msgid "Recurrent"
 msgstr "Recurrente"
 
-#: .\templates\timesheet\project_list.html:89
-msgid "No Projects available."
-msgstr ""
-
 #: .\templates\timesheet\project_view.html:11
 msgid "Start Date: "
 msgstr "Fecha de Inicio: "
@@ -350,8 +350,11 @@ msgid "User"
 msgstr "Usuario"
 
 #: .\templates\timesheet\project_view.html:123
-msgid "No Timesheets available."
-msgstr ""
+#: .\templates\timesheet\timesheet_list.html:84
+#: .\templates\timesheet\timesheet_list_self.html:78
+#: .\templates\timesheet\user_detail.html:88
+msgid "No timesheets available."
+msgstr "No hay timesheets disponibles."
 
 #: .\templates\timesheet\timesheet_create.html:26
 #: .\templates\timesheet\timesheet_create_self.html:26
@@ -392,12 +395,6 @@ msgstr "Proyecto"
 #: .\templates\timesheet\timesheet_list.html:45
 msgid "Resource"
 msgstr "Recurso"
-
-#: .\templates\timesheet\timesheet_list.html:84
-#: .\templates\timesheet\timesheet_list_self.html:78
-#: .\templates\timesheet\user_detail.html:88
-msgid "No timesheets available."
-msgstr "No hay timesheets disponibles."
 
 #: .\templates\timesheet\timesheet_view.html:7
 #: .\templates\timesheet\timesheet_view_self.html:7
@@ -450,9 +447,9 @@ msgstr "Objetivo Mensual: "
 msgid "Unallocated Time: "
 msgstr "Unallocated Time: "
 
-#: .\templates\timesheet\user_list.html:82
-msgid "No Users available."
-msgstr ""
+#: .\templates\timesheet\user_list.html:82 .\templates\users\users.html:81
+msgid "No users available."
+msgstr "No existen usuarios disponibles."
 
 #: .\templates\users\activate_account.html:3
 msgid "Dear"
@@ -461,7 +458,7 @@ msgstr "Estimado"
 #: .\templates\users\activate_account.html:5
 msgid ""
 "Please click on the link below to complete your registration at MateApp "
-"Directory:"
+"Timesheet:"
 msgstr ""
 
 #: .\templates\users\create_user.html:14 .\templates\users\users.html:16
@@ -476,13 +473,13 @@ msgstr "eMail:"
 
 #: .\templates\users\create_user.html:26 .\templates\users\edit_user.html:21
 #: .\templates\users\profile_edit.html:20
-#: .\templates\users\registration.html:29
+#: .\templates\users\registration.html:31
 msgid "First Name:"
 msgstr "Nombre:"
 
 #: .\templates\users\create_user.html:32 .\templates\users\edit_user.html:27
 #: .\templates\users\profile_edit.html:26
-#: .\templates\users\registration.html:35
+#: .\templates\users\registration.html:37
 msgid "Last Name:"
 msgstr "Apellido:"
 
@@ -502,31 +499,31 @@ msgstr "Objetivo Mensual:"
 
 #: .\templates\users\create_user.html:73
 #: .\templates\users\password_change.html:25
-#: .\templates\users\registration.html:47
+#: .\templates\users\registration.html:49
 msgid "Your password can’t be too similar to your other personal information."
 msgstr "Su contraseña no puede ser similar a su información personal."
 
 #: .\templates\users\create_user.html:74
 #: .\templates\users\password_change.html:26
-#: .\templates\users\registration.html:48
+#: .\templates\users\registration.html:50
 msgid "Your password must contain at least 8 characters."
 msgstr "Su contraseña debe contener al menos 8 caracteres."
 
 #: .\templates\users\create_user.html:75
 #: .\templates\users\password_change.html:27
-#: .\templates\users\registration.html:49
+#: .\templates\users\registration.html:51
 msgid "Your password can’t be a commonly used password."
 msgstr "Su contraseña no puede ser una demasiado común."
 
 #: .\templates\users\create_user.html:76
 #: .\templates\users\password_change.html:28
-#: .\templates\users\registration.html:50
+#: .\templates\users\registration.html:52
 msgid "Your password can’t be entirely numeric."
 msgstr "Su contraseña no puede ser solamente numérica."
 
 #: .\templates\users\create_user.html:83
 #: .\templates\users\password_change.html:35
-#: .\templates\users\registration.html:57
+#: .\templates\users\registration.html:59
 msgid "Re-type Password:"
 msgstr "Reingrese su Contraseña:"
 
@@ -563,8 +560,9 @@ msgstr "Restablecer Contraseña"
 msgid ""
 "Forgot you password? Enter your email below, and we'll email instructions "
 "for setting a new one."
-msgstr "¿Olvidó su contraseña? Ingrese su email, y le enviaremos instrucciones "
-"para restablecerla."
+msgstr ""
+"¿Olvidó su contraseña? Ingrese su email, y le enviaremos instrucciones para "
+"restablecerla."
 
 #: .\templates\users\password_reset.html:25
 msgid "Send"
@@ -580,16 +578,17 @@ msgid ""
 "address. To initiate the password reset process for your account, click the "
 "link below."
 msgstr ""
-"Recibimos una solicitud para restablecer la contraseña para la cuenta vinculada "
-"a esta dirección de email. Para iniciar el proceso, clickee en el link de abajo."
+"Recibimos una solicitud para restablecer la contraseña para la cuenta "
+"vinculada a esta dirección de email. Para iniciar el proceso, clickee en el "
+"link de abajo."
 
 #: .\templates\users\password_reset_email.html:9
 msgid ""
 "This link can only be used once. If you need to reset your password again, "
 "please visit"
 msgstr ""
-"Este link solo puede utilizado una sola vez. Si necesita restablecer su"
-"contraseña nuevamente, por favor visite"
+"Este link solo puede utilizado una sola vez. Si necesita restablecer "
+"sucontraseña nuevamente, por favor visite"
 
 #: .\templates\users\password_reset_email.html:9
 msgid "and request another reset."
@@ -643,11 +642,11 @@ msgstr "Cambiar Contraseña"
 msgid "User Registration"
 msgstr "Registro de Usuario"
 
-#: .\templates\users\registration.html:23
+#: .\templates\users\registration.html:24
 msgid "Only"
 msgstr "Solamente se procesarán direcciones del dominio"
 
-#: .\templates\users\registration.html:23
+#: .\templates\users\registration.html:24
 msgid "addresses will be processed."
 msgstr "."
 
@@ -670,10 +669,6 @@ msgstr "Si"
 #: .\templates\users\users.html:53
 msgid "No"
 msgstr "No"
-
-#: .\templates\users\users.html:81
-msgid "No users available."
-msgstr "No existen usuarios disponibles."
 
 #: .\timesheet\forms.py:7
 msgid "Business Hours"
@@ -755,35 +750,44 @@ msgstr "El superusuario debe tener is_superuser=True"
 msgid "email address"
 msgstr "dirección de email"
 
-#: .\users\views.py:36
+#: .\users\views.py:38
 msgid "Thank you for your confirmation. Your account is now active"
 msgstr "Gracias por su confirmación. Su cuenta ha sido activada."
 
-#: .\users\views.py:39
-msgid "Activation link is invalid. Contact the administrator"
-msgstr "El link de activación es inválido. Por favor contacte al administrador."
+#: .\users\views.py:43
+msgid ""
+"Thank you for your confirmation. The Administrator will enable your account "
+"soon."
+msgstr "Gracias por su confirmación. El Administrador activará su cuenta pronto."
 
-#: .\users\views.py:45
+#: .\users\views.py:46
+msgid "Activation link is invalid. Contact the administrator"
+msgstr ""
+"El link de activación es inválido. Por favor contacte al administrador."
+
+#: .\users\views.py:52
 msgid "Activate your user account."
 msgstr "Active su cuenta."
 
-#: .\users\views.py:56
+#: .\users\views.py:63
 msgid ""
 "Please go to your email inbox and click on the included activation link to "
 "enable your account. <b>Note:</b> Remember to check your spam folder."
 msgstr ""
 "Por favor busque nuestro mail en su bandeja de entrada y clickee en el link "
-"incluido a fin de activar su cuenta. <b>Nota:</b> Recuerde revisar su carpeta de spam."
+"incluido a fin de activar su cuenta. <b>Nota:</b> Recuerde revisar su "
+"carpeta de spam."
 
-#: .\users\views.py:59 .\users\views.py:157
+#: .\users\views.py:66 .\users\views.py:166
 msgid "There was a problem sending the email. Please contact the Administrator"
-msgstr "Hubo un problema al enviar el email. Por favor contacte al Administrador"
+msgstr ""
+"Hubo un problema al enviar el email. Por favor contacte al Administrador"
 
-#: .\users\views.py:143
+#: .\users\views.py:152
 msgid "Password Reset Request"
 msgstr "Solicitud de restablecimiento de contraseña"
 
-#: .\users\views.py:154
+#: .\users\views.py:163
 msgid ""
 "Please go to your email inbox and click on the included link to reset your "
 "password. <b>Note:</b> Remember to check your spam folder."
@@ -792,18 +796,18 @@ msgstr ""
 "incluido a fin de restablecer su contraseña. <b>Nota:</b> Recuerde revisar "
 "su carpeta de spam."
 
-#: .\users\views.py:159
+#: .\users\views.py:168
 msgid "The email address provided is not registered."
 msgstr "El email proporcionado no esta registrado."
 
-#: .\users\views.py:184
+#: .\users\views.py:193
 msgid "Your password has been set. You may go ahead and <b>login</b> now."
 msgstr "Su contraseña ha sido actualizada. Puede continuar al <b>Login</>."
 
-#: .\users\views.py:193
+#: .\users\views.py:202
 msgid "Link is expired"
 msgstr "El link esta expirado"
 
-#: .\users\views.py:195
+#: .\users\views.py:204
 msgid "Something went wrong, redirecting back to Homepage"
 msgstr "Algo salió mal. Lo estamos redireccionado a la pagina principal."
