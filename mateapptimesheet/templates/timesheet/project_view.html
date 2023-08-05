@@ -24,6 +24,7 @@
       </div>
       <div class="col align-text-bottom px-5 py-3 mb-2 col-lg-5">
         <h4>{% trans "Project Budget: " %}{{ project.budget }} hs.</h4>
+        <h5>{% trans "Pending: " %}{{ pending_time }} hs.</h5>
     </div>
     </div>
 </div>
@@ -32,7 +33,7 @@
     <div class="col shadow p-3 border rounded col-lg-10">
       <nav class="navbar navbar-expand-lg table_nav">
         <div class="container-fluid px-4">
-          <a class="navbar-brand" href=""><h4>Project Timesheets:</h4></a>
+          <a class="navbar-brand" href=""><h4>{% trans "Project Timesheets:" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usersNavbar" aria-controls="usersNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

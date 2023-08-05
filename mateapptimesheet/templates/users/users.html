@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse" id="usersNavbar">
             <ul class="navbar-nav ms-auto mb-lg-0">
               <li class="nav-item me-1 my-1">
-                <a class="btn btn-outline-secondary btn-sm" href={% url 'users:createUser' %}>{% trans "Create User" %}</a>
+                <a class="btn btn-outline-secondary btn-sm" href={% url 'users:createUser' %}><i class="bi bi-plus-square"></i>&nbsp;{% trans "Create User" %}</a>
               </li>
             </ul>
             </div>
@@ -59,7 +59,7 @@
     </table>
     </div>
 
-    <nav aria-label="Page navigation">
+    <nav aria-label="Page navigation" class="m-3">
         <ul class="pagination">
           <li class="page-item">
             <a class="page-link" href="/users/users/{{idxPL}}/{{idxPR}}/" aria-label="Previous">

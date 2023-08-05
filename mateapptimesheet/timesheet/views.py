@@ -208,6 +208,10 @@ def project(request, id, a, b):
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/project_view.html')
             total_alloc_time = timesheet_list.aggregate(Sum('timeItem'))
+            try:
+                pending_time = project.budget - (total_alloc_time['timeItem__sum'])
+            except:
+                pending_time = project.budget
             
     else:
         if project.projectType == 'onetime':
@@ -218,6 +222,10 @@ def project(request, id, a, b):
             filterform = FilterForm(initial={'f':'Current_Month'})
         timesheet_list = timesheet_dataset [a:b]
         total_alloc_time = timesheet_dataset.aggregate(Sum('timeItem'))
+        try:
+            pending_time = project.budget - (total_alloc_time['timeItem__sum'])
+        except:
+            pending_time = project.budget
         length = timesheet_dataset.count()
         links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 5)
         template = loader.get_template('timesheet/project_view.html')
@@ -227,6 +235,7 @@ def project(request, id, a, b):
         'timesheet_list' : timesheet_list,
         'filterform' : filterform,
         'total_alloc_time' : total_alloc_time,
+        'pending_time' : pending_time,
         'id' : id,
         'links' : links,
         'idxPL' : idxPL,

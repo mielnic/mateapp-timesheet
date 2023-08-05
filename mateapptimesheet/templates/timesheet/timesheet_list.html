@@ -1,13 +1,13 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
 {% load static %}
-
 {% block content %}
 {% include 'includes/navbar_mgmt.html' %}
-<div class="row mt-3 justify-content-md-center">
-    <div class="col shadow p-2 col-lg-10 rounded bg-light">
-      <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid px-4">
+
+<div class="row mt-3 justify-content-md-center" id="companies-table-block">
+    <div class="col shadow p-3 border rounded col-lg-10">
+      <nav class="navbar navbar-expand-lg table_nav">
+        <div class="container-fluid">
           <a class="navbar-brand" href="#"><h4>{% trans "Timesheets" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#timesheetsNavbar" aria-controls="timesheetsNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -15,7 +15,7 @@
           <div class="collapse navbar-collapse" id="timesheetsNavbar">
             <ul class="navbar-nav me-auto mb-lg-0">
               <li class="nav-item">
-                <a class="btn btn-outline-secondary btn-sm me-1 my-1" href="{% url 'timesheet:Create_Timesheet' %}">{% trans "Add Timesheet" %}</a>
+                <a class="btn btn-outline-secondary btn-sm me-1 my-1" href="{% url 'timesheet:Create_Timesheet' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Timesheet" %}</a>
               </li>
             </ul>
             <form class="d-flex btn-sm" role="search" id="qform">
@@ -29,13 +29,9 @@
           </div>
         </div>
       </nav>
-    </div>
-</div> 
-<div class="row mt-3 justify-content-md-center" id="companies-table-block">
-    <div class="col shadow p-3 border rounded col-lg-10">
-    {% if timesheets_list %}
-    <div class="table-responsive">
-    <table class="table table-hover" id="timesheets_list" name="Timesheets_List">
+  {% if timesheets_list %}
+  <div class="table-responsive">
+  <table class="table table-hover" id="timesheets_list" name="Timesheets_List">
     <!-- Cabecera de Tabla -->
     
         <thead class="table-primary">
@@ -49,18 +45,27 @@
     
     <tbody>
         {% for Timesheet in timesheets_list %}
+        {% if Timesheet.timeType == 'Non Business' %}
+        <tr>
+          <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
+          <td class="text-center text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
+          <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
+          <td class="px-3 text-danger"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
+        </tr>
+        {% else %}
         <tr>
           <td class="px-3"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
           <td class="text-center"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
           <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
           <td class="px-3"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
         </tr>
+        {% endif %}
         {% endfor %}
     </tbody>
     </table>
     </div>
     {% if links %}
-    <nav aria-label="Page navigation">
+    <nav aria-label="Page navigation" class="m-3">
         <ul class="pagination">
           <li class="page-item">
             <a class="page-link" href="/timesheet/timesheets/{{idxPL}}/{{idxPR}}/" aria-label="Previous">

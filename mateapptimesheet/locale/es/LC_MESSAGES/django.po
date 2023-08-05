@@ -137,7 +137,7 @@ msgstr "No existen backups disponibles."
 #: .\templates\timesheet\user_detail.html:37
 #: .\templates\timesheet\user_list.html:27
 msgid "Clear"
-msgstr "Borrar"
+msgstr "Limipar"
 
 #: .\templates\main\admin_trash.html:45 .\templates\main\admin_trash.html:47
 #: .\templates\main\user_trash.html:30 .\templates\main\user_trash.html:32

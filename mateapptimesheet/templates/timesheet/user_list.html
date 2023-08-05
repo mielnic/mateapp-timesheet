@@ -7,15 +7,15 @@
 <div class="row mt-3 justify-content-md-center">
     <div class="col shadow p-3 border rounded col-lg-10">
       <nav class="navbar navbar-expand-lg table_nav">
-        <div class="container-fluid px-4">
-          <a class="navbar-brand" href=""><h4>Users</h4></a>
+        <div class="container-fluid">
+          <a class="navbar-brand" href=""><h4>{% trans "Users" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usersNavbar" aria-controls="usersNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="usersNavbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="btn btn-outline-secondary btn-sm me-1 my-1" href="{% url 'timesheet:Create_Timesheet' %}">{% trans "Add Timesheet" %}</a>
+                <a class="btn btn-outline-secondary btn-sm me-1 my-1" href="{% url 'timesheet:Create_Timesheet' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Timesheet" %}</a>
               </li>
             </ul>
             <form class="d-flex btn-sm" role="search" id="qform">
@@ -58,7 +58,7 @@
     </table>
     </div>
     {% if links %}
-    <nav aria-label="Page navigation">
+    <nav aria-label="Page navigation" class="m-3">
         <ul class="pagination">
           <li class="page-item">
             <a class="page-link" href="/timesheet/users/{{idxPL}}/{{idxPR}}/" aria-label="Previous">

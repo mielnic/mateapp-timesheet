@@ -13,16 +13,16 @@
           {% if user.is_authenticated %}
           {% if user.is_staff %}
           <li class="nav-item">
-            <a class="btn btn-outline-secondary btn-sm me-1 my-1" href={% url 'main:Admin_Home' a=0 b=10 %}>{% trans "Backup" %}</a>
+            <a class="btn btn-outline-secondary btn-sm me-1 my-1" href={% url 'main:Admin_Home' a=0 b=10 %}><i class="bi bi-hdd-stack"></i>&nbsp;{% trans "Backup" %}</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-secondary btn-sm me-1 my-1" href={% url 'users:Users' a=0 b=10 %}>{% trans "Users" %}</a>
+            <a class="btn btn-outline-secondary btn-sm me-1 my-1" href={% url 'users:Users' a=0 b=10 %}><i class="bi bi-people"></i>&nbsp;{% trans "Users" %}</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-secondary btn-sm me-1 my-1" href={% url 'users:deletedUsers' a=0 b=10%}>{% trans "Inactive Users" %}</a>
+            <a class="btn btn-outline-secondary btn-sm me-1 my-1" href={% url 'users:deletedUsers' a=0 b=10%}><i class="bi bi-person-slash">&nbsp;</i>{% trans "Inactive Users" %}</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-secondary btn-sm me-1 my-1" href={% url 'main:Admin_Trash' a=0 b=10 %}>{% trans "System Trash" %}</a>
+            <a class="btn btn-outline-secondary btn-sm me-1 my-1" href={% url 'main:Admin_Trash' a=0 b=10 %}><i class="bi bi-trash-fill"></i>&nbsp;{% trans "System Trash" %}</a>
           </li>
           {% endif %}
           {% endif %}
