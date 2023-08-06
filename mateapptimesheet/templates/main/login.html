@@ -13,6 +13,7 @@
 {% csrf_token %}
 {% comment %} <div class="row row-col-1 py-3 justify-content-center"> {% endcomment %}
     {% comment %} <div class="col shadow m-5 p-4 border col-lg-5 rounded"> {% endcomment %}
+
 <div class="row py-3 justify-content-center">
     <div class="col col-lg-5 shadow m-5 p-4 border rounded">
         <div style="text-align: center;">
@@ -29,7 +30,7 @@
                 <label for="Password" class="form-label">{% trans "Password:" %}</label>
             </div>
             <br>
-        <button type="submit" class="w-100 btn btn-lg-5 btn-primary">Login</button>
+        <button type="submit" class="w-100 btn btn-lg-5 btn-success">Login</button>
         <div>
             <br>
             <a class="nav-link" href="/users/password_reset/">{% trans "Forgot Password?" %}</a>

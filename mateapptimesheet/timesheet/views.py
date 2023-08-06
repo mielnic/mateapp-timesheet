@@ -37,7 +37,7 @@ def companies(request, a, b):
     else:
         companies_list = Company.objects.order_by('companyName').filter(deleted=False) [a:b]
         length = Company.objects.filter(deleted=False).count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/company_list.html')
 
     context = {
@@ -61,7 +61,7 @@ def company(request, id, a, b):
     project_list = project_dataset.filter(company_id=id).order_by('-projectStatus', 'projectName') [a:b]
     total_balance = project_dataset.filter(company_id=id).filter(Q(projectType='recurrent') | Q(projectStatus=False)).aggregate(Sum('balance'))
     length = Project.objects.filter(company_id=id).filter(deleted=False).count()
-    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, (b-a))
+    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
     template = loader.get_template('timesheet/company_view.html')
     context = {
         'company' : company,
@@ -177,7 +177,7 @@ def projects(request, a, b):
         project_dataset = getProjectList().filter(projectStatus=True)
         project_list = project_dataset [a:b]
         length = project_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/project_list.html')
 
     context = {
@@ -228,7 +228,7 @@ def project(request, id, a, b):
         except:
             pending_time = project.budget
         length = timesheet_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 5)
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/project_view.html')
         
     context = {
@@ -345,7 +345,7 @@ def timesheets(request, a, b):
         s = timeSum(timesheets_dataset)
         timesheets_list = timesheets_dataset [a:b]
         length = Time.objects.filter(deleted=False).count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, (b-a))
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/timesheet_list.html')
 
     context = {
@@ -386,7 +386,7 @@ def self_timesheets(request, a, b):
         s = timeSum(timesheets_dataset)
         timesheets_list = timesheets_dataset [a:b]
         length = Time.objects.filter(user=user, deleted=False).count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, (b-a))
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/timesheet_list_self.html')
 
     context = {
@@ -549,7 +549,7 @@ def full_delete_timesheet(request, id):
 
 @login_required
 @allowed_users(allowed_roles=['admin', 'staff'])
-def users(request, a=0, b=10):
+def users(request, a, b):
     if 'q' in request.GET or 'f' in request.GET:
         filterform = FilterForm(request.GET)
         if filterform.is_valid():   
@@ -569,7 +569,7 @@ def users(request, a=0, b=10):
         total_alloc_time = users_dataset.aggregate(Sum('alloc_time'))
         total_unalloc_time = users_dataset.aggregate(Sum('unalloc_time'))
         length = users_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/user_list.html')
     
     context = {
@@ -611,7 +611,7 @@ def user_detail(request, id, a, b):
         s = timeSum(timesheets_dataset)
         timesheets_list = timesheets_dataset [a:b]
         length = timesheets_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/user_detail.html')
 
     context = {
@@ -632,9 +632,9 @@ def user_detail(request, id, a, b):
 
 # View Users (projects w/sumarized time?)
 
-def dev_button(request):
-    dateref = datetime.datetime(2023, 6, 15)
-    timesheets_list = Time.objects.order_by('-timeDate').filter(deleted=False, timeDate__lt=dateref)
-    timesheets_list=list(timesheets_list)
-    print(timesheets_list)
-    return redirect('/timesheet/timesheets/0/10/')
+# def dev_button(request):
+#     dateref = datetime.datetime(2023, 6, 15)
+#     timesheets_list = Time.objects.order_by('-timeDate').filter(deleted=False, timeDate__lt=dateref)
+#     timesheets_list=list(timesheets_list)
+#     print(timesheets_list)
+#     return redirect('/timesheet/timesheets/0/10/')

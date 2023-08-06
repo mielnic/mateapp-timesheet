@@ -54,7 +54,7 @@ class CompanyForm(forms.ModelForm):
         ]
 
         widgets = {
-            'companyName': forms.TextInput(attrs={'class':'form-control','placeholder':'Customer Name'}),
+            'companyName': forms.TextInput(attrs={'class':'form-control','required':'True','placeholder':'Customer Name'}),
             'tax_id': forms.TextInput(attrs={'class':'form-control','placeholder':'Tax ID'}),
         }  
 
@@ -83,8 +83,8 @@ class ProjectForm(forms.ModelForm):
         ]
     
         widgets = {
-            'projectName': forms.TextInput(attrs={'class':'form-control','placeholder':'Project Name'}),
-            'company': forms.Select(attrs={'class':'form-select'}),
+            'projectName': forms.TextInput(attrs={'class':'form-control','required':'True','placeholder':'Project Name'}),
+            'company': forms.Select(attrs={'class':'form-select','required':'True'}),
             'startDate' : forms.DateInput(attrs={'class':'form-control'}),
             'budget' : forms.NumberInput(attrs={'class':'form-control'}),
             'projectNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
@@ -120,10 +120,11 @@ class TimesheetForm(forms.ModelForm):
         ]
 
         widgets = {
-            'timeDate': forms.DateInput(attrs={'type':'date', 'class':'form-control'}),
-            'project': forms.Select(attrs={'class':'form-select'}),
+            'timeDate': forms.DateInput(attrs={'class':'form-control','required':'True',}),
+            # 'timeDate': forms.DateInput(attrs={'type':'date', 'class':'form-control'}),
+            'project': forms.Select(attrs={'class':'form-select','required':'True',}),
             'timeNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
-            'user': forms.Select(attrs={'class':'form-select'})
+            'user': forms.Select(attrs={'class':'form-select','required':'True'})
         }
 
     def __init__(self, *args, **kwargs):

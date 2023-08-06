@@ -42,7 +42,7 @@
                     <form class="col btn-sm" role="search" id="qform">
                       <div class="my-2">{{filterform.q}}</div>
                       <div class="my-2">{{filterform.f}}</div>
-                      <button class="btn btn-primary mr-2" type="submit">{% trans "Filter" %}</button>
+                      <button class="btn btn-success mr-2" type="submit">{% trans "Filter" %}</button>
                       <a href="{% url 'timesheet:User' id=id a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
                     </form>
                   </div>
@@ -55,7 +55,7 @@
                     <form class="d-flex btn-sm" role="search" id="qform">
                         {{filterform.q}}
                         {{filterform.f}}
-                      <button class="btn btn-primary mx-2" type="submit">{% trans "Filter" %}</button>
+                      <button class="btn btn-success mx-2" type="submit">{% trans "Filter" %}</button>
                     </form>
                     <div>
                       <a href="{% url 'timesheet:User' id=id a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
@@ -70,7 +70,7 @@
     <table class="table table-hover" id="timesheets_list" name="Timesheets_List">
     <!-- Cabecera de Tabla -->
     
-        <thead class="table-warning">
+        <thead class="table-success">
             <th class="px-4">{% trans "Date" %}</th>
             <th class="text-center">{% trans "Allocated Time: " %}{{ s }} hs.</th>
             <th>{% trans "Project" %}</th>
@@ -114,6 +114,11 @@
         <div class='mx-5 my-3'>{% trans "No timesheets available." %}</div>
     {% endif %}
     </div>
+</div>
+<div class="row py-3 mx-1 justify-content-center">
+  <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-10">       
+      <p><button onclick="history.back()" class="btn btn-secondary px-3 mx-3" role="button">{% trans "Cancel" %}</button></p>
+  </div>
 </div>
 <script src="{% static 'timesheet/js/user_detail_helper.js' %}"></script>
 {% endblock %}

@@ -90,11 +90,12 @@ def user_trash(request, a, b):
     deleted_projects_list = Project.objects.filter(deleted=True, deletedBy=uid)
     deleted_timesheets_list = Time.objects.filter(deleted=True, deletedBy=uid)
     trash = list(chain(deleted_projects_list, deleted_companies_list, deleted_timesheets_list))
+    trash_list = trash [a:b]
     length = len(trash)
-    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
+    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
     template = loader.get_template('main/user_trash.html')
     context = {
-        'trash_list': trash,
+        'trash_list': trash_list,
         'links' : links,
         'idxPL' : idxPL,
         'idxPR' : idxPR,
@@ -129,13 +130,14 @@ def admin_trash(request, a, b):
         deleted_projects_list = Project.objects.filter(deleted=True)
         deleted_timesheets_list = Time.objects.filter(deleted=True)
         trash = list(chain(deleted_companies_list, deleted_projects_list, deleted_timesheets_list))
+        trash_list = trash [a:b]
         length = len(trash)
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, 10)
+        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('main/admin_trash.html')
     
     context = {
         'searchform' : searchform,
-        'trash_list': trash,
+        'trash_list': trash_list,
         'links' : links,
         'idxPL' : idxPL,
         'idxPR' : idxPR,

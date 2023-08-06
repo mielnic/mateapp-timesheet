@@ -51,6 +51,6 @@ urlpatterns += [
 ]
 
 
-urlpatterns += [
-    path('dev', views.dev_button, name='Dev'),
-]
+# urlpatterns += [
+#     path('dev', views.dev_button, name='Dev'),
+# ]

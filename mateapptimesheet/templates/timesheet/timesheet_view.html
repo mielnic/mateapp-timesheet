@@ -15,9 +15,9 @@
         <br>
         <h5>{% trans "Logged Time: " %}<b>{{timesheet.timeItem}} Hs.</b></h5>
         <br>
-        <h5>{% trans "Project: " %} <a class='text-reset text-decoration-none link-primary' href={% url 'timesheet:Project' id=timesheet.project.id a=0 b=5%}>{{timesheet.project.projectName}}</a></h5>
+        <h5>{% trans "Project: " %} <a class='text-reset text-decoration-none link-success' href={% url 'timesheet:Project' id=timesheet.project.id a=0 b=5%}>{{timesheet.project.projectName}}</a></h5>
         <br>
-        <h5>{% trans "Customer: " %} <a class='text-reset text-decoration-none link-primary' href={% url 'timesheet:Company' id=timesheet.project.company.id a=0 b=5%}>{{timesheet.project.company}}</a></h5>
+        <h5>{% trans "Customer: " %} <a class='text-reset text-decoration-none link-success' href={% url 'timesheet:Company' id=timesheet.project.company.id a=0 b=5%}>{{timesheet.project.company}}</a></h5>
         <br>
         {% if timesheet.timeType == "Business" %}
         <h5>{% trans "Type: Business Hours" %}</h5>
@@ -33,7 +33,7 @@
 <div class="row py-3 mx-1 justify-content-center">
     <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-5">       
         <p><a href={% url 'timesheet:Edit_Timesheet' id=timesheet.id %} class="btn btn-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-        <p><a href={% url 'timesheet:Timesheets' a=0 b=10 %} class="btn btn-secondary px-3 mx-3" role="button">{% trans "Cancel" %}</a></p>
+        <p><button onclick="history.back()" class="btn btn-secondary px-3 mx-3" role="button">{% trans "Cancel" %}</button></p>
         <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id u=1%} class="btn btn-danger mx-3" role="button">{% trans "Delete" %}</a></p>
     </div>
     </div>

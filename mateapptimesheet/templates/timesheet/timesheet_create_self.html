@@ -45,7 +45,7 @@
             </div>          
 
             <div class="col d-flex justify-content-center my-3 px-5 py-3">
-                <button type="submit" class="btn btn-primary px-3 mx-2">{% trans "Save" %}</button>
+                <button type="submit" class="btn btn-success px-3 mx-2">{% trans "Save" %}</button>
                 {% if project.id %}
                 <a href={% url 'timesheet:Timesheet' id=timesheet.id%} class="btn btn-secondary" role="button">{% trans "Cancel" %}</a>
                 {% else %}

@@ -1,7 +1,7 @@
 import math
 
-def paginator(index, length, l):
-
+def paginator(index, length, b):
+    l = b-index
     pageNumber = int(index/l) + 1
     pages = math.ceil(length / l) 
     links = []

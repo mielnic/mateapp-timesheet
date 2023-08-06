@@ -31,11 +31,11 @@
             </td>
             <td>
               {% if trash.companyName %}
-                <div><a class="btn btn-primary btn-sm" href={% url 'timesheet:Restore_Company' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
+                <div><a class="btn btn-success btn-sm" href={% url 'timesheet:Restore_Company' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
               {% elif trash.projectName%}
-                <div><a class="btn btn-primary btn-sm" href={% url 'timesheet:Restore_Project' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
+                <div><a class="btn btn-success btn-sm" href={% url 'timesheet:Restore_Project' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
               {% else %}
-                <div><a class="btn btn-primary btn-sm" href={% url 'timesheet:Restore_Timesheet' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
+                <div><a class="btn btn-success btn-sm" href={% url 'timesheet:Restore_Timesheet' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
               {% endif %}
             </td>
             <td>
