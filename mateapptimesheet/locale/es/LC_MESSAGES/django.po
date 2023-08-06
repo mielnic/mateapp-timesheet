@@ -95,7 +95,7 @@ msgstr "Papelera del Sistema"
 #: .\templates\includes\navbar_mgmt.html:19
 #: .\templates\timesheet\project_list.html:11
 msgid "Projects"
-msgstr "Projectos"
+msgstr "Proyectos"
 
 #: .\templates\includes\navbar_mgmt.html:22
 #: .\templates\timesheet\company_list.html:11
@@ -409,7 +409,7 @@ msgstr "Tiempo registrado: "
 #: .\templates\timesheet\timesheet_view.html:11
 #: .\templates\timesheet\timesheet_view_self.html:11
 msgid "Project: "
-msgstr "Projecto: "
+msgstr "Proyecto: "
 
 #: .\templates\timesheet\timesheet_view.html:13
 #: .\templates\timesheet\timesheet_view_self.html:13
@@ -534,7 +534,7 @@ msgstr "¿Está Activo?"
 #: .\templates\users\create_user.html:93 .\templates\users\edit_user.html:66
 #: .\templates\users\users.html:35
 msgid "Is Supervisor?"
-msgstr "¿Es Supervior?"
+msgstr "¿Es Supervisor?"
 
 #: .\templates\users\edit_user.html:14
 msgid "Editing User:"

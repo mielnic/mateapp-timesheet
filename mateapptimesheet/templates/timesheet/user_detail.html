@@ -2,11 +2,15 @@
 {% load i18n %}
 {% load static %}
 
+{% block navbar %}
+{% include 'includes/navbar.html' %}
+{% endblock navbar %}
+
 {% block content %}
-{% include 'includes/navbar_mgmt.html' %}
+
 <div class="row mt-3 mx-1 justify-content-center">
     <div class="row row-col-2 justify-content-between shadow p-2 col-lg-10 rounded bg-light">
-        <div class="col px-5 py-3 mb-2 col-lg-5">
+        <div class="col px-4 py-3 mb-2 col-lg-5">
           <h3>{{ muser }}</h3>
           <h6>{{ muser.title }}</h6>
           <h6>{% trans "Practice: " %}{{ muser.practice }}</h6>
@@ -19,22 +23,44 @@
 </div> 
 <div class="row mt-3 mx-1 justify-content-md-center" id="companies-table-block">
     <div class="col shadow p-3 border rounded col-lg-10">
+        <!-- Table Block Header -->
         <nav class="navbar navbar-expand-lg table_nav">
             <div class="container-fluid px-4">
                 <a class="navbar-brand" href="#"><h4>{{ muser.first_name }}'s Timesheets</h4></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#timesheetsNavbar" aria-controls="timesheetsNavbar" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#timesheetsNavbar" aria-controls="timesheetsNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="timesheetsNavbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                </ul>
-                <form class="d-flex btn-sm" role="search" id="qform">
-                    {{filterform.q}}
-                    {{filterform.f}}
-                  <button class="btn btn-primary mx-2" type="submit">{% trans "Filter" %}</button>
-                </form>
-                <div>
-                  <a href="{% url 'timesheet:User' id=id a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+              <!-- Offcanvas Header -->
+              <div class="offcanvas offcanvas-end bg-light" tabindex="-1" id="timesheetsNavbar" aria-labelledby="offcanvasTimesheetsLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasTimesheetsLabel">{% trans "User Timesheets" %}</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <!-- Offcanvas Form -->
+                <div class="d-lg-none">
+                  <div class="offcanvas-body">
+                    <form class="col btn-sm" role="search" id="qform">
+                      <div class="my-2">{{filterform.q}}</div>
+                      <div class="my-2">{{filterform.f}}</div>
+                      <button class="btn btn-primary mr-2" type="submit">{% trans "Filter" %}</button>
+                      <a href="{% url 'timesheet:User' id=id a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+                    </form>
+                  </div>
+                </div>
+                <!-- Incanvas Form -->
+                <div class="d-none d-lg-block">
+                  <div class="collapse navbar-collapse" id="timesheetsNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    </ul>
+                    <form class="d-flex btn-sm" role="search" id="qform">
+                        {{filterform.q}}
+                        {{filterform.f}}
+                      <button class="btn btn-primary mx-2" type="submit">{% trans "Filter" %}</button>
+                    </form>
+                    <div>
+                      <a href="{% url 'timesheet:User' id=id a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -44,7 +70,7 @@
     <table class="table table-hover" id="timesheets_list" name="Timesheets_List">
     <!-- Cabecera de Tabla -->
     
-        <thead class="table-primary">
+        <thead class="table-warning">
             <th class="px-4">{% trans "Date" %}</th>
             <th class="text-center">{% trans "Allocated Time: " %}{{ s }} hs.</th>
             <th>{% trans "Project" %}</th>

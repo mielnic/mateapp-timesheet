@@ -2,30 +2,54 @@
 {% load i18n %}
 {% load static %}
 
+{% block navbar %}
+{% include 'includes/navbar.html' %}
+{% endblock navbar %}
+
 {% block content %}
-{% include 'includes/navbar_mgmt.html' %}
+
 <div class="row mt-3 mx-1 justify-content-md-center" id="companies-table-block">
     <div class="col shadow p-3 border rounded col-lg-10">
+      <!-- Table Header -->
       <nav class="navbar navbar-expand-lg table_nav">
         <div class="container-fluid">
           <a class="navbar-brand" href="#"><h4>{% trans "Customers" %}</h4></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#customersNavbar" aria-controls="customersNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#customersNavbar" aria-controls="customersNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="customersNavbar">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              {% if user.is_staff %}
-              <li class="nav-item">
+          <!-- Offcanvas Header -->
+          <div class="offcanvas offcanvas-end bg-light" tabindex="-1" id="customersNavbar" aria-labelledby="offcanvasCustomerLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasCustomerLabel">{% trans "Customers" %}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <!-- Offcanvas Form -->
+            <div class="d-lg-none">
+              <div class="offcanvas-body">
                 <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Company' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Customer" %}</a>
-              </li>
-              {% endif %}
-            </ul>
-            <form class="d-flex btn-sm" role="search">
-                {{searchform.q}}
-              <button class="btn btn-primary mx-2" type="submit">{% trans "Search" %}</button>
-            </form>
-            <div>
-              <a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+                <form class="col btn-sm" role="search" id="qform">
+                  <div class="my-2">{{searchform.q}}</div>
+                  <button class="btn btn-primary mr-2" type="submit">{% trans "Filter" %}</button>
+                  <a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+                </form>
+              </div>
+            </div>
+            <!-- Incanvas Form -->
+            <div class="d-none d-lg-block">
+              <div class="collapse navbar-collapse" id="customersNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Company' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Customer" %}</a>
+                  </li>
+                </ul>
+                <form class="d-flex btn-sm" role="search">
+                    {{searchform.q}}
+                  <button class="btn btn-primary mx-2" type="submit">{% trans "Search" %}</button>
+                </form>
+                <div>
+                  <a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -35,7 +59,7 @@
     <table class="table table-hover" id="companies_list" name="Companies_List">
     <!-- Cabecera de Tabla -->
     
-        <thead class="table-primary">
+        <thead class="table-warning">
             <th class="px-3">{% trans "Name" %}</th>
             <th>{% trans "Tax ID" %}</th>
         </thead>
