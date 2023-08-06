@@ -4,7 +4,7 @@ from django.template import loader
 from django.contrib import messages
 from .models import Address, Company, Project, Time
 from .forms import CompanyForm, ProjectForm, TimesheetForm, FilterForm
-from .functions import timeSum, timesheetDateFilter, userAllocTime, getProjectList, getProjectTimesheets
+from .functions import timeSum, timesheetDateFilter, userAllocTime, getProjectList, getProjectTimesheets, checkProjectEmpty
 from main.forms import SearchForm
 from main.functions import paginator
 from django.contrib.auth.decorators import login_required
@@ -54,7 +54,7 @@ def companies(request, a, b):
 # Customer View
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+#@allowed_users(allowed_roles=['admin', 'staff'])
 def company(request, id, a, b):
     company = Company.objects.get(id=id)
     project_dataset = getProjectList()
@@ -194,9 +194,10 @@ def projects(request, a, b):
 # Project View
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+#@allowed_users(allowed_roles=['admin', 'staff'])
 def project(request, id, a, b):
     project = Project.objects.get(id=id)
+    empty = checkProjectEmpty(id)
     if 'q' in request.GET or 'f' in request.GET:
         filterform = FilterForm(request.GET)
         if filterform.is_valid():   
@@ -236,6 +237,7 @@ def project(request, id, a, b):
         'filterform' : filterform,
         'total_alloc_time' : total_alloc_time,
         'pending_time' : pending_time,
+        'empty' : empty,
         'id' : id,
         'links' : links,
         'idxPL' : idxPL,

@@ -43,11 +43,11 @@
             <ul class="navbar-nav mx-4 ms-auto mb-2 mb-lg-0">
 
               {% if user.is_authenticated %}
-                <li class="nav-item">
+                {% comment %} <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="/" data-bs-toggle="tooltip" data-bs-title={% trans "Search" %} data-bs-placement="bottom">
                     <img src="{% static 'main/images/search.svg' %}" alt="Search">
                   </a>
-                </li>
+                </li> {% endcomment %}
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="/user_trash/0/10" data-bs-toggle="tooltip" data-bs-title={% trans "Trash" %} data-bs-placement="bottom">
                     <img src="{% static 'main/images/trash.svg' %}" alt="Trash">
@@ -89,11 +89,11 @@
             <ul class="navbar-nav mx-4 ms-auto mb-2 mb-lg-0">
 
               {% if user.is_authenticated %}
-                <li class="nav-item">
+                {% comment %} <li class="nav-item">
                   <a class="nav-link" href="/">
                     <h5><i class="bi bi-search"></i>&nbsp;{% trans "Search" %}</h5>
                   </a>
-                </li>
+                </li> {% endcomment %}
                 <li class="nav-item">
                   <a class="nav-link" href="/user_trash/0/10">
                     <h5><i class="bi bi-trash"></i>&nbsp;{% trans "Trash" %}</h5>

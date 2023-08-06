@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-03 16:09-0300\n"
+"POT-Creation-Date: 2023-08-05 23:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,424 +30,484 @@ msgstr "Usuario o Contraseña Incorrectos."
 msgid "The search didn't return any result."
 msgstr "La búsqueda no arrojó ningún resultado."
 
-#: .\templates\includes\navbar.html:18
-#: .\templates\timesheet\timesheet_list_self.html:10
-msgid "My Timesheets"
-msgstr "Mis Timesheets"
-
-#: .\templates\includes\navbar.html:22 .\timesheet\views.py:433
-#: .\timesheet\views.py:459
-msgid "Log Timesheet"
-msgstr "Registrar Timesheet"
-
-#: .\templates\includes\navbar.html:26 .\templates\includes\navbar_mgmt.html:7
-msgid "Management"
-msgstr "Gestión"
-
-#: .\templates\includes\navbar.html:36 .\templates\main\admin_trash.html:20
-#: .\templates\main\home.html:19 .\templates\timesheet\company_list.html:25
-#: .\templates\timesheet\project_list.html:25
-msgid "Search"
-msgstr "Búsqueda"
-
-#: .\templates\includes\navbar.html:41 .\templates\main\user_trash.html:9
-msgid "Trash"
-msgstr "Papelera"
-
-#: .\templates\includes\navbar.html:47
-msgid "Admin"
-msgstr "Admin"
-
-#: .\templates\includes\navbar.html:53
-msgid "Profile"
-msgstr "Perfil"
-
-#: .\templates\includes\navbar.html:58
-msgid "Logout"
-msgstr "Logout"
-
-#: .\templates\includes\navbar.html:66 .\templates\users\registration.html:63
-msgid "Register"
-msgstr "Registro"
-
-#: .\templates\includes\navbar_admin.html:7
+#: .\templates\includes\admin_navbar.html:14
+#: .\templates\includes\navbar.html:105
 msgid "Administration"
 msgstr "Administración"
 
-#: .\templates\includes\navbar_admin.html:16
-msgid "Backup"
-msgstr "Backup"
-
-#: .\templates\includes\navbar_admin.html:19
-#: .\templates\includes\navbar_mgmt.html:16
+#: .\templates\includes\admin_navbar.html:22
+#: .\templates\includes\admin_navbar.html:24
+#: .\templates\includes\navbar.html:31 .\templates\timesheet\user_list.html:16
+#: .\templates\timesheet\user_list.html:23 .\templates\users\users.html:12
 msgid "Users"
 msgstr "Usuarios"
 
-#: .\templates\includes\navbar_admin.html:22
+#: .\templates\includes\admin_navbar.html:25
 msgid "Inactive Users"
 msgstr "Usuarios Inactivos"
 
-#: .\templates\includes\navbar_admin.html:25
-#: .\templates\main\admin_trash.html:10
-msgid "System Trash"
-msgstr "Papelera del Sistema"
+#: .\templates\includes\admin_navbar.html:26
+#: .\templates\users\create_user.html:18
+msgid "Create User"
+msgstr "Crear Usuario"
 
-#: .\templates\includes\navbar_mgmt.html:19
-#: .\templates\timesheet\project_list.html:11
-msgid "Projects"
-msgstr "Proyectos"
+#: .\templates\includes\admin_navbar.html:32
+msgid "Backup"
+msgstr "Backup"
 
-#: .\templates\includes\navbar_mgmt.html:22
-#: .\templates\timesheet\company_list.html:11
-msgid "Customers"
-msgstr "Clientes"
-
-#: .\templates\includes\navbar_mgmt.html:25
-#: .\templates\timesheet\timesheet_list.html:11
-msgid "Timesheets"
-msgstr "Timesheets"
-
-#: .\templates\main\admin_home.html:11
+#: .\templates\includes\admin_navbar.html:34
+#: .\templates\main\admin_home.html:14
 msgid "Backups"
 msgstr "Backups"
 
-#: .\templates\main\admin_home.html:18
+#: .\templates\includes\admin_navbar.html:35
 msgid "New Backup"
 msgstr "Crear Backup"
 
-#: .\templates\main\admin_home.html:34
-#: .\templates\timesheet\company_list.html:39
-#: .\templates\timesheet\company_view.html:24
-#: .\templates\timesheet\project_list.html:39
-#: .\templates\timesheet\project_view.html:58
-#: .\templates\timesheet\user_list.html:38 .\templates\users\users.html:32
+#: .\templates\includes\admin_navbar.html:40
+#: .\templates\main\admin_trash.html:14
+msgid "System Trash"
+msgstr "Papelera del Sistema"
+
+#: .\templates\includes\admin_navbar.html:49
+#: .\templates\includes\admin_navbar.html:83
+#: .\templates\includes\navbar.html:47 .\templates\includes\navbar.html:94
+#: .\templates\main\admin_trash.html:24 .\templates\main\home.html:24
+#: .\templates\timesheet\company_list.html:47
+#: .\templates\timesheet\project_list.html:48
+msgid "Search"
+msgstr "Búsqueda"
+
+#: .\templates\includes\admin_navbar.html:54
+#: .\templates\includes\admin_navbar.html:88
+#: .\templates\includes\navbar.html:52 .\templates\includes\navbar.html:99
+#: .\templates\main\user_trash.html:13
+msgid "Trash"
+msgstr "Papelera"
+
+#: .\templates\includes\admin_navbar.html:59
+#: .\templates\includes\admin_navbar.html:94
+msgid "Home"
+msgstr "Inicio"
+
+#: .\templates\includes\admin_navbar.html:64
+#: .\templates\includes\admin_navbar.html:100
+#: .\templates\includes\navbar.html:64 .\templates\includes\navbar.html:111
+msgid "Profile"
+msgstr "Perfil"
+
+#: .\templates\includes\admin_navbar.html:69
+#: .\templates\includes\admin_navbar.html:105
+#: .\templates\includes\navbar.html:69 .\templates\includes\navbar.html:116
+msgid "Logout"
+msgstr "Logout"
+
+#: .\templates\includes\admin_navbar.html:113
+#: .\templates\includes\navbar.html:78 .\templates\includes\navbar.html:124
+#: .\templates\users\registration.html:68
+msgid "Register"
+msgstr "Registro"
+
+#: .\templates\includes\navbar.html:21
+#: .\templates\timesheet\timesheet_list_self.html:15
+#: .\templates\timesheet\timesheet_list_self.html:22
+msgid "My Timesheets"
+msgstr "Mis Timesheets"
+
+#: .\templates\includes\navbar.html:24 .\timesheet\views.py:443
+#: .\timesheet\views.py:469
+msgid "Log Timesheet"
+msgstr "Registrar Timesheet"
+
+#: .\templates\includes\navbar.html:29 .\templates\includes\navbar_mgmt.html:7
+msgid "Management"
+msgstr "Gestión"
+
+#: .\templates\includes\navbar.html:32
+#: .\templates\timesheet\project_list.html:17
+#: .\templates\timesheet\project_list.html:24
+msgid "Projects"
+msgstr "Proyectos"
+
+#: .\templates\includes\navbar.html:33
+#: .\templates\timesheet\company_list.html:16
+#: .\templates\timesheet\company_list.html:23
+msgid "Customers"
+msgstr "Clientes"
+
+#: .\templates\includes\navbar.html:34
+#: .\templates\timesheet\timesheet_list.html:17
+#: .\templates\timesheet\timesheet_list.html:24
+msgid "Timesheets"
+msgstr "Timesheets"
+
+#: .\templates\includes\navbar.html:58
+msgid "Admin"
+msgstr "Admin"
+
+#: .\templates\main\admin_home.html:26
+#: .\templates\timesheet\company_list.html:63
+#: .\templates\timesheet\company_view.html:29
+#: .\templates\timesheet\project_list.html:64
+#: .\templates\timesheet\project_view.html:86
+#: .\templates\timesheet\user_list.html:65 .\templates\users\users.html:23
 msgid "Name"
 msgstr "Nombre"
 
-#: .\templates\main\admin_home.html:52
+#: .\templates\main\admin_home.html:44
 msgid "No backups available."
 msgstr "No existen backups disponibles."
 
-#: .\templates\main\admin_trash.html:23
-#: .\templates\timesheet\company_list.html:28
-#: .\templates\timesheet\project_list.html:28
-#: .\templates\timesheet\project_view.html:48
-#: .\templates\timesheet\timesheet_list.html:27
-#: .\templates\timesheet\timesheet_list_self.html:23
-#: .\templates\timesheet\user_detail.html:37
-#: .\templates\timesheet\user_list.html:27
+#: .\templates\main\admin_trash.html:27
+#: .\templates\timesheet\company_list.html:33
+#: .\templates\timesheet\company_list.html:50
+#: .\templates\timesheet\project_list.html:34
+#: .\templates\timesheet\project_list.html:51
+#: .\templates\timesheet\project_view.html:59
+#: .\templates\timesheet\project_view.html:74
+#: .\templates\timesheet\timesheet_list.html:35
+#: .\templates\timesheet\timesheet_list.html:53
+#: .\templates\timesheet\timesheet_list_self.html:32
+#: .\templates\timesheet\timesheet_list_self.html:47
+#: .\templates\timesheet\user_detail.html:46
+#: .\templates\timesheet\user_detail.html:61
+#: .\templates\timesheet\user_list.html:34
+#: .\templates\timesheet\user_list.html:52
 msgid "Clear"
 msgstr "Limipar"
 
-#: .\templates\main\admin_trash.html:45 .\templates\main\admin_trash.html:47
-#: .\templates\main\user_trash.html:30 .\templates\main\user_trash.html:32
-#: .\templates\main\user_trash.html:34
+#: .\templates\main\admin_trash.html:49 .\templates\main\admin_trash.html:51
+#: .\templates\main\user_trash.html:34 .\templates\main\user_trash.html:36
+#: .\templates\main\user_trash.html:38
 msgid "Restore"
 msgstr "Restaurar"
 
-#: .\templates\main\admin_trash.html:76 .\templates\main\user_trash.html:71
+#: .\templates\main\admin_trash.html:80 .\templates\main\user_trash.html:75
 msgid "Trash is empty."
 msgstr "La papelera está vacía."
 
-#: .\templates\main\login.html:18
+#: .\templates\main\login.html:26
 msgid "Username:"
 msgstr "Usuario"
 
-#: .\templates\main\login.html:23 .\templates\users\create_user.html:67
-#: .\templates\users\password_change.html:19
-#: .\templates\users\registration.html:43
+#: .\templates\main\login.html:31 .\templates\users\create_user.html:71
+#: .\templates\users\password_change.html:23
+#: .\templates\users\registration.html:48
 msgid "Password:"
 msgstr "Contraseña"
 
-#: .\templates\main\login.html:29
+#: .\templates\main\login.html:37
 msgid "Forgot Password?"
 msgstr "¿Olvidó su contraseña?"
 
-#: .\templates\main\user_trash.html:39 .\templates\main\user_trash.html:41
-#: .\templates\main\user_trash.html:43
-#: .\templates\timesheet\company_view.html:85
-#: .\templates\timesheet\project_view.html:134
-#: .\templates\timesheet\timesheet_view.html:30
-#: .\templates\timesheet\timesheet_view_self.html:30
+#: .\templates\main\user_trash.html:43 .\templates\main\user_trash.html:45
+#: .\templates\main\user_trash.html:47
+#: .\templates\timesheet\company_view.html:90
+#: .\templates\timesheet\project_view.html:162
+#: .\templates\timesheet\timesheet_view.html:37
+#: .\templates\timesheet\timesheet_view_self.html:35
 msgid "Delete"
 msgstr "Borrar"
 
-#: .\templates\timesheet\company_create.html:27
+#: .\templates\timesheet\company_create.html:31
 msgid "Customer Name:"
 msgstr "Nombre del Cliente:"
 
-#: .\templates\timesheet\company_create.html:33
+#: .\templates\timesheet\company_create.html:37
 msgid "Tax ID:"
 msgstr "ID Fiscal:"
 
-#: .\templates\timesheet\company_create.html:41
-#: .\templates\timesheet\project_create.html:61
-#: .\templates\timesheet\timesheet_create.html:44
-#: .\templates\timesheet\timesheet_create_self.html:44
-#: .\templates\users\create_user.html:99 .\templates\users\edit_user.html:72
-#: .\templates\users\profile_edit.html:32
+#: .\templates\timesheet\company_create.html:45
+#: .\templates\timesheet\project_create.html:65
+#: .\templates\timesheet\timesheet_create.html:48
+#: .\templates\timesheet\timesheet_create_self.html:48
+#: .\templates\users\create_user.html:103 .\templates\users\edit_user.html:76
+#: .\templates\users\profile_edit.html:38
 msgid "Save"
 msgstr "Guardar"
 
-#: .\templates\timesheet\company_create.html:44
-#: .\templates\timesheet\company_create.html:46
-#: .\templates\timesheet\company_view.html:83
-#: .\templates\timesheet\project_create.html:63
-#: .\templates\timesheet\project_create.html:65
-#: .\templates\timesheet\project_view.html:132
-#: .\templates\timesheet\timesheet_create.html:46
-#: .\templates\timesheet\timesheet_create.html:48
-#: .\templates\timesheet\timesheet_create_self.html:46
-#: .\templates\timesheet\timesheet_create_self.html:48
-#: .\templates\timesheet\timesheet_view.html:29
-#: .\templates\timesheet\timesheet_view_self.html:29
-#: .\templates\users\create_user.html:100 .\templates\users\edit_user.html:73
-#: .\templates\users\password_change.html:41
-#: .\templates\users\password_reset.html:26
-#: .\templates\users\profile_edit.html:33
-#: .\templates\users\registration.html:64
+#: .\templates\timesheet\company_create.html:48
+#: .\templates\timesheet\company_create.html:50
+#: .\templates\timesheet\company_view.html:88
+#: .\templates\timesheet\project_create.html:67
+#: .\templates\timesheet\project_create.html:69
+#: .\templates\timesheet\project_view.html:160
+#: .\templates\timesheet\timesheet_create.html:50
+#: .\templates\timesheet\timesheet_create.html:52
+#: .\templates\timesheet\timesheet_create_self.html:50
+#: .\templates\timesheet\timesheet_create_self.html:52
+#: .\templates\timesheet\timesheet_view.html:36
+#: .\templates\timesheet\timesheet_view_self.html:34
+#: .\templates\users\create_user.html:104 .\templates\users\edit_user.html:77
+#: .\templates\users\password_change.html:45
+#: .\templates\users\password_reset.html:30
+#: .\templates\users\profile_edit.html:39
+#: .\templates\users\registration.html:69
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: .\templates\timesheet\company_list.html:19
-msgid "Add Customer"
-msgstr "Agregar Cliente"
+#: .\templates\timesheet\company_list.html:29
+#: .\templates\timesheet\company_list.html:42
+msgid "Customer"
+msgstr "Cliente"
 
-#: .\templates\timesheet\company_list.html:40
+#: .\templates\timesheet\company_list.html:32
+#: .\templates\timesheet\project_list.html:33
+#: .\templates\timesheet\project_view.html:58
+#: .\templates\timesheet\project_view.html:71
+#: .\templates\timesheet\timesheet_list.html:34
+#: .\templates\timesheet\timesheet_list.html:50
+#: .\templates\timesheet\timesheet_list_self.html:31
+#: .\templates\timesheet\timesheet_list_self.html:44
+#: .\templates\timesheet\user_detail.html:45
+#: .\templates\timesheet\user_detail.html:58
+#: .\templates\timesheet\user_list.html:33
+#: .\templates\timesheet\user_list.html:49
+msgid "Filter"
+msgstr "Filtrar"
+
+#: .\templates\timesheet\company_list.html:64
 msgid "Tax ID"
 msgstr "ID Fiscal"
 
-#: .\templates\timesheet\company_list.html:77
-#, fuzzy
-#| msgid "No users available."
+#: .\templates\timesheet\company_list.html:101
 msgid "No customers available."
-msgstr "No existen usuarios disponibles."
+msgstr "No existen clientes disponibles."
 
-#: .\templates\timesheet\company_view.html:12
+#: .\templates\timesheet\company_view.html:17
 msgid "Customer Balance: "
-msgstr "Balance del Cliente:"
+msgstr "Balance del Cliente: "
 
-#: .\templates\timesheet\company_view.html:25
-#: .\templates\timesheet\project_list.html:40
+#: .\templates\timesheet\company_view.html:30
+#: .\templates\timesheet\project_list.html:65
 msgid "Allocated"
 msgstr "Allocated"
 
-#: .\templates\timesheet\company_view.html:26
+#: .\templates\timesheet\company_view.html:31
 msgid "Backlog"
 msgstr "Backlog"
 
-#: .\templates\timesheet\company_view.html:27 .\templates\users\users.html:34
+#: .\templates\timesheet\company_view.html:32 .\templates\users\users.html:25
 msgid "Status"
 msgstr "Estado"
 
-#: .\templates\timesheet\company_view.html:28
+#: .\templates\timesheet\company_view.html:33
 msgid "Balance"
 msgstr "Balance"
 
-#: .\templates\timesheet\company_view.html:44 .\templates\users\profile.html:25
-#: .\templates\users\user.html:36 .\templates\users\users.html:46
+#: .\templates\timesheet\company_view.html:49 .\templates\users\profile.html:30
+#: .\templates\users\user.html:40 .\templates\users\users.html:37
 #: .\timesheet\forms.py:42
 msgid "Active"
 msgstr "Activo"
 
-#: .\templates\timesheet\company_view.html:46 .\timesheet\forms.py:43
+#: .\templates\timesheet\company_view.html:51 .\timesheet\forms.py:43
 msgid "Finished"
 msgstr "Terminado"
 
-#: .\templates\timesheet\company_view.html:75
-#: .\templates\timesheet\project_list.html:89
+#: .\templates\timesheet\company_view.html:80
+#: .\templates\timesheet\project_list.html:114
 msgid "No projects available."
 msgstr "No hay proyectos disponibles."
 
-#: .\templates\timesheet\company_view.html:82
-#: .\templates\timesheet\project_view.html:131
-#: .\templates\timesheet\timesheet_view.html:28
-#: .\templates\timesheet\timesheet_view_self.html:28
-#: .\templates\users\profile.html:31 .\templates\users\user.html:42
+#: .\templates\timesheet\company_view.html:87
+#: .\templates\timesheet\project_view.html:159
+#: .\templates\timesheet\timesheet_view.html:35
+#: .\templates\timesheet\timesheet_view_self.html:33
+#: .\templates\users\profile.html:36 .\templates\users\user.html:46
 msgid "Edit"
 msgstr "Editar"
 
-#: .\templates\timesheet\project_create.html:27
+#: .\templates\timesheet\project_create.html:31
 msgid "Project Name:"
 msgstr "Nombre del Proyecto:"
 
-#: .\templates\timesheet\project_create.html:38
+#: .\templates\timesheet\project_create.html:42
 msgid "Budget (hs.):"
 msgstr "Presupuesto (hs.):"
 
-#: .\templates\timesheet\project_create.html:56
-#: .\templates\users\create_user.html:61 .\templates\users\edit_user.html:56
-#: .\templates\users\user.html:25
+#: .\templates\timesheet\project_create.html:60
+#: .\templates\users\create_user.html:65 .\templates\users\edit_user.html:60
+#: .\templates\users\user.html:29
 msgid "Start Date:"
 msgstr "Fecha de Ingreso:"
 
-#: .\templates\timesheet\project_create.html:76
-#: .\templates\timesheet\timesheet_create.html:58
-#: .\templates\timesheet\timesheet_create_self.html:58
+#: .\templates\timesheet\project_create.html:80
+#: .\templates\timesheet\timesheet_create.html:62
+#: .\templates\timesheet\timesheet_create_self.html:62
 msgid "Notes:"
 msgstr "Notas:"
 
-#: .\templates\timesheet\project_list.html:19
-msgid "Add Project"
-msgstr "Agregar Proyecto"
-
-#: .\templates\timesheet\project_list.html:41
-msgid "Remaining"
-msgstr "Pendiente"
-
-#: .\templates\timesheet\project_list.html:42
-msgid "Type"
-msgstr "Tipo"
-
-#: .\templates\timesheet\project_list.html:58 .\timesheet\forms.py:37
-msgid "One-Time"
-msgstr "One-Time"
-
-#: .\templates\timesheet\project_list.html:60 .\timesheet\forms.py:38
-msgid "Recurrent"
-msgstr "Recurrente"
-
-#: .\templates\timesheet\project_view.html:11
-msgid "Start Date: "
-msgstr "Fecha de Inicio: "
-
-#: .\templates\timesheet\project_view.html:14
-msgid "Type: One-Time"
-msgstr "Tipo: One-Time"
-
-#: .\templates\timesheet\project_view.html:16
-msgid "Type: Recurrent"
-msgstr "Tipo: Recurrente"
-
-#: .\templates\timesheet\project_view.html:20
-msgid "Status: Active"
-msgstr "Estado: Activo"
-
-#: .\templates\timesheet\project_view.html:22
-msgid "Status: Finished"
-msgstr "Estado: Terminado"
-
-#: .\templates\timesheet\project_view.html:26
-msgid "Project Budget: "
-msgstr "Presupesto del Proyecto: "
-
-#: .\templates\timesheet\project_view.html:45
-#: .\templates\timesheet\timesheet_list.html:24
-#: .\templates\timesheet\timesheet_list_self.html:20
-#: .\templates\timesheet\user_detail.html:34
-#: .\templates\timesheet\user_list.html:24
-msgid "Filter"
-msgstr "Filtrar"
-
-#: .\templates\timesheet\project_view.html:59
-#: .\templates\timesheet\user_detail.html:49
-#: .\templates\timesheet\user_list.html:39
-msgid "Allocated Time: "
-msgstr "Allocated Time: "
-
-#: .\templates\timesheet\project_view.html:60
-msgid "User"
-msgstr "Usuario"
-
-#: .\templates\timesheet\project_view.html:123
-#: .\templates\timesheet\timesheet_list.html:84
-#: .\templates\timesheet\timesheet_list_self.html:78
-#: .\templates\timesheet\user_detail.html:88
-msgid "No timesheets available."
-msgstr "No hay timesheets disponibles."
-
-#: .\templates\timesheet\timesheet_create.html:26
-#: .\templates\timesheet\timesheet_create_self.html:26
-msgid "Date:"
-msgstr "Fecha: "
-
-#: .\templates\timesheet\timesheet_create.html:30
-#: .\templates\timesheet\timesheet_create_self.html:30
-msgid "Duration:"
-msgstr "duración:"
-
-#: .\templates\timesheet\timesheet_create_self.html:34
-msgid "Type:"
-msgstr "Tipo:"
-
-#: .\templates\timesheet\timesheet_list.html:18
-#: .\templates\timesheet\user_list.html:18
-msgid "Add Timesheet"
-msgstr "Agregar Timesheet"
-
-#: .\templates\timesheet\timesheet_list.html:42
-#: .\templates\timesheet\timesheet_list_self.html:38
-#: .\templates\timesheet\user_detail.html:48
-msgid "Date"
-msgstr "Fecha"
-
-#: .\templates\timesheet\timesheet_list.html:43
-#: .\templates\timesheet\timesheet_list_self.html:39
-msgid "Hours: "
-msgstr "Horas: "
-
-#: .\templates\timesheet\timesheet_list.html:44
-#: .\templates\timesheet\timesheet_list_self.html:40
-#: .\templates\timesheet\user_detail.html:50
+#: .\templates\timesheet\project_list.html:30
+#: .\templates\timesheet\project_list.html:43
+#: .\templates\timesheet\timesheet_list.html:68
+#: .\templates\timesheet\timesheet_list_self.html:66
+#: .\templates\timesheet\user_detail.html:76
 msgid "Project"
 msgstr "Proyecto"
 
-#: .\templates\timesheet\timesheet_list.html:45
+#: .\templates\timesheet\project_list.html:66
+msgid "Remaining"
+msgstr "Pendiente"
+
+#: .\templates\timesheet\project_list.html:67
+msgid "Type"
+msgstr "Tipo"
+
+#: .\templates\timesheet\project_list.html:83 .\timesheet\forms.py:37
+msgid "One-Time"
+msgstr "One-Time"
+
+#: .\templates\timesheet\project_list.html:85 .\timesheet\forms.py:38
+msgid "Recurrent"
+msgstr "Recurrente"
+
+#: .\templates\timesheet\project_view.html:16
+msgid "Start Date: "
+msgstr "Fecha de Inicio: "
+
+#: .\templates\timesheet\project_view.html:19
+msgid "Type: One-Time"
+msgstr "Tipo: One-Time"
+
+#: .\templates\timesheet\project_view.html:21
+msgid "Type: Recurrent"
+msgstr "Tipo: Recurrente"
+
+#: .\templates\timesheet\project_view.html:25
+msgid "Status: Active"
+msgstr "Estado: Activo"
+
+#: .\templates\timesheet\project_view.html:27
+msgid "Status: Finished"
+msgstr "Estado: Terminado"
+
+#: .\templates\timesheet\project_view.html:31
+msgid "Project Budget: "
+msgstr "Presupesto del Proyecto: "
+
+#: .\templates\timesheet\project_view.html:32
+msgid "Pending: "
+msgstr "Pendiente: "
+
+#: .\templates\timesheet\project_view.html:42
+#: .\templates\timesheet\project_view.html:49
+msgid "Project Timesheets"
+msgstr "Timesheets del Proyecto"
+
+#: .\templates\timesheet\project_view.html:87
+#: .\templates\timesheet\user_detail.html:75
+#: .\templates\timesheet\user_list.html:66
+msgid "Allocated Time: "
+msgstr "Allocated Time: "
+
+#: .\templates\timesheet\project_view.html:88
+msgid "User"
+msgstr "Usuario"
+
+#: .\templates\timesheet\project_view.html:151
+#: .\templates\timesheet\timesheet_list.html:117
+#: .\templates\timesheet\timesheet_list_self.html:104
+#: .\templates\timesheet\user_detail.html:114
+msgid "No timesheets available."
+msgstr "No hay timesheets disponibles."
+
+#: .\templates\timesheet\timesheet_create.html:30
+#: .\templates\timesheet\timesheet_create_self.html:30
+msgid "Date:"
+msgstr "Fecha:"
+
+#: .\templates\timesheet\timesheet_create.html:34
+#: .\templates\timesheet\timesheet_create_self.html:34
+msgid "Duration:"
+msgstr "duración:"
+
+#: .\templates\timesheet\timesheet_create_self.html:38
+msgid "Type:"
+msgstr "Tipo:"
+
+#: .\templates\timesheet\timesheet_list.html:30
+#: .\templates\timesheet\timesheet_list.html:44
+#: .\templates\timesheet\user_list.html:29
+#: .\templates\timesheet\user_list.html:43
+msgid "Timesheet"
+msgstr "Timesheet"
+
+#: .\templates\timesheet\timesheet_list.html:66
+#: .\templates\timesheet\timesheet_list_self.html:64
+#: .\templates\timesheet\user_detail.html:74
+msgid "Date"
+msgstr "Fecha"
+
+#: .\templates\timesheet\timesheet_list.html:67
+#: .\templates\timesheet\timesheet_list_self.html:65
+msgid "Hours: "
+msgstr "Horas: "
+
+#: .\templates\timesheet\timesheet_list.html:69
 msgid "Resource"
 msgstr "Recurso"
 
-#: .\templates\timesheet\timesheet_view.html:7
-#: .\templates\timesheet\timesheet_view_self.html:7
+#: .\templates\timesheet\timesheet_view.html:12
+#: .\templates\timesheet\timesheet_view_self.html:12
 msgid "Timesheet for: "
 msgstr "Timesheet para: "
 
-#: .\templates\timesheet\timesheet_view.html:9
-#: .\templates\timesheet\timesheet_view_self.html:9
+#: .\templates\timesheet\timesheet_view.html:14
+msgid "User: "
+msgstr "Usuario: "
+
+#: .\templates\timesheet\timesheet_view.html:16
+#: .\templates\timesheet\timesheet_view_self.html:14
 msgid "Logged Time: "
 msgstr "Tiempo registrado: "
 
-#: .\templates\timesheet\timesheet_view.html:11
-#: .\templates\timesheet\timesheet_view_self.html:11
+#: .\templates\timesheet\timesheet_view.html:18
+#: .\templates\timesheet\timesheet_view_self.html:16
 msgid "Project: "
 msgstr "Proyecto: "
 
-#: .\templates\timesheet\timesheet_view.html:13
-#: .\templates\timesheet\timesheet_view_self.html:13
+#: .\templates\timesheet\timesheet_view.html:20
+#: .\templates\timesheet\timesheet_view_self.html:18
 msgid "Customer: "
 msgstr "Cliente: "
 
-#: .\templates\timesheet\timesheet_view.html:16
-#: .\templates\timesheet\timesheet_view_self.html:16
+#: .\templates\timesheet\timesheet_view.html:23
+#: .\templates\timesheet\timesheet_view_self.html:21
 msgid "Type: Business Hours"
 msgstr "Tipo: Horario Hábil"
 
-#: .\templates\timesheet\timesheet_view.html:18
-#: .\templates\timesheet\timesheet_view_self.html:18
+#: .\templates\timesheet\timesheet_view.html:25
+#: .\templates\timesheet\timesheet_view_self.html:23
 msgid "Type: Non Business Hours"
 msgstr "Tipo: Horario Inábil"
 
-#: .\templates\timesheet\timesheet_view.html:21
-#: .\templates\timesheet\timesheet_view_self.html:21
+#: .\templates\timesheet\timesheet_view.html:28
+#: .\templates\timesheet\timesheet_view_self.html:26
 msgid "Notes: "
 msgstr "Notas: "
 
-#: .\templates\timesheet\user_detail.html:12
+#: .\templates\timesheet\user_detail.html:16
 msgid "Practice: "
 msgstr "Práctica: "
 
-#: .\templates\timesheet\user_detail.html:13
+#: .\templates\timesheet\user_detail.html:17
 msgid "Seniority: "
 msgstr "Seniority: "
 
-#: .\templates\timesheet\user_detail.html:16
+#: .\templates\timesheet\user_detail.html:20
 msgid "Monthly Allocation Target: "
 msgstr "Objetivo Mensual: "
 
-#: .\templates\timesheet\user_list.html:40
+#: .\templates\timesheet\user_detail.html:36
+msgid "User Timesheets"
+msgstr "Timesheets del Usuario"
+
+#: .\templates\timesheet\user_list.html:67
 msgid "Unallocated Time: "
 msgstr "Unallocated Time: "
 
-#: .\templates\timesheet\user_list.html:82 .\templates\users\users.html:81
+#: .\templates\timesheet\user_list.html:109 .\templates\users\users.html:72
 msgid "No users available."
 msgstr "No existen usuarios disponibles."
 
@@ -460,103 +520,100 @@ msgid ""
 "Please click on the link below to complete your registration at MateApp "
 "Timesheet:"
 msgstr ""
+"Por favor haga 'Click' en el link de abajo para compleatar su registro:"
 
-#: .\templates\users\create_user.html:14 .\templates\users\users.html:16
-msgid "Create User"
-msgstr "Crear Usuario"
-
-#: .\templates\users\create_user.html:20
-#: .\templates\users\password_reset.html:21 .\templates\users\profile.html:14
-#: .\templates\users\registration.html:18 .\templates\users\user.html:15
+#: .\templates\users\create_user.html:24
+#: .\templates\users\password_reset.html:25 .\templates\users\profile.html:19
+#: .\templates\users\registration.html:23 .\templates\users\user.html:19
 msgid "eMail:"
 msgstr "eMail:"
 
-#: .\templates\users\create_user.html:26 .\templates\users\edit_user.html:21
-#: .\templates\users\profile_edit.html:20
-#: .\templates\users\registration.html:31
+#: .\templates\users\create_user.html:30 .\templates\users\edit_user.html:25
+#: .\templates\users\profile_edit.html:26
+#: .\templates\users\registration.html:36
 msgid "First Name:"
 msgstr "Nombre:"
 
-#: .\templates\users\create_user.html:32 .\templates\users\edit_user.html:27
-#: .\templates\users\profile_edit.html:26
-#: .\templates\users\registration.html:37
+#: .\templates\users\create_user.html:36 .\templates\users\edit_user.html:31
+#: .\templates\users\profile_edit.html:32
+#: .\templates\users\registration.html:42
 msgid "Last Name:"
 msgstr "Apellido:"
 
-#: .\templates\users\create_user.html:38
+#: .\templates\users\create_user.html:42
 msgid "Job Title:"
 msgstr "Posición:"
 
-#: .\templates\users\create_user.html:49 .\templates\users\edit_user.html:39
-#: .\templates\users\user.html:19
+#: .\templates\users\create_user.html:53 .\templates\users\edit_user.html:43
+#: .\templates\users\user.html:23
 msgid "Practice:"
 msgstr "Práctica:"
 
-#: .\templates\users\create_user.html:55 .\templates\users\edit_user.html:50
-#: .\templates\users\user.html:23
+#: .\templates\users\create_user.html:59 .\templates\users\edit_user.html:54
+#: .\templates\users\user.html:27
 msgid "Monthly Allocation Target:"
 msgstr "Objetivo Mensual:"
 
-#: .\templates\users\create_user.html:73
-#: .\templates\users\password_change.html:25
-#: .\templates\users\registration.html:49
+#: .\templates\users\create_user.html:77
+#: .\templates\users\password_change.html:29
+#: .\templates\users\registration.html:54
 msgid "Your password can’t be too similar to your other personal information."
 msgstr "Su contraseña no puede ser similar a su información personal."
 
-#: .\templates\users\create_user.html:74
-#: .\templates\users\password_change.html:26
-#: .\templates\users\registration.html:50
+#: .\templates\users\create_user.html:78
+#: .\templates\users\password_change.html:30
+#: .\templates\users\registration.html:55
 msgid "Your password must contain at least 8 characters."
 msgstr "Su contraseña debe contener al menos 8 caracteres."
 
-#: .\templates\users\create_user.html:75
-#: .\templates\users\password_change.html:27
-#: .\templates\users\registration.html:51
+#: .\templates\users\create_user.html:79
+#: .\templates\users\password_change.html:31
+#: .\templates\users\registration.html:56
 msgid "Your password can’t be a commonly used password."
 msgstr "Su contraseña no puede ser una demasiado común."
 
-#: .\templates\users\create_user.html:76
-#: .\templates\users\password_change.html:28
-#: .\templates\users\registration.html:52
+#: .\templates\users\create_user.html:80
+#: .\templates\users\password_change.html:32
+#: .\templates\users\registration.html:57
 msgid "Your password can’t be entirely numeric."
 msgstr "Su contraseña no puede ser solamente numérica."
 
-#: .\templates\users\create_user.html:83
-#: .\templates\users\password_change.html:35
-#: .\templates\users\registration.html:59
+#: .\templates\users\create_user.html:87
+#: .\templates\users\password_change.html:39
+#: .\templates\users\registration.html:64
 msgid "Re-type Password:"
 msgstr "Reingrese su Contraseña:"
 
-#: .\templates\users\create_user.html:89 .\templates\users\edit_user.html:62
+#: .\templates\users\create_user.html:93 .\templates\users\edit_user.html:66
 msgid "Is Active?"
 msgstr "¿Está Activo?"
 
-#: .\templates\users\create_user.html:93 .\templates\users\edit_user.html:66
-#: .\templates\users\users.html:35
+#: .\templates\users\create_user.html:97 .\templates\users\edit_user.html:70
+#: .\templates\users\users.html:26
 msgid "Is Supervisor?"
 msgstr "¿Es Supervisor?"
 
-#: .\templates\users\edit_user.html:14
+#: .\templates\users\edit_user.html:18
 msgid "Editing User:"
 msgstr "Editando Usuario:"
 
-#: .\templates\users\edit_user.html:33 .\templates\users\user.html:17
+#: .\templates\users\edit_user.html:37 .\templates\users\user.html:21
 msgid "Title:"
 msgstr "Título"
 
-#: .\templates\users\password_change.html:13
+#: .\templates\users\password_change.html:17
 msgid "Password Change"
 msgstr "Cambio de Contraseña"
 
-#: .\templates\users\password_change.html:40
+#: .\templates\users\password_change.html:44
 msgid "Change"
 msgstr "Cambiar"
 
-#: .\templates\users\password_reset.html:12
+#: .\templates\users\password_reset.html:16
 msgid "Password Reset"
 msgstr "Restablecer Contraseña"
 
-#: .\templates\users\password_reset.html:16
+#: .\templates\users\password_reset.html:20
 msgid ""
 "Forgot you password? Enter your email below, and we'll email instructions "
 "for setting a new one."
@@ -564,7 +621,7 @@ msgstr ""
 "¿Olvidó su contraseña? Ingrese su email, y le enviaremos instrucciones para "
 "restablecerla."
 
-#: .\templates\users\password_reset.html:25
+#: .\templates\users\password_reset.html:29
 msgid "Send"
 msgstr "Enviar"
 
@@ -598,75 +655,75 @@ msgstr "y solicite nuevamente el reseteo."
 msgid "If you did not make this request, you can simply ignore this email."
 msgstr "Si usted no efectuó este requerimiento, simplemente ignore este email."
 
-#: .\templates\users\profile.html:9 .\templates\users\user.html:10
+#: .\templates\users\profile.html:14 .\templates\users\user.html:14
 msgid "User Profile"
 msgstr "Perfil de Usuario"
 
-#: .\templates\users\profile.html:17 .\templates\users\profile.html:19
-#: .\templates\users\profile.html:21 .\templates\users\user.html:28
-#: .\templates\users\user.html:30 .\templates\users\user.html:32
+#: .\templates\users\profile.html:22 .\templates\users\profile.html:24
+#: .\templates\users\profile.html:26 .\templates\users\user.html:32
+#: .\templates\users\user.html:34 .\templates\users\user.html:36
 msgid "User Type:"
 msgstr "Tipo de Usuario:"
 
-#: .\templates\users\profile.html:17 .\templates\users\user.html:28
+#: .\templates\users\profile.html:22 .\templates\users\user.html:32
 msgid "Administrator"
 msgstr "Administrador"
 
-#: .\templates\users\profile.html:19 .\templates\users\user.html:30
+#: .\templates\users\profile.html:24 .\templates\users\user.html:34
 msgid "Supervisor"
 msgstr "Supervisor"
 
-#: .\templates\users\profile.html:21 .\templates\users\user.html:32
+#: .\templates\users\profile.html:26 .\templates\users\user.html:36
 msgid "Regular"
 msgstr "Regular"
 
-#: .\templates\users\profile.html:25 .\templates\users\profile.html:27
-#: .\templates\users\user.html:36 .\templates\users\user.html:38
+#: .\templates\users\profile.html:30 .\templates\users\profile.html:32
+#: .\templates\users\user.html:40 .\templates\users\user.html:42
 msgid "User Status:"
 msgstr "Estado:"
 
-#: .\templates\users\profile.html:27 .\templates\users\user.html:38
-#: .\templates\users\users.html:48
+#: .\templates\users\profile.html:32 .\templates\users\user.html:42
+#: .\templates\users\users.html:39
 msgid "Inactive"
 msgstr "Inactivo"
 
-#: .\templates\users\profile_edit.html:12
+#: .\templates\users\profile_edit.html:18
 msgid "Profile Update for:"
 msgstr "Actualización del perfil de:"
 
-#: .\templates\users\profile_edit.html:29
+#: .\templates\users\profile_edit.html:35
 msgid "Change Password"
 msgstr "Cambiar Contraseña"
 
-#: .\templates\users\registration.html:12
+#: .\templates\users\registration.html:17
 msgid "User Registration"
 msgstr "Registro de Usuario"
 
-#: .\templates\users\registration.html:24
+#: .\templates\users\registration.html:29
 msgid "Only"
 msgstr "Solamente se procesarán direcciones del dominio"
 
-#: .\templates\users\registration.html:24
+#: .\templates\users\registration.html:29
 msgid "addresses will be processed."
 msgstr "."
 
-#: .\templates\users\user.html:21
+#: .\templates\users\user.html:25
 msgid "Seniority:"
 msgstr "Seniority:"
 
-#: .\templates\users\user.html:43
+#: .\templates\users\user.html:47
 msgid "Back"
 msgstr "Volver"
 
-#: .\templates\users\users.html:33 .\users\forms.py:154
+#: .\templates\users\users.html:24 .\users\forms.py:154
 msgid "eMail"
 msgstr "eMail"
 
-#: .\templates\users\users.html:51
+#: .\templates\users\users.html:42
 msgid "Yes"
 msgstr "Si"
 
-#: .\templates\users\users.html:53
+#: .\templates\users\users.html:44
 msgid "No"
 msgstr "No"
 
@@ -722,7 +779,7 @@ msgstr "Seleccione Usuario"
 msgid "New Customer"
 msgstr "Nuevo Cliente"
 
-#: .\timesheet\views.py:256
+#: .\timesheet\views.py:265
 msgid "New Project"
 msgstr "Nuevo Proyecto"
 
@@ -750,26 +807,27 @@ msgstr "El superusuario debe tener is_superuser=True"
 msgid "email address"
 msgstr "dirección de email"
 
-#: .\users\views.py:38
+#: .\users\views.py:36
 msgid "Thank you for your confirmation. Your account is now active"
 msgstr "Gracias por su confirmación. Su cuenta ha sido activada."
 
-#: .\users\views.py:43
+#: .\users\views.py:41
 msgid ""
 "Thank you for your confirmation. The Administrator will enable your account "
 "soon."
-msgstr "Gracias por su confirmación. El Administrador activará su cuenta pronto."
+msgstr ""
+"Gracias por su confirmación. El Administrador activará su cuenta pronto."
 
-#: .\users\views.py:46
+#: .\users\views.py:44
 msgid "Activation link is invalid. Contact the administrator"
 msgstr ""
 "El link de activación es inválido. Por favor contacte al administrador."
 
-#: .\users\views.py:52
+#: .\users\views.py:50
 msgid "Activate your user account."
 msgstr "Active su cuenta."
 
-#: .\users\views.py:63
+#: .\users\views.py:61
 msgid ""
 "Please go to your email inbox and click on the included activation link to "
 "enable your account. <b>Note:</b> Remember to check your spam folder."
@@ -778,16 +836,16 @@ msgstr ""
 "incluido a fin de activar su cuenta. <b>Nota:</b> Recuerde revisar su "
 "carpeta de spam."
 
-#: .\users\views.py:66 .\users\views.py:166
+#: .\users\views.py:64 .\users\views.py:165
 msgid "There was a problem sending the email. Please contact the Administrator"
 msgstr ""
 "Hubo un problema al enviar el email. Por favor contacte al Administrador"
 
-#: .\users\views.py:152
+#: .\users\views.py:151
 msgid "Password Reset Request"
 msgstr "Solicitud de restablecimiento de contraseña"
 
-#: .\users\views.py:163
+#: .\users\views.py:162
 msgid ""
 "Please go to your email inbox and click on the included link to reset your "
 "password. <b>Note:</b> Remember to check your spam folder."
@@ -796,18 +854,27 @@ msgstr ""
 "incluido a fin de restablecer su contraseña. <b>Nota:</b> Recuerde revisar "
 "su carpeta de spam."
 
-#: .\users\views.py:168
+#: .\users\views.py:167
 msgid "The email address provided is not registered."
 msgstr "El email proporcionado no esta registrado."
 
-#: .\users\views.py:193
+#: .\users\views.py:192
 msgid "Your password has been set. You may go ahead and <b>login</b> now."
 msgstr "Su contraseña ha sido actualizada. Puede continuar al <b>Login</>."
 
-#: .\users\views.py:202
+#: .\users\views.py:201
 msgid "Link is expired"
 msgstr "El link esta expirado"
 
-#: .\users\views.py:204
+#: .\users\views.py:203
 msgid "Something went wrong, redirecting back to Homepage"
 msgstr "Algo salió mal. Lo estamos redireccionado a la pagina principal."
+
+#~ msgid "Add Customer"
+#~ msgstr "Agregar Cliente"
+
+#~ msgid "Add Project"
+#~ msgstr "Agregar Proyecto"
+
+#~ msgid "Add Timesheet"
+#~ msgstr "Agregar Timesheet"

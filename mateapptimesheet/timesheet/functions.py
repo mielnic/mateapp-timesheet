@@ -123,3 +123,10 @@ def getProjectTimesheets(f, pid):
     start, end, target = timeRange(f)
     timesheet_dataset = Time.objects.filter(deleted=False, timeDate__gte=start, timeDate__lte=end, project_id=pid).order_by('-timeDate')
     return timesheet_dataset
+
+def checkProjectEmpty(pid):
+    project_timesheets = Time.objects.filter(deleted=False, project_id=pid)
+    if project_timesheets:
+        return False
+    else:
+        return True

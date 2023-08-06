@@ -81,6 +81,11 @@
     {% endif %}
     </div>
 </div>
+<div class="row py-3 mx-1 justify-content-center">
+  <div class="col shadow py-3 px-5 col-lg-10 border rounded">
+      {% trans "Notes: " %}{{company.companyNotes}}
+  </div>
+</div>
 {% if user.is_staff %}
 <div class="row py-3 mx-1 justify-content-center">
     <div class="col d-flex justify-content-center shadow rounded px-5 py-3 col-lg-10">       
