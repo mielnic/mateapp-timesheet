@@ -2,6 +2,7 @@ from django import forms
 from .models import Company, Project, Time
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
+from django.forms.widgets import SelectDateWidget
 
 TYPE_CHOICES = [
     ("Business", _("Business Hours")),
@@ -85,7 +86,7 @@ class ProjectForm(forms.ModelForm):
         widgets = {
             'projectName': forms.TextInput(attrs={'class':'form-control','required':'True','placeholder':'Project Name'}),
             'company': forms.Select(attrs={'class':'form-select','required':'True'}),
-            'startDate' : forms.DateInput(attrs={'class':'form-control'}),
+            'startDate' : forms.DateInput(attrs={'type':'date', 'class':'form-control', 'required':'True'}),
             'budget' : forms.NumberInput(attrs={'class':'form-control'}),
             'projectNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
         }
@@ -120,8 +121,8 @@ class TimesheetForm(forms.ModelForm):
         ]
 
         widgets = {
-            'timeDate': forms.DateInput(attrs={'class':'form-control','required':'True',}),
-            # 'timeDate': forms.DateInput(attrs={'type':'date', 'class':'form-control'}),
+            # 'timeDate': forms.DateInput(attrs={'class':'form-control','required':'True',}),
+            'timeDate': forms.DateInput(attrs={'type':'date', 'class':'form-control', 'required':'True'}),
             'project': forms.Select(attrs={'class':'form-select','required':'True',}),
             'timeNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
             'user': forms.Select(attrs={'class':'form-select','required':'True'})
