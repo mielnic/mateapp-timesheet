@@ -9,8 +9,8 @@
 {% block content %}
 
 
-<div class="row mx-1 py-3 justify-content-center">
-    <div class="col shadow p-3 col-lg-10 rounded border bg-light">
+<div class="row py-3 justify-content-center">
+    <div class="col shadow p-4 col-10 rounded border bg-light">
         {% if title %}
         <h2>{{title}}</h2>
         {% else %}
@@ -23,8 +23,8 @@
 
 {% csrf_token %}
 
-<div class="row row-col-2 mx-1 py-3 justify-content-center">
-    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-lg-5 rounded">
+<div class="row row-col-2 py-3 justify-content-center">
+    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-10 col-md-5 rounded">
         <p>
         <div class="form-floating">
            {{projectform.projectName}}
@@ -43,7 +43,7 @@
             </div>
         </p>
     </div>
-    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-lg-5 rounded">
+    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-10 col-md-5 rounded">
         <p>
             <div>
                 {{projectform.projectType}}
@@ -72,14 +72,14 @@
             </div>
     </div>
 </div>
-<div class="row py-3 mx-1 justify-content-center">
-    <div class="col shadow py-3 px-5 col-lg-10 border rounded">
-    <p>
+<div class="row py-3 justify-content-center">
+    <div class="col shadow py-4 px-5 col-10 border rounded">
+
         <div class="form-floating">
             {{projectform.projectNotes}}
             <label for="id_notes">{% trans "Notes:" %}</label>
         </div>
-        </p>
+
     </div>
 </div>
 

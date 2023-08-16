@@ -52,11 +52,13 @@ class CompanyForm(forms.ModelForm):
         fields = [
             'companyName',
             'tax_id',
+            'companyNotes'
         ]
 
         widgets = {
             'companyName': forms.TextInput(attrs={'class':'form-control','required':'True','placeholder':'Customer Name'}),
             'tax_id': forms.TextInput(attrs={'class':'form-control','placeholder':'Tax ID'}),
+            'companyNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
         }  
 
 class ProjectForm(forms.ModelForm):
