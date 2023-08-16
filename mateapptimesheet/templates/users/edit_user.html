@@ -60,6 +60,7 @@
                      <label for="id_startdate">{% trans "Start Date:" %}</label>
                  </div>
             </p>
+            {% if user != muser %}
             <div>
                 <div class="form-check">
                     {{usercreateform.is_active}}
@@ -74,6 +75,7 @@
                     <label for="is_admin" class="form-check-label">{% trans "Is Administrator?" %}?</label>
                 </div>
             </div>
+            {% endif %}
 
             <p>
                 <div class="col d-flex justify-content-center px-5 py-3 col-lg-15">

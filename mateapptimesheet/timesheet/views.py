@@ -366,7 +366,7 @@ def timesheets(request, a, b):
 # Timesheet List Self
 
 @login_required
-def self_timesheets(request, a, b):
+def self_timesheets(request, a=0, b=10):
     id = request.user.id
     user = get_user_model().objects.get(id=id)
     filterform = FilterForm
