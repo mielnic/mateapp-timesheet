@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-07 16:22-0300\n"
+"POT-Creation-Date: 2023-08-08 22:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,7 +218,7 @@ msgstr "ID Fiscal:"
 #: .\templates\timesheet\project_create.html:65
 #: .\templates\timesheet\timesheet_create.html:48
 #: .\templates\timesheet\timesheet_create_self.html:48
-#: .\templates\users\create_user.html:103 .\templates\users\edit_user.html:76
+#: .\templates\users\create_user.html:103 .\templates\users\edit_user.html:80
 #: .\templates\users\profile_edit.html:38
 msgid "Save"
 msgstr "Guardar"
@@ -236,7 +236,7 @@ msgstr "Guardar"
 #: .\templates\timesheet\timesheet_view.html:36
 #: .\templates\timesheet\timesheet_view_self.html:34
 #: .\templates\timesheet\user_detail.html:120
-#: .\templates\users\create_user.html:104 .\templates\users\edit_user.html:77
+#: .\templates\users\create_user.html:104 .\templates\users\edit_user.html:81
 #: .\templates\users\password_change.html:45
 #: .\templates\users\password_reset.html:30
 #: .\templates\users\profile_edit.html:39
@@ -604,6 +604,10 @@ msgstr "Editando Usuario:"
 msgid "Title:"
 msgstr "Título"
 
+#: .\templates\users\edit_user.html:74
+msgid "Is Administrator?"
+msgstr "¿Es Administrador?"
+
 #: .\templates\users\password_change.html:17
 msgid "Password Change"
 msgstr "Cambio de Contraseña"
@@ -718,7 +722,7 @@ msgstr "Seniority:"
 msgid "Back"
 msgstr "Volver"
 
-#: .\templates\users\users.html:24 .\users\forms.py:154
+#: .\templates\users\users.html:24 .\users\forms.py:156
 msgid "eMail"
 msgstr "eMail"
 
@@ -786,11 +790,11 @@ msgstr "Nuevo Cliente"
 msgid "New Project"
 msgstr "Nuevo Proyecto"
 
-#: .\users\forms.py:19 .\users\forms.py:63 .\users\forms.py:136
+#: .\users\forms.py:19 .\users\forms.py:63 .\users\forms.py:138
 msgid "Password"
 msgstr "Contraseña"
 
-#: .\users\forms.py:23 .\users\forms.py:67 .\users\forms.py:140
+#: .\users\forms.py:23 .\users\forms.py:67 .\users\forms.py:142
 msgid "Confirm password"
 msgstr "Confirmar Contraseña"
 

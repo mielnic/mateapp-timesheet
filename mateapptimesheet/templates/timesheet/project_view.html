@@ -10,7 +10,7 @@
 
 <div class="row py-3 mx-1 justify-content-center">
     <div class="row row-col-2 justify-content-between shadow p-2 col-lg-10 rounded bg-light">
-      <div class="col px-4 py-3 mb-2 col-lg-5">
+      <div class="col px-4 py-3 mb-2 col-10 col-md-6">
         <h3>{{project.projectName}}</h3>
         <a class="nav-link" href={% url 'timesheet:Company' id=project.company.id a=0 b=5 %}><h6>{{project.company}}</h6></a>
         <h6>{% trans "Start Date: " %}{{ project.startDate }}</h6>
@@ -27,9 +27,14 @@
         <h6>{% trans "Status: Finished" %}</h6>
         {% endif %}
       </div>
-      <div class="col align-text-bottom px-5 py-3 mb-2 col-lg-5">
-        <h4>{% trans "Project Budget: " %}{{ project.budget }} hs.</h4>
+      <div class="col align-text-bottom px-4 py-3 mb-2 col-10 col-md-6">
+        {% if recurrent %}
+        <h4>{% trans "Monthly Budget: " %}{{ project.budget }} hs.</h4>
+        <h5>{% trans "This Month Remaining: " %}{{ pending_time }} hs.</h5>
+        {% else %}
+        <h4>{% trans "Budget: " %}{{ project.budget }} hs.</h4>
         <h5>{% trans "Pending: " %}{{ pending_time }} hs.</h5>
+        {% endif %}
     </div>
     </div>
 </div>
@@ -39,7 +44,7 @@
       <!-- Table Block Header -->
       <nav class="navbar navbar-expand-lg table_nav">
         <div class="container-fluid px-4">
-          <a class="navbar-brand" href=""><h4>{% trans "Project Timesheets" %}</h4></a>
+          <a class="navbar-brand" href=""><h4>{% trans "Project Resources" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#timesheetsNavbar" aria-controls="timesheetsNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -78,14 +83,13 @@
           </div>
         </div>
       </nav>
-    {% if timesheet_list %}
+    {% if user_list %}
     <div class="table-responsive">
     <table class="table table-hover" id="timesheet_list" name="timesheet_List">
         <!-- Cabecera de Tabla -->
         <thead class="table-success">
-            <th>{% trans "Name" %}</th>
-            <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.timeItem__sum }} hs.</th>
-            <th>{% trans "User" %}</th>
+            <th class="px-3">{% trans "User" %}</th>
+            <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th> 
         </thead>
 
         <!-- Cuerpo de Tabla -->
@@ -93,11 +97,10 @@
         {% if user.is_staff %}
 
         <tbody>
-            {% for Timesheet in timesheet_list %}
+            {% for Users in user_list %}
             <tr>
-                <td><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
-                <td class="text-center">{{ Timesheet.timeItem }} hs.</td>
-                <td>{{ Timesheet.user }}</td>
+                <td class="px-3"><a class="nav-link" href={% url 'timesheet:User' id=Users.id a=0 b=10 %}>{{ Users.last_name }}, {{ Users.first_name}}</a></td>
+                <td class="text-center">{{ Users.alloc_time }} hs.</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -105,24 +108,13 @@
         {% else %}
 
         <tbody>
-          {% for Timesheet in timesheet_list %}
-
-            {% if user == Timesheet.user %}
+          {% for Users in user_list %}
             <tr>
-                <td><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
-                <td>{{ Timesheet.timeItem }}</td>
-                <td>{{ Timesheet.user }}</td>
+              <td class="px-3">{{ Users.last_name }}, {{ Users.first_name}}</td>
+              <td class="text-center">{{ Users.alloc_time }} hs.</td>
             </tr>
-            {% else %}
-            <tr>
-              <td>{{ Timesheet.timeDate }}</td>
-              <td>{{ Timesheet.timeItem }}</td>
-              <td>{{ Timesheet.user }}</td>
-            </tr>
-            {% endif %}
 
           {% endfor %}
-      </tbody>
 
         {% endif %}
 

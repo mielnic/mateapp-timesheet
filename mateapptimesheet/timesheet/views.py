@@ -196,47 +196,50 @@ def projects(request, a, b):
 @login_required
 #@allowed_users(allowed_roles=['admin', 'staff'])
 def project(request, id, a, b):
+
     project = Project.objects.get(id=id)
     empty = checkProjectEmpty(id)
+
+    if project.projectType == 'onetime':
+            user_dataset = getProjectTimesheets('All', project.id)
+            filterform = FilterForm(initial={'f':'All'})
+            recurrent = False
+    else:
+        user_dataset = getProjectTimesheets('Current_Month', project.id)
+        filterform = FilterForm(initial={'f':'Current_Month'})
+        recurrent = True
+    
+    total_alloc_time = user_dataset.aggregate(Sum('alloc_time'))
+    try:
+        pending_time = project.budget - (total_alloc_time['alloc_time__sum'])
+    except:
+        pending_time = project.budget
+    
     if 'q' in request.GET or 'f' in request.GET:
         filterform = FilterForm(request.GET)
         if filterform.is_valid():   
             f = filterform.cleaned_data['f']
             q = filterform.cleaned_data['q']
-            timesheet_list = getProjectTimesheets(f, project.id)
+            user_list = getProjectTimesheets(f, project.id)
             if q:       
-                timesheet_list = timesheet_list.annotate(search=SearchVector("user__last_name", "user__first_name")).filter(search=SearchQuery(q))
+                user_list = user_list.annotate(search=SearchVector("user__last_name", "user__first_name")).filter(search=SearchQuery(q))
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/project_view.html')
-            total_alloc_time = timesheet_list.aggregate(Sum('timeItem'))
-            try:
-                pending_time = project.budget - (total_alloc_time['timeItem__sum'])
-            except:
-                pending_time = project.budget
-            
+            view_total_alloc_time = user_list.aggregate(Sum('alloc_time'))           
     else:
-        if project.projectType == 'onetime':
-            timesheet_dataset = getProjectTimesheets('All', project.id)
-            filterform = FilterForm(initial={'f':'All'})
-        else:
-            timesheet_dataset = getProjectTimesheets('Current_Month', project.id)
-            filterform = FilterForm(initial={'f':'Current_Month'})
-        timesheet_list = timesheet_dataset [a:b]
-        total_alloc_time = timesheet_dataset.aggregate(Sum('timeItem'))
-        try:
-            pending_time = project.budget - (total_alloc_time['timeItem__sum'])
-        except:
-            pending_time = project.budget
-        length = timesheet_dataset.count()
+        view_total_alloc_time = total_alloc_time
+        user_list = user_dataset [a:b]
+        length = user_dataset.count()
         links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/project_view.html')
         
     context = {
         'project' : project,
-        'timesheet_list' : timesheet_list,
+        'user_list' : user_list,
         'filterform' : filterform,
-        'total_alloc_time' : total_alloc_time,
+        'total_alloc_time' : view_total_alloc_time,
         'pending_time' : pending_time,
+        'recurrent' : recurrent,
         'empty' : empty,
         'id' : id,
         'links' : links,

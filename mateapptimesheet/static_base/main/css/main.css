@@ -1,9 +1,6 @@
-thead {
-    background-color: rgba(16,131,192,0.1);
-}
-
-.custom_nav {
-    background-color: rgba(16,131,192,0.1);
+:root,
+[data-bs-theme=light] {
+    --bs-success-bg-subtle: #d1e7d4 !important;
 }
 
 .table_nav {
@@ -15,14 +12,9 @@ thead {
     height: 2em;
 }
 
-.custom-border {
-    display: inline-block;
-    width: 0;
-    height: 1.3em;
-    margin-top: 0.75em;
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
-}
+.table-success {
+    --bs-table-bg: #d1e7d4 !important;
+  }
 
 .table-responsive {
     border-radius: 5px;

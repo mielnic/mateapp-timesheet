@@ -112,6 +112,7 @@ class CustomUserEditForm(UserChangeForm):
             "last_name",
             "is_active",
             "is_staff",
+            "is_superuser",
             "title",
             "seniority",
             "practice",
@@ -127,6 +128,7 @@ class CustomUserEditForm(UserChangeForm):
             'allocTarget' : forms.NumberInput(attrs={'class':'form-control'}),
             'is_staff' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_active' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
+            'is_superuser' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'startDate': forms.DateInput(attrs={'class':'form-control'}),
         }
 
