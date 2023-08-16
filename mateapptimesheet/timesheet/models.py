@@ -1,6 +1,7 @@
 from datetime import date
 from django.db import models
 from django.conf import settings
+from .validators import invalidate_future_timesheets
 
 # Create your models here.
 
@@ -46,7 +47,7 @@ class Project(models.Model):
     
 class Time(models.Model):
     timeItem = models.IntegerField(blank=False, null=True)
-    timeDate = models.DateField(blank=False, null=True, default=date.today)
+    timeDate = models.DateField(blank=False, null=True, default=date.today, validators=[invalidate_future_timesheets])
     project = models.ForeignKey(Project, on_delete=models.DO_NOTHING, blank=True, null=True)
     timeType = models.CharField(max_length=100, blank=True)
     timeRevenue = models.BooleanField(blank=True, default=0)

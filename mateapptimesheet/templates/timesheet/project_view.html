@@ -29,11 +29,11 @@
       </div>
       <div class="col align-text-bottom px-4 py-3 mb-2 col-10 col-md-6">
         {% if recurrent %}
-        <h4>{% trans "Monthly Budget: " %}{{ project.budget }} hs.</h4>
-        <h5>{% trans "This Month Remaining: " %}{{ pending_time }} hs.</h5>
+        <h5>{% trans "Monthly Budget: " %}{{ project.budget }} hs.</h5>
+        <h6>{% trans "Current month remaining: " %}{{ pending_time }} hs.</h6>
         {% else %}
-        <h4>{% trans "Budget: " %}{{ project.budget }} hs.</h4>
-        <h5>{% trans "Pending: " %}{{ pending_time }} hs.</h5>
+        <h5>{% trans "Budget: " %}{{ project.budget }} hs.</h5>
+        <h6>{% trans "Pending: " %}{{ pending_time }} hs.</h6>
         {% endif %}
     </div>
     </div>

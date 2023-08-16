@@ -162,9 +162,9 @@ def projects(request, a, b):
             q = searchform.cleaned_data['q']
             q = q.lower()
             status = True
-            if 'inactive' in q:
+            if '@inactive' in q:
                 status = False
-                q = q.replace('inactive', '').strip()
+                q = q.replace('@inactive', '').strip()
                 print(q, status)
             project_dataset = getProjectList()
             if q:
@@ -437,7 +437,10 @@ def create_timesheet(request):
         if timesheetform.is_valid():
             timesheetform.save()
             id = Time.objects.last().id
-            return HttpResponseRedirect('/timesheet/timesheets/0/10/')     
+            return HttpResponseRedirect('/timesheet/timesheets/0/10/')
+        else:
+            for error in timesheetform.errors.values():
+                messages.error(request, error)
 
     else:
         timesheetform = TimesheetForm(initial={'timeItem': '8'})
@@ -464,6 +467,9 @@ def create_self_timesheet(request):
             timesheet.user = user
             timesheet.save()
             return HttpResponseRedirect('/timesheet/timesheets_self/0/10/')
+        else:
+            for error in timesheetform.errors.values():
+                messages.error(request, error)
 
     else:
         timesheetform = TimesheetForm(initial={'timeItem': '8'})
