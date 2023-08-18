@@ -145,10 +145,10 @@ class FilterForm(forms.Form):
         choices=FILTER_CHOICES,
         required=False,
     )
-    f.widget.attrs.update({'class': 'form-select'})
+    f.widget.attrs.update({'class': 'form-select f'})
 
     q = forms.CharField(
         label="Search",
         required=False,
-        widget=forms.TextInput(attrs={'class':'form-control me-2', 'placeholder':_('Search:'), 'type':'search', 'aria-label':'search'}),
+        widget=forms.TextInput(attrs={'class':'form-control me-2 q', 'placeholder':_('Search:'), 'type':'search', 'aria-label':'search'}),
     )

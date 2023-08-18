@@ -1,8 +1,10 @@
 const lan = navigator.language.includes("es") ? "es" : "en";
-const search = document.getElementById('id_q');
+const search = document.getElementsByClassName('q');
 
-if (lan == "es") {
-    search.placeholder = 'Cliente, Proyecto o Nombre:';
-} else {
-    search.placeholder = 'Customer, Project or Name:';
+for (var i =0; i < search.length; i++) {
+    if (lan == "es") {
+        search[i].placeholder = 'Cliente, Proyecto o Nombre:';
+    } else {
+        search[i].placeholder = 'Customer, Project or Name:';
+    }
 }

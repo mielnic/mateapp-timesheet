@@ -1,8 +1,10 @@
 const lan = navigator.language.includes("es") ? "es" : "en";
-const search = document.getElementById('id_q');
+const search = document.getElementsByClassName('q');
 
-if (lan == "es") {
-    search.placeholder = 'Nombre:';
-} else {
-    search.placeholder = 'Name:';
+for (var i =0; i < search.length; i++) {
+    if (lan == "es") {
+        search[i].placeholder = 'Nombre:';
+    } else {
+        search[i].placeholder = 'Name:';
+    }
 }
