@@ -222,7 +222,7 @@ def project(request, id, a, b):
             q = filterform.cleaned_data['q']
             user_list = getProjectTimesheets(f, project.id)
             if q:       
-                user_list = user_list.annotate(search=SearchVector("user__last_name", "user__first_name")).filter(search=SearchQuery(q))
+                user_list = user_list.annotate(search=SearchVector("last_name", "first_name")).filter(search=SearchQuery(q))
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/project_view.html')
             view_total_alloc_time = user_list.aggregate(Sum('alloc_time'))           

@@ -11,7 +11,7 @@ from timesheet.models import Company, Project, Time
 from django.contrib.auth.decorators import login_required
 from itertools import chain
 from operator import attrgetter
-from django.contrib.postgres.search import TrigramSimilarity
+from django.contrib.postgres.search import TrigramSimilarity, SearchVector, SearchQuery
 from django.utils.translation import gettext_lazy as _
 from .functions import paginator
 from django.template import loader
@@ -114,16 +114,13 @@ def admin_trash(request, a, b):
         searchform = SearchForm(request.GET)
         if searchform.is_valid():
             q = searchform.cleaned_data['q']
-            p_results = Project.objects.annotate(similarity=TrigramSimilarity('projectName', q),).filter(similarity__gte=0.3, deleted=True).order_by('-similarity')
-            # fn_results = Person.objects.annotate(similarity=TrigramSimilarity('firstName', q),).filter(similarity__gte=0.5, deleted=True).order_by('-similarity')
-            c_results = Company.objects.annotate(similarity=TrigramSimilarity('companyName', q),).filter(similarity__gte=0.3, deleted=True).order_by('-similarity')
-            trash = sorted(chain(c_results),
-                             key=attrgetter('similarity'),
-                             reverse=True,
-                             )
+            deleted_companies_list = Company.objects.filter(deleted=True).annotate(search=SearchVector("companyName", "tax_id")).filter(search=SearchQuery(q))
+            deleted_projects_list = Project.objects.filter(deleted=True).annotate(search=SearchVector("projectName", "company__companyName")).filter(search=SearchQuery(q))
+            deleted_timesheets_list = Time.objects.filter(deleted=True).annotate(search=SearchVector("user__last_name", "user__first_name", "timeDate", "project__projectName", "project__company__companyName")).filter(search=SearchQuery(q))
+            trash_list = list(chain(deleted_companies_list, deleted_projects_list, deleted_timesheets_list))
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('main/admin_trash.html')
-            if trash == []:
+            if trash_list == []:
                 messages.warning(request, _("The search didn't return any result."))
     else:
         deleted_companies_list = Company.objects.filter(deleted=True)

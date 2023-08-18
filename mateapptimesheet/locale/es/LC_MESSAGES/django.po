@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 15:42-0300\n"
+"POT-Creation-Date: 2023-08-18 10:33-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\main\forms.py:8 .\timesheet\forms.py:151
+#: .\main\forms.py:8 .\timesheet\forms.py:153
 msgid "Search:"
 msgstr "Búsqueda"
 
@@ -26,7 +26,7 @@ msgstr "Búsqueda"
 msgid "Incorrect Username or Password."
 msgstr "Usuario o Contraseña Incorrectos."
 
-#: .\main\views.py:127
+#: .\main\views.py:124
 msgid "The search didn't return any result."
 msgstr "La búsqueda no arrojó ningún resultado."
 
@@ -159,8 +159,8 @@ msgstr "Búsqueda"
 #: .\templates\timesheet\company_list.html:50
 #: .\templates\timesheet\project_list.html:34
 #: .\templates\timesheet\project_list.html:51
-#: .\templates\timesheet\project_view.html:64
-#: .\templates\timesheet\project_view.html:79
+#: .\templates\timesheet\project_view.html:65
+#: .\templates\timesheet\project_view.html:80
 #: .\templates\timesheet\timesheet_list.html:35
 #: .\templates\timesheet\timesheet_list.html:53
 #: .\templates\timesheet\timesheet_list_self.html:32
@@ -199,7 +199,7 @@ msgstr "¿Olvidó su contraseña?"
 #: .\templates\main\user_trash.html:43 .\templates\main\user_trash.html:45
 #: .\templates\main\user_trash.html:47
 #: .\templates\timesheet\company_view.html:95
-#: .\templates\timesheet\project_view.html:158
+#: .\templates\timesheet\project_view.html:159
 #: .\templates\timesheet\timesheet_view.html:37
 #: .\templates\timesheet\timesheet_view_self.html:35
 msgid "Delete"
@@ -217,7 +217,7 @@ msgstr "ID Fiscal:"
 #: .\templates\timesheet\project_create.html:65
 #: .\templates\timesheet\timesheet_create.html:48
 #: .\templates\timesheet\timesheet_create_self.html:48
-#: .\templates\users\create_user.html:103 .\templates\users\edit_user.html:80
+#: .\templates\users\create_user.html:103 .\templates\users\edit_user.html:82
 #: .\templates\users\profile_edit.html:38
 msgid "Save"
 msgstr "Guardar"
@@ -227,7 +227,7 @@ msgstr "Guardar"
 #: .\templates\timesheet\company_view.html:93
 #: .\templates\timesheet\project_create.html:67
 #: .\templates\timesheet\project_create.html:69
-#: .\templates\timesheet\project_view.html:156
+#: .\templates\timesheet\project_view.html:157
 #: .\templates\timesheet\timesheet_create.html:50
 #: .\templates\timesheet\timesheet_create.html:52
 #: .\templates\timesheet\timesheet_create_self.html:50
@@ -235,13 +235,20 @@ msgstr "Guardar"
 #: .\templates\timesheet\timesheet_view.html:36
 #: .\templates\timesheet\timesheet_view_self.html:34
 #: .\templates\timesheet\user_detail.html:120
-#: .\templates\users\create_user.html:104 .\templates\users\edit_user.html:81
+#: .\templates\users\create_user.html:104 .\templates\users\edit_user.html:83
 #: .\templates\users\password_change.html:45
 #: .\templates\users\password_reset.html:30
 #: .\templates\users\profile_edit.html:39
 #: .\templates\users\registration.html:69
 msgid "Cancel"
 msgstr "Cancelar"
+
+#: .\templates\timesheet\company_create.html:59
+#: .\templates\timesheet\project_create.html:80
+#: .\templates\timesheet\timesheet_create.html:62
+#: .\templates\timesheet\timesheet_create_self.html:62
+msgid "Notes:"
+msgstr "Notas:"
 
 #: .\templates\timesheet\company_list.html:29
 #: .\templates\timesheet\company_list.html:42
@@ -250,8 +257,8 @@ msgstr "Cliente"
 
 #: .\templates\timesheet\company_list.html:32
 #: .\templates\timesheet\project_list.html:33
-#: .\templates\timesheet\project_view.html:63
-#: .\templates\timesheet\project_view.html:76
+#: .\templates\timesheet\project_view.html:64
+#: .\templates\timesheet\project_view.html:77
 #: .\templates\timesheet\timesheet_list.html:34
 #: .\templates\timesheet\timesheet_list.html:50
 #: .\templates\timesheet\timesheet_list_self.html:31
@@ -308,14 +315,14 @@ msgid "No projects available."
 msgstr "No hay proyectos disponibles."
 
 #: .\templates\timesheet\company_view.html:86
-#: .\templates\timesheet\project_view.html:149
+#: .\templates\timesheet\project_view.html:150
 #: .\templates\timesheet\timesheet_view.html:28
 #: .\templates\timesheet\timesheet_view_self.html:26
 msgid "Notes: "
 msgstr "Notas: "
 
 #: .\templates\timesheet\company_view.html:92
-#: .\templates\timesheet\project_view.html:155
+#: .\templates\timesheet\project_view.html:156
 #: .\templates\timesheet\timesheet_view.html:35
 #: .\templates\timesheet\timesheet_view_self.html:33
 #: .\templates\users\profile.html:36 .\templates\users\user.html:46
@@ -334,12 +341,6 @@ msgstr "Presupuesto (hs.):"
 #: .\templates\users\edit_user.html:60 .\templates\users\user.html:29
 msgid "Start Date:"
 msgstr "Fecha de Ingreso:"
-
-#: .\templates\timesheet\project_create.html:80
-#: .\templates\timesheet\timesheet_create.html:62
-#: .\templates\timesheet\timesheet_create_self.html:62
-msgid "Notes:"
-msgstr "Notas:"
 
 #: .\templates\timesheet\project_list.html:30
 #: .\templates\timesheet\project_list.html:43
@@ -365,61 +366,61 @@ msgstr "One-Time"
 msgid "Recurrent"
 msgstr "Recurrente"
 
-#: .\templates\timesheet\project_view.html:16
+#: .\templates\timesheet\project_view.html:17
 msgid "Start Date: "
 msgstr "Fecha de Inicio: "
 
-#: .\templates\timesheet\project_view.html:19
+#: .\templates\timesheet\project_view.html:20
 msgid "Type: One-Time"
 msgstr "Tipo: One-Time"
 
-#: .\templates\timesheet\project_view.html:21
+#: .\templates\timesheet\project_view.html:22
 msgid "Type: Recurrent"
 msgstr "Tipo: Recurrente"
 
-#: .\templates\timesheet\project_view.html:25
+#: .\templates\timesheet\project_view.html:26
 msgid "Status: Active"
 msgstr "Estado: Activo"
 
-#: .\templates\timesheet\project_view.html:27
+#: .\templates\timesheet\project_view.html:28
 msgid "Status: Finished"
 msgstr "Estado: Terminado"
 
-#: .\templates\timesheet\project_view.html:32
+#: .\templates\timesheet\project_view.html:33
 msgid "Monthly Budget: "
 msgstr "Presupesto Mensual: "
 
-#: .\templates\timesheet\project_view.html:33
+#: .\templates\timesheet\project_view.html:34
 msgid "Current month remaining: "
-msgstr "Remanente del mes corriente: "
+msgstr "Remanente del mes: "
 
-#: .\templates\timesheet\project_view.html:35
+#: .\templates\timesheet\project_view.html:36
 msgid "Budget: "
 msgstr "Presupesto: "
 
-#: .\templates\timesheet\project_view.html:36
+#: .\templates\timesheet\project_view.html:37
 msgid "Pending: "
 msgstr "Pendiente: "
 
-#: .\templates\timesheet\project_view.html:47
-msgid "Project Resources"
-msgstr "Recursos del Proyecto"
+#: .\templates\timesheet\project_view.html:48
+msgid "Resources"
+msgstr "Recursos"
 
-#: .\templates\timesheet\project_view.html:54
+#: .\templates\timesheet\project_view.html:55
 msgid "Project Timesheets"
 msgstr "Timesheets del Proyecto"
 
-#: .\templates\timesheet\project_view.html:91
+#: .\templates\timesheet\project_view.html:92
 msgid "User"
 msgstr "Usuario"
 
-#: .\templates\timesheet\project_view.html:92
+#: .\templates\timesheet\project_view.html:93
 #: .\templates\timesheet\user_detail.html:75
 #: .\templates\timesheet\user_list.html:66
 msgid "Allocated Time: "
 msgstr "Allocated Time: "
 
-#: .\templates\timesheet\project_view.html:143
+#: .\templates\timesheet\project_view.html:144
 #: .\templates\timesheet\timesheet_list.html:117
 #: .\templates\timesheet\timesheet_list_self.html:104
 #: .\templates\timesheet\user_detail.html:114
@@ -505,8 +506,8 @@ msgid "Seniority: "
 msgstr "Seniority: "
 
 #: .\templates\timesheet\user_detail.html:20
-msgid "Monthly Allocation Target: "
-msgstr "Objetivo Mensual: "
+msgid "Monthly Target: "
+msgstr "Presupesto Mensual: "
 
 #: .\templates\timesheet\user_detail.html:36
 msgid "User Timesheets"
@@ -597,11 +598,11 @@ msgstr "Su contraseña no puede ser solamente numérica."
 msgid "Re-type Password:"
 msgstr "Reingrese su Contraseña:"
 
-#: .\templates\users\create_user.html:93 .\templates\users\edit_user.html:66
+#: .\templates\users\create_user.html:93 .\templates\users\edit_user.html:67
 msgid "Is Active?"
 msgstr "¿Está Activo?"
 
-#: .\templates\users\create_user.html:97 .\templates\users\edit_user.html:70
+#: .\templates\users\create_user.html:97 .\templates\users\edit_user.html:71
 #: .\templates\users\users.html:26
 msgid "Is Supervisor?"
 msgstr "¿Es Supervisor?"
@@ -614,7 +615,7 @@ msgstr "Editando Usuario:"
 msgid "Title:"
 msgstr "Título"
 
-#: .\templates\users\edit_user.html:74
+#: .\templates\users\edit_user.html:75
 msgid "Is Administrator?"
 msgstr "¿Es Administrador?"
 
@@ -780,15 +781,15 @@ msgstr "Último Año"
 msgid "All"
 msgstr "Todo"
 
-#: .\timesheet\forms.py:97
+#: .\timesheet\forms.py:99
 msgid "Select Customer:"
 msgstr "Seleccione Cliente:"
 
-#: .\timesheet\forms.py:135
+#: .\timesheet\forms.py:137
 msgid "Select Project:"
 msgstr "Seleccione Proyecto:"
 
-#: .\timesheet\forms.py:138
+#: .\timesheet\forms.py:140
 msgid "Select User"
 msgstr "Seleccione Usuario"
 
@@ -890,6 +891,12 @@ msgstr "El link esta expirado"
 #: .\users\views.py:203
 msgid "Something went wrong, redirecting back to Homepage"
 msgstr "Algo salió mal. Lo estamos redireccionado a la pagina principal."
+
+#~ msgid "Project Resources"
+#~ msgstr "Recursos del Proyecto"
+
+#~ msgid "Monthly Allocation Target: "
+#~ msgstr "Objetivo Mensual: "
 
 #~ msgid "Add Customer"
 #~ msgstr "Agregar Cliente"
