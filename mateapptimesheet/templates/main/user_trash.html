@@ -23,7 +23,7 @@
 
     <!-- Cuerpo de Tabla -->
     
-    <tbody>
+    <tbody hx-target="closest tr" hx-swap="outerHTML swap:0.5s">
         {% for trash in trash_list %}
         <tr>
             <td>
@@ -31,20 +31,20 @@
             </td>
             <td>
               {% if trash.companyName %}
-                <div><a class="btn btn-success btn-sm" href={% url 'timesheet:Restore_Company' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
+                <div class="btn btn-outline-success btn-sm" hx-delete={% url 'timesheet:Restore_Company' id=trash.id u=0 %}>{% trans "Restore" %}</div>
               {% elif trash.projectName%}
-                <div><a class="btn btn-success btn-sm" href={% url 'timesheet:Restore_Project' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
+                <div class="btn btn-outline-success btn-sm" hx-delete={% url 'timesheet:Restore_Project' id=trash.id u=0 %}>{% trans "Restore" %}</div>
               {% else %}
-                <div><a class="btn btn-success btn-sm" href={% url 'timesheet:Restore_Timesheet' id=trash.id u=0 %}>{% trans "Restore" %}</a></div>
+                <div class="btn btn-outline-success btn-sm" hx-delete={% url 'timesheet:Restore_Timesheet' id=trash.id u=0 %}>{% trans "Restore" %}</div>
               {% endif %}
             </td>
             <td>
               {% if trash.companyName %}
-                <div><a class="btn btn-danger btn-sm" href={% url 'timesheet:Full_Delete_Company' id=trash.id %}>{% trans "Delete" %}</a></div>
+                <div class="btn btn-outline-danger btn-sm" hx-delete={% url 'timesheet:Full_Delete_Company' id=trash.id %}>{% trans "Delete" %}</div>
               {% elif trash.projectName %}
-                <div><a class="btn btn-danger btn-sm" href={% url 'timesheet:Full_Delete_Project' id=trash.id %}>{% trans "Delete" %}</a></div>
+                <div class="btn btn-outline-danger btn-sm" hx-delete={% url 'timesheet:Full_Delete_Project' id=trash.id %}>{% trans "Delete" %}</div>
               {% else %}
-                <div><a class="btn btn-danger btn-sm" href={% url 'timesheet:Full_Delete_Timesheet' id=trash.id %}>{% trans "Delete" %}</a></div>
+                <div class="btn btn-outline-danger btn-sm" hx-delete={% url 'timesheet:Full_Delete_Timesheet' id=trash.id %}>{% trans "Delete" %}</div>
               {% endif %}
             </td>
         </tr>

@@ -29,7 +29,7 @@
                 <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Company' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Customer" %}</a>
                 <form class="col btn-sm" role="search" id="qform">
                   <div class="my-2">{{searchform.q}}</div>
-                  <button class="btn btn-success mr-2" type="submit">{% trans "Filter" %}</button>
+                  <button class="btn btn-outline-success mr-2" type="submit">{% trans "Filter" %}</button>
                   <a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
                 </form>
               </div>
@@ -44,7 +44,7 @@
                 </ul>
                 <form class="d-flex btn-sm" role="search">
                     {{searchform.q}}
-                  <button class="btn btn-success mx-2" type="submit">{% trans "Search" %}</button>
+                  <button class="btn btn-outline-success mx-2" type="submit">{% trans "Search" %}</button>
                 </form>
                 <div>
                   <a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>

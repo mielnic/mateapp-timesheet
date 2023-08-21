@@ -34,6 +34,7 @@ urlpatterns += [
     path('create_self_timesheet/', views.create_self_timesheet, name='Create_Self_Timesheet'),
     path('edit_timesheet/<int:id>/', views.edit_timesheet, name='Edit_Timesheet'),
     path('edit_self_timesheet/<int:id>/', views.edit_self_timesheet, name='Edit_Self_Timesheet'),
+    path('delete_timesheet_table/<int:id>/<int:u>/', views.delete_timesheet_table, name='Delete_Timesheet_Table'),
     path('delete_timesheet/<int:id>/<int:u>/', views.delete_timesheet, name='Delete_Timesheet'),
     path('restore_timesheet/<int:id>/<int:u>/', views.restore_timesheet, name='Restore_Timesheet'),
     path('full_delete_timesheet/<int:id>/', views.full_delete_timesheet, name='Full_Delete_Timesheet'),

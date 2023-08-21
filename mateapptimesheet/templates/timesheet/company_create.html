@@ -41,11 +41,11 @@
     <div class="col shadow mx-1 px-5 py-3 mb-2 border col-10 col-md-5 rounded">
     
             <div class="col d-flex justify-content-center my-3 px-5 py-3">
-                <p><button type="submit" class="btn btn-success px-3 mx-2">{% trans "Save" %}</button></p>
+                <p><button type="submit" class="btn btn-outline-success px-3 mx-2">{% trans "Save" %}</button></p>
                 {% if company.id %}
-                <p><a href={% url 'timesheet:Company' id=company.id a=0 b=5%} class="btn btn-secondary" role="button">{% trans "Cancel" %}</a></p>
+                <p><a href={% url 'timesheet:Company' id=company.id a=0 b=5%} class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</a></p>
                 {% else %}
-                <p><a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-secondary" role="button">{% trans "Cancel" %}</a></p>
+                <p><a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</a></p>
                 {% endif %}
     
             </div>

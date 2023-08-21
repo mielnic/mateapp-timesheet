@@ -134,10 +134,7 @@ def restore_company(request, id, u):
     company = Company.objects.get(id=id)
     company.deleted = 0
     company.save()
-    if u == 0:
-        return redirect('/user_trash/0/10/')
-    else:
-        return redirect('/admin_trash/0/10/')
+    return HttpResponse(status = 200)
 
 # Customer Full Delete
 
@@ -147,7 +144,7 @@ def full_delete_company(request, id):
     company = Company.objects.get(id=id)
     company.deletedBy = None
     company.save()
-    return redirect('/user_trash/0/10/')
+    return HttpResponse(status = 200)
 
 # CRUD Project (Staff CUD)
 
@@ -308,10 +305,7 @@ def restore_project(request, id, u):
     project = Project.objects.get(id=id)
     project.deleted = 0
     project.save()
-    if u == 0:
-        return redirect('/user_trash/0/10/')
-    else:
-        return redirect('/admin_trash/0/10/')
+    return HttpResponse(status = 200)
 
 # Project Full Delete
 
@@ -321,7 +315,7 @@ def full_delete_project(request, id):
     project = Project.objects.get(id=id)
     project.deletedBy = None
     project.save()
-    return redirect('/user_trash/0/10/')
+    return HttpResponse(status = 200)
 
 # CRUD Time Item (User)
 
@@ -385,10 +379,12 @@ def self_timesheets(request, a=0, b=10):
             s = timeSum(timesheets_list)
 
     else:
-        timesheets_dataset = Time.objects.order_by('-timeDate').filter(user=user, deleted=False)
+        filterform = FilterForm(initial={'f':'Current_Month'})
+        timesheets_dataset = timesheetDateFilter('Current_Month').filter(user=user)
+        timesheets_dataset = timesheets_dataset.order_by('-timeDate').filter(user=user, deleted=False)
         s = timeSum(timesheets_dataset)
         timesheets_list = timesheets_dataset [a:b]
-        length = Time.objects.filter(user=user, deleted=False).count()
+        length = timesheets_dataset.count()
         links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/timesheet_list_self.html')
 
@@ -532,6 +528,18 @@ def delete_timesheet(request, id, u):
         return redirect('/timesheet/timesheets_self/0/10/')
     else:
         return redirect('/timesheet/timesheets/0/10/')
+    
+# Timesheet Delete Table (htmx)
+
+@login_required
+def delete_timesheet_table(request, id, u):
+    uid = request.user.id
+    timesheet = Time.objects.get(id=id)
+    timesheet.deleted = 1
+    timesheet.deletedBy = uid
+    timesheet.save()
+    return HttpResponse(status = 200)
+    
 
 # Timesheet Restore
 
@@ -540,10 +548,7 @@ def restore_timesheet(request, id, u):
     timesheet = Time.objects.get(id=id)
     timesheet.deleted = 0
     timesheet.save()
-    if u == 0:
-        return redirect('/user_trash/0/10/')
-    else:
-        return redirect('/admin_trash/0/10/')
+    return HttpResponse(status = 200)
 
 # Timesheet Full Delete
 
@@ -552,7 +557,7 @@ def full_delete_timesheet(request, id):
     timesheet = Time.objects.get(id=id)
     timesheet.deletedBy = None
     timesheet.save()
-    return redirect('/user_trash/0/10/')
+    return HttpResponse(status = 200)
 
 # Users List
 

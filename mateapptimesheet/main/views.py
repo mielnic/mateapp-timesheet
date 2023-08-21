@@ -127,6 +127,7 @@ def admin_trash(request, a, b):
         deleted_projects_list = Project.objects.filter(deleted=True)
         deleted_timesheets_list = Time.objects.filter(deleted=True)
         trash = list(chain(deleted_companies_list, deleted_projects_list, deleted_timesheets_list))
+        print(trash)
         trash_list = trash [a:b]
         length = len(trash)
         links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)

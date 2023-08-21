@@ -21,7 +21,7 @@
             <div>
             <form class="d-flex" role="search">
                 {{searchform.q}}
-                <button class="btn btn-success mx-2" type="submit">{% trans "Search" %}</button>
+                <button class="btn btn-outline-success mx-2" type="submit">{% trans "Search" %}</button>
               </form>
             </div>
               <div><a href="/admin_trash/0/10/" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a></div>
@@ -31,14 +31,15 @@
     </div>
 </div> 
 <div class="row mt-3 mx-1 justify-content-md-center" id="companies-table-block">
-    <div class="col shadow p-3 border rounded col-lg-10">
+    
+  <div class="col shadow p-3 border rounded col-lg-10">
     {% if trash_list %}
     <div class="table-responsive">
     <table class="table table-hover" id="trash_list" name="Trash_List">
 
     <!-- Cuerpo de Tabla -->
     
-    <tbody>
+    <tbody hx-target="closest tr" hx-swap="outerHTML swap:0.5s">
         {% for trash in trash_list %}
         <tr>
             <td>
@@ -46,9 +47,20 @@
             </td>
             <td>
               {% if trash.companyName %}
-              <div><a class="btn btn-success btn-sm" href={% url 'timesheet:Restore_Company' id=trash.id u=1 %}>{% trans "Restore" %}</a></div>
+                <div>{% trans "Company" %}</div>
+              {% elif trash.projectName%}
+                <div>{% trans "Project" %}</div>
               {% else %}
-                <div><a class="btn btn-success btn-sm" href="/directory/restore_company/{{ trash.id }}/1">{% trans "Restore" %}</a></div>
+                <div>{% trans "Timesheet" %}</div>
+              {% endif %}
+            </td>
+            <td>
+              {% if trash.companyName %}
+                <div class="btn btn-outline-success btn-sm" hx-delete={% url 'timesheet:Restore_Company' id=trash.id u=0 %}>{% trans "Restore" %}</div>
+              {% elif trash.projectName%}
+                <div class="btn btn-outline-success btn-sm" hx-delete={% url 'timesheet:Restore_Project' id=trash.id u=0 %}>{% trans "Restore" %}</div>
+              {% else %}
+                <div class="btn btn-outline-success btn-sm" hx-delete={% url 'timesheet:Restore_Timesheet' id=trash.id u=0 %}>{% trans "Restore" %}</div>
               {% endif %}
             </td>
         </tr>

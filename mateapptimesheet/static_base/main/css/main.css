@@ -38,4 +38,12 @@
     --bs-pagination-active-border-color: #28a745 !important;
     --bs-pagination-hover-color: #0a3622 !important;
   }
-  
+
+.hx-pointer {
+    cursor: pointer;
+}
+
+tr.htmx-swapping td {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
