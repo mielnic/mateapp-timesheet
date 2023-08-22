@@ -24,17 +24,7 @@
               <h5 class="offcanvas-title" id="offcanvasProjectsLabel">{% trans "Projects" %}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <!-- Offcanvas Form -->
-            <div class="d-lg-none">
-              <div class="offcanvas-body">
-                <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Project' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Project" %}</a>
-                <form class="col btn-sm" role="search" id="qform">
-                  <div class="my-2">{{searchform.q}}</div>
-                  <button class="btn btn-outline-success mr-2" type="submit">{% trans "Filter" %}</button>
-                  <a href="{% url 'timesheet:Projects' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
-                </form>
-              </div>
-            </div>
+
             <!-- Incanvas Form -->
             <div class="d-none d-lg-block">
               <div class="collapse navbar-collapse" id="projectsNavbar">
@@ -52,14 +42,64 @@
                 </div>
               </div>
             </div>
+            
+            <!-- Offcanvas Form -->
+            <div class="d-lg-none">
+              <div class="offcanvas-body">
+                <a class="btn btn-outline-secondary btn-sm my-1" href="{% url 'timesheet:Create_Project' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Project" %}</a>
+                <form class="col btn-sm" role="search" id="qform">
+                  <div class="my-2">{{searchform.q}}</div>
+                  <button class="btn btn-outline-success mr-2" type="submit">{% trans "Filter" %}</button>
+                  <a href="{% url 'timesheet:Projects' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+                </form>
+              </div>
+            </div>
+
           </div>
         </div>
       </nav>
     {% if project_list %}
-    <div class="table-responsive">
-    <table class="table table-hover" id="project_list" name="Project_List">
-    <!-- Cabecera de Tabla -->
-    
+    <!--Tabla LG -->
+    <div class="table-responsive d-none d-lg-block">
+      <table class="table table-hover" id="project_list" name="Project_List">
+        <!-- Cabecera de Tabla -->
+        <thead class="table-success">
+            <th class="px-3">{% trans "Name" %}</th>
+            <th>{% trans "Customer" %}</th>
+            <th class="text-center">{% trans "Allocated" %}</th>
+            <th class="text-center">{% trans "Remaining" %}</th>
+            <th>{% trans "Type" %}</th>
+            <th>{% trans "Start Date" %}</th>
+        </thead>
+
+        <!-- Cuerpo de Tabla -->
+        <tbody>
+            {% for Project in project_list %}
+            <tr>
+                <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName }}</a></td>
+                <td><a class="nav-link" href={% url 'timesheet:Company' id=Project.company.id a=0 b=5 %}>{{Project.company.companyName}}</a></td>
+                <td class="text-center">{{ Project.alloc_time }} hs.</td>
+                {% if Project.unalloc_time < 0 %}
+                <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>
+                {% else %}
+                <td class="text-center">{{ Project.unalloc_time }} hs.</td>
+                {% endif %}
+                {% if Project.projectType == 'onetime' %}
+                <td>{% trans "One-Time" %}</td>
+                {% else %}
+                <td>{% trans "Recurrent" %}</td>
+                {% endif %}
+                <td>{{ Project.startDate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!--Tabla sm -->
+    <div class="table-responsive d-none d-sm-block d-lg-none">
+      <table class="table table-hover" id="project_list" name="Project_List">
+        <!-- Cabecera de Tabla -->
         <thead class="table-success">
             <th class="px-3">{% trans "Name" %}</th>
             <th class="text-center">{% trans "Allocated" %}</th>
@@ -67,28 +107,53 @@
             <th>{% trans "Type" %}</th>
         </thead>
 
+        <!-- Cuerpo de Tabla -->
+        <tbody>
+            {% for Project in project_list %}
+            <tr>
+                <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project}}</a></td>
+                <td class="text-center">{{ Project.alloc_time }} hs.</td>
+                {% if Project.unalloc_time < 0 %}
+                <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>
+                {% else %}
+                <td class="text-center">{{ Project.unalloc_time }} hs.</td>
+                {% endif %}
+                {% if Project.projectType == 'onetime' %}
+                <td>{% trans "One-Time" %}</td>
+                {% else %}
+                <td>{% trans "Recurrent" %}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+<!--Tabla xs -->
+<div class="table-responsive d-block d-sm-none">
+  <table class="table table-hover" id="project_list" name="Project_List">
+    <!-- Cabecera de Tabla -->
+    <thead class="table-success">
+        <th class="px-3">{% trans "Name" %}</th>
+        <th class="text-center">{% trans "Remaining" %}</th>
+    </thead>
+
     <!-- Cuerpo de Tabla -->
-    
     <tbody>
         {% for Project in project_list %}
         <tr>
-            <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project}}</a></td>
-            <td class="text-center">{{ Project.alloc_time }} hs.</td>
+            <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName}}</a></td>
             {% if Project.unalloc_time < 0 %}
             <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>
             {% else %}
             <td class="text-center">{{ Project.unalloc_time }} hs.</td>
             {% endif %}
-            {% if Project.projectType == 'onetime' %}
-            <td>{% trans "One-Time" %}</td>
-            {% else %}
-            <td>{% trans "Recurrent" %}</td>
-            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
-    </table>
-    </div>
+  </table>
+</div>
+
     {% if links %}
     <nav aria-label="Page navigation" class="m-3">
         <ul class="pagination">

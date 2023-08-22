@@ -130,7 +130,7 @@ def getProjectTimesheets(f, pid):
     ''' Genera el dataset de timesheets para la vista de proyectos'''
     updateMaxAllocMonths()
     start, end, target = timeRange(f)
-    user_dataset = get_user_model().objects.order_by('last_name').filter(time__project=pid)
+    user_dataset = get_user_model().objects.order_by('last_name').filter(time__project=pid, time__timeDate__gte=start, time__timeDate__lte=end)
     user_dataset =  user_dataset.annotate(
         alloc_time_sum = Sum("time__timeItem", filter=Q(time__deleted=False, time__timeDate__gte=start, time__timeDate__lte=end, time__project=pid))
         ).annotate(alloc_time = Case(

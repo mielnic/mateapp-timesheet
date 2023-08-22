@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<div class="row py-3 justify-content-start" id="notes" hx-swap="outerHTML swap:0.2s" hx-target="#notes">
+    <div class="col p-3 col-lg-10">
+        <i class="bi bi-pencil-square text-success h5 hx-pointer me-2" hx-get="{% url 'timesheet:Project_Edit_Notes' id=project.id %}"></i>{{project.projectNotes}}
+    </div>
+</div>

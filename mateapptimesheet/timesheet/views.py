@@ -238,7 +238,6 @@ def project(request, id, a, b):
         'pending_time' : pending_time,
         'recurrent' : recurrent,
         'empty' : empty,
-        'id' : id,
         'links' : links,
         'idxPL' : idxPL,
         'idxPR' : idxPR,
@@ -748,7 +747,7 @@ def projectNotesEdit(request, id):
 
     context = {
         'notesform' : notesform,
-        'company' : project,
+        'project' : project,
     }
     return render(request, 'timesheet/partials/project_edit_notes.html', context)
 

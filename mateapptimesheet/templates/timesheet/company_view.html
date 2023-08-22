@@ -8,56 +8,104 @@
 {% block content %}
 
 <div class="row py-3 mx-1 justify-content-center">
-    <div class="row row-col-2 justify-content-between shadow p-2 col-lg-10 rounded border bg-light">
-      <div class="col px-4 py-3 mb-2 col-10 col-md-6">
+  <div class="col shadow p-3 mx-1 px-5 col-lg-10 rounded border bg-light">
+    <div class="row row-col-2 py-2 justify-content-center">
+      <div class="col col-10 col-md-6 py-1 my-2">
         <h2>{{company.companyName}}</h2>
         <h5>{{company.tax_id}}</h5>
       </div>
-      <div class="col align-text-bottom ps-4 py-3 mb-2 col-10 col-md-6">
+      <div class="col col-10 col-md-6 py-3 light-border">
         <h5>{% trans "Customer Balance: " %}{{ total_balance.balance__sum }} hs.</h5>
+      </div>
     </div>
-    </div>
-</div>
 
+    <div>
+      {% include 'timesheet/partials/company_notes.html' %}
+    </div>
+
+    {% if user.is_staff %}
+    <div class="row mx-1 justify-content-center">
+        <div class="col col-lg-10 d-flex justify-content-center">       
+            <p><a href={% url 'timesheet:Edit_Company' id=company.id %} class="btn btn-outline-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
+            <p><a href={% url 'timesheet:Companies' a=0 b=10 %} class="btn btn-outline-secondary px-3 mx-3" role="button">{% trans "Back" %}</a></p>
+            {% if not project_list %}
+            <p><a href={% url 'timesheet:Delete_Company' id=company.id %} class="btn btn-outline-danger mx-3" role="button">{% trans "Delete" %}</a></p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% if project_list %}
 <div class="row mt-3 mx-1 justify-content-center">
     <div class="col shadow p-3 border rounded col-lg-10">
-    {% if project_list %}
-    <div class="table-responsive">
-    <table class="table table-hover" id="person_list" name="Person_List">
-        <!-- Cabecera de Tabla -->
-        <thead class="table-success">
-            <th>{% trans "Name" %}</th>
-            <th class="text-center">{% trans "Allocated" %}</th>
-            <th class="text-center">{% trans "Backlog" %}</th>
-            <th>{% trans "Status" %}</th>
-            <th class="text-center">{% trans "Balance" %}</th>
-        </thead>
+    <!-- Table md -->
+    <div class="table-responsive d-none d-sm-block">
+      <table class="table table-hover" id="person_list" name="Person_List">
+          <!-- Cabecera de Tabla -->
+          <thead class="table-success">
+              <th class="px-3">{% trans "Name" %}</th>
+              <th class="text-center">{% trans "Allocated" %}</th>
+              <th class="text-center">{% trans "Backlog" %}</th>
+              <th>{% trans "Status" %}</th>
+              <th class="text-center">{% trans "Balance" %}</th>
+          </thead>
 
-        <!-- Cuerpo de Tabla -->
+          <!-- Cuerpo de Tabla -->
 
-        <tbody>
-            {% for Project in project_list %}
-            <tr>
-                <td><a class="nav-link" href= {% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName }}</a></td>
-                <td class="text-center">{{ Project.alloc_time }} hs.</td>
-                {% if Project.unalloc_time < 0 %}
-                <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>
-                {% else %}
-                <td class="text-center">{{ Project.unalloc_time }} hs.</td>
-                {% endif %}
-                {% if Project.projectStatus %}
-                <td>{% trans "Active" %}</td>
-                {% else %}
-                <td>{% trans "Finished" %}</td>
-                {% endif %}
-                <td class="text-center">{{ Project.balance }} hs.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+          <tbody>
+              {% for Project in project_list %}
+              <tr>
+                  <td class="px-3"><a class="nav-link" href= {% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName }}</a></td>
+                  <td class="text-center">{{ Project.alloc_time }} hs.</td>
+                  {% if Project.unalloc_time < 0 %}
+                  <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>
+                  {% else %}
+                  <td class="text-center">{{ Project.unalloc_time }} hs.</td>
+                  {% endif %}
+                  {% if Project.projectStatus %}
+                  <td>{% trans "Active" %}</td>
+                  {% else %}
+                  <td>{% trans "Finished" %}</td>
+                  {% endif %}
+                  <td class="text-center">{{ Project.balance }} hs.</td>
+              </tr>
+              {% endfor %}
+          </tbody>
 
-    </table>
+      </table>
+    </div>
+    <!-- Table xm -->
+    <div class="table-responsive d-block d-sm-none">
+      <table class="table table-hover" id="person_list" name="Person_List">
+          <!-- Cabecera de Tabla -->
+          <thead class="table-success">
+              <th class="px-3">{% trans "Name" %}</th>
+              <th class="text-center">{% trans "Allocated" %}</th>
+              <th class="text-center">{% trans "Backlog" %}</th>
+          </thead>
+
+          <!-- Cuerpo de Tabla -->
+
+          <tbody>
+              {% for Project in project_list %}
+              <tr>
+                  <td class="px-3"><a class="nav-link" href= {% url 'timesheet:Project' id=Project.id a=0 b=5 %}>{{ Project.projectName }}</a></td>
+                  <td class="text-center">{{ Project.alloc_time }} hs.</td>
+                  {% if Project.unalloc_time < 0 %}
+                  <td class="text-center text-danger">{{ Project.unalloc_time }} hs.</td>
+                  {% else %}
+                  <td class="text-center">{{ Project.unalloc_time }} hs.</td>
+                  {% endif %}
+              </tr>
+              {% endfor %}
+          </tbody>
+
+      </table>
     </div>
 
+    <!-- Pagination -->
     <nav aria-label="Page navigation">
         <ul class="pagination">
           <li class="page-item">
@@ -75,25 +123,6 @@
           </li>
         </ul>
       </nav>
-
-    {% else %}
-        <p>{% trans "No projects available." %}</p>
-    {% endif %}
-    </div>
-</div>
-<div class="row py-3 mx-1 justify-content-center">
-  <div class="col shadow py-3 px-5 col-lg-10 border rounded">
-      {% trans "Notes: " %}{{company.companyNotes}}
-  </div>
-</div>
-{% if user.is_staff %}
-<div class="row py-3 mx-1 justify-content-center">
-    <div class="col d-flex justify-content-center shadow rounded border px-5 py-3 col-lg-10">       
-        <p><a href={% url 'timesheet:Edit_Company' id=company.id %} class="btn btn-outline-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-        <p><a href={% url 'timesheet:Companies' a=0 b=10 %} class="btn btn-outline-secondary px-3 mx-3" role="button">{% trans "Cancel" %}</a></p>
-        {% if not project_list %}
-        <p><a href={% url 'timesheet:Delete_Company' id=company.id %} class="btn btn-outline-danger mx-3" role="button">{% trans "Delete" %}</a></p>
-        {% endif %}
     </div>
 </div>
 {% endif %}

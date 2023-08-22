@@ -38,7 +38,7 @@
         <div class="row py-3 mx-1 justify-content-center">
             <div class="col col-lg-10 d-flex justify-content-center">       
                 <p><a href={% url 'timesheet:Edit_Timesheet' id=timesheet.id %} class="btn btn-outline-success mt-2 px-4 mx-2" role="button">{% trans "Edit" %}</a></p>
-                <p><a href={% url 'timesheet:Timesheets' a=0 b=10 %} class="btn btn-outline-secondary mt-2 px-3 mx-2" role="button">{% trans "Cancel" %}</a></p>
+                <p><a href={% url 'timesheet:Timesheets' a=0 b=10 %} class="btn btn-outline-secondary mt-2 px-3 mx-2" role="button">{% trans "Back" %}</a></p>
                 <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id u=1%} class="btn btn-outline-danger mt-2 mx-2" role="button">{% trans "Delete" %}</a></p>
             </div>
         </div>

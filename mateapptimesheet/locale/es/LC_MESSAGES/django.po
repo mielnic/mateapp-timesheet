@@ -398,7 +398,7 @@ msgstr "Estado: Terminado"
 
 #: .\templates\timesheet\project_view.html:33
 msgid "Monthly Budget: "
-msgstr "Presupesto Mensual: "
+msgstr "Presupuesto Mensual: "
 
 #: .\templates\timesheet\project_view.html:34
 msgid "Current month remaining: "
@@ -406,7 +406,7 @@ msgstr "Remanente del mes: "
 
 #: .\templates\timesheet\project_view.html:36
 msgid "Budget: "
-msgstr "Presupesto: "
+msgstr "Presupuesto: "
 
 #: .\templates\timesheet\project_view.html:37
 msgid "Pending: "

@@ -58,10 +58,13 @@
         </div>
       </nav>
   {% if timesheets_list %}
-  <div class="table-responsive">
-  <table class="table table-hover" id="timesheets_list" name="Timesheets_List">
-    <!-- Cabecera de Tabla -->
-    
+
+  <!--Table md-->
+
+  <div class="table-responsive d-none d-sm-block">
+    <table class="table table-hover" id="timesheets_list" name="Timesheets_List">
+      <!-- Cabecera de Tabla -->
+      
         <thead class="table-success">
             <th class="px-3">{% trans "Date" %}</th>
             <th class="text-center">{% trans "Hours: " %}{{ s }}</th>
@@ -69,29 +72,62 @@
             <th class="px-3">{% trans "Resource" %}</th>
         </thead>
 
-    <!-- Cuerpo de Tabla -->
-    
-    <tbody>
-        {% for Timesheet in timesheets_list %}
-        {% if Timesheet.timeType == 'Non Business' %}
-        <tr>
-          <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
-          <td class="text-center text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
-          <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
-          <td class="px-3 text-danger"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td class="px-3"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
-          <td class="text-center"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
-          <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
-          <td class="px-3"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </tbody>
-    </table>
+      <!-- Cuerpo de Tabla -->
+      
+        <tbody>
+            {% for Timesheet in timesheets_list %}
+            {% if Timesheet.timeType == 'Non Business' %}
+            <tr>
+              <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
+              <td class="text-center text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
+              <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
+              <td class="px-3 text-danger"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
+            </tr>
+            {% else %}
+            <tr>
+              <td class="px-3"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
+              <td class="text-center"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
+              <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
+              <td class="px-3"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+      </table>
     </div>
+
+    <!--Table sm-->
+
+  <div class="table-responsive d-block d-sm-none">
+    <table class="table table-hover" id="timesheets_list" name="Timesheets_List">
+      <!-- Cabecera de Tabla -->
+      
+        <thead class="table-success">
+            <th class="px-3">{% trans "Date" %}</th>
+            <th class="px-3">{% trans "Resource" %}</th>
+        </thead>
+
+      <!-- Cuerpo de Tabla -->
+      
+        <tbody>
+            {% for Timesheet in timesheets_list %}
+            {% if Timesheet.timeType == 'Non Business' %}
+            <tr>
+              <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
+              <td class="px-3 text-danger"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
+            </tr>
+            {% else %}
+            <tr>
+              <td class="px-3"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
+              <td class="px-3"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!--Pagination-->
     {% if links %}
     <nav aria-label="Page navigation" class="m-3">
         <ul class="pagination">
