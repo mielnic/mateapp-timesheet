@@ -89,7 +89,10 @@ def user_trash(request, a, b):
     deleted_companies_list = Company.objects.filter(deleted=True, deletedBy=uid)
     deleted_projects_list = Project.objects.filter(deleted=True, deletedBy=uid)
     deleted_timesheets_list = Time.objects.filter(deleted=True, deletedBy=uid)
-    trash = list(chain(deleted_projects_list, deleted_companies_list, deleted_timesheets_list))
+    trash = sorted(chain(deleted_projects_list, deleted_companies_list, deleted_timesheets_list),
+                    key=attrgetter('modified_date'),
+                    reverse=True,
+                    )
     trash_list = trash [a:b]
     length = len(trash)
     links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
@@ -126,8 +129,10 @@ def admin_trash(request, a, b):
         deleted_companies_list = Company.objects.filter(deleted=True)
         deleted_projects_list = Project.objects.filter(deleted=True)
         deleted_timesheets_list = Time.objects.filter(deleted=True)
-        trash = list(chain(deleted_companies_list, deleted_projects_list, deleted_timesheets_list))
-        print(trash)
+        trash = sorted(chain(deleted_companies_list, deleted_projects_list, deleted_timesheets_list),
+                        key=attrgetter('modified_date'),
+                        reverse=True,
+                        )
         trash_list = trash [a:b]
         length = len(trash)
         links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)

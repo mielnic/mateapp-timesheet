@@ -5,7 +5,14 @@ from .validators import invalidate_future_timesheets
 
 # Create your models here.
 
-class Address(models.Model):
+class BaseModel(models.Model):
+    create_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        abstract = True
+
+class Address(BaseModel):
     street = models.CharField(max_length=200, blank=True)
     postalCode = models.CharField(max_length=7, blank=True)
     city = models.CharField(max_length=50, blank=True)
@@ -17,7 +24,7 @@ class Address(models.Model):
     def __str__(self):
         return f'{self.street}, {self.city}'
 
-class Company(models.Model):
+class Company(BaseModel):
     companyName = models.CharField(max_length=100, blank=True)
     tax_id = models.CharField(max_length=15, blank=True)
     address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, blank=True, null=True)
@@ -30,7 +37,7 @@ class Company(models.Model):
     def __str__(self):
         return self.companyName
 
-class Project(models.Model):
+class Project(BaseModel):
     projectName = models.CharField(max_length=100, blank=True)
     company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, blank=True, null=True)
     projectStatus = models.BooleanField(blank=True, default=1)
@@ -45,7 +52,7 @@ class Project(models.Model):
     def __str__(self):
         return f'{self.projectName} - {self.company}'
     
-class Time(models.Model):
+class Time(BaseModel):
     timeItem = models.IntegerField(blank=False, null=True)
     timeDate = models.DateField(blank=False, null=True, default=date.today, validators=[invalidate_future_timesheets])
     project = models.ForeignKey(Project, on_delete=models.DO_NOTHING, blank=True, null=True)

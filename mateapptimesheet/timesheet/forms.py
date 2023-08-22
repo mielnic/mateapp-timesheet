@@ -152,3 +152,42 @@ class FilterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'class':'form-control me-2 q', 'placeholder':_('Search:'), 'type':'search', 'aria-label':'search'}),
     )
+
+class CompanyNotesForm(forms.ModelForm):
+    '''Short form for partial edit with htmx'''
+
+    class Meta:
+        model = Company
+        fields = {
+            'companyNotes',
+        }
+
+        widgets = {
+            'companyNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
+        }
+
+class ProjectNotesForm(forms.ModelForm):
+    '''Short form for partial edit with htmx'''
+
+    class Meta:
+        model = Project
+        fields = {
+            'projectNotes',
+        }
+
+        widgets = {
+            'projectNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
+        }
+
+class TimeNotesForm(forms.ModelForm):
+    '''Short form for partial edit with htmx'''
+
+    class Meta:
+        model = Time
+        fields = {
+            'timeNotes',
+        }
+
+        widgets = {
+            'timeNotes': forms.Textarea(attrs={'class':'form-control','placeholder':'Notes','style':'height: 200px'}),
+        }

@@ -12,26 +12,32 @@ def monthRewind(firstMonth, a):
             return monthRewind(firstMonth, a-1)
 
 def updateMaxAllocMonths():
-    l = get_user_model().objects.count()
+    l = get_user_model().objects.last().id
     today = datetime.date.today()
     for i in range(1,l+1):
-        user = get_user_model().objects.get(id=i)
-        joined = user.date_joined.date()
-        months = ((today.year - joined.year) * 12 + (today.month - joined.month))
-        if months > 0:
-            user.maxAllocMonths = months
-        else:
-            user.maxAllocMonths = 1
-        user.save()
+        try:
+            user = get_user_model().objects.get(id=i)
+            joined = user.date_joined.date()
+            months = ((today.year - joined.year) * 12 + (today.month - joined.month))
+            if months > 0:
+                user.maxAllocMonths = months
+            else:
+                user.maxAllocMonths = 1
+            user.save()
+        except:
+            continue
 
 def updateProjectAge():
-    l = Project.objects.count()
+    l = Project.objects.last().id
     today = datetime.date.today()
     for i in range(1, l+1):
-        project = Project.objects.get(id=i)
-        months = ((today.year - project.startDate.year) * 12 + (today.month - project.startDate.month))
-        project.projectAge = months
-        project.save()
+        try:
+            project = Project.objects.get(id=i)
+            months = ((today.year - project.startDate.year) * 12 + (today.month - project.startDate.month))
+            project.projectAge = months
+            project.save()
+        except:
+            continue
 
 def timeRange(c):
     todayDate = datetime.date.today()
@@ -125,16 +131,12 @@ def getProjectTimesheets(f, pid):
     updateMaxAllocMonths()
     start, end, target = timeRange(f)
     user_dataset = get_user_model().objects.order_by('last_name').filter(time__project=pid)
- 
     user_dataset =  user_dataset.annotate(
         alloc_time_sum = Sum("time__timeItem", filter=Q(time__deleted=False, time__timeDate__gte=start, time__timeDate__lte=end, time__project=pid))
         ).annotate(alloc_time = Case(
             When(alloc_time_sum = None, then = Value(0, output_field=IntegerField())), default='alloc_time_sum'
             )
         )
-
-    # start, end, target = timeRange(f)
-    # timesheet_dataset = Time.objects.filter(deleted=False, timeDate__gte=start, timeDate__lte=end, project_id=pid).order_by('-timeDate')
     return user_dataset
 
 def checkProjectEmpty(pid):
@@ -143,3 +145,15 @@ def checkProjectEmpty(pid):
         return False
     else:
         return True
+    
+def getUserProjects(f, uid):
+    '''Genera el dataset de dedicación de tiempos por proyecto del usuario'''
+    start, end, target = timeRange(f)
+    project_dataset = Project.objects.order_by('projectName').filter(time__user=uid, time__timeDate__gte=start, time__timeDate__lte=end)
+    project_dataset = project_dataset.annotate(
+        period_alloc_time_sum=Sum('time__timeItem', filter=Q(time__deleted=False, time__timeDate__gte=start, time__timeDate__lte=end, time__user=uid))
+        ).annotate(total_alloc_time = Case(
+            When(period_alloc_time_sum = None, then = Value(0, output_field=IntegerField())), default='period_alloc_time_sum'
+            )
+        )
+    return project_dataset

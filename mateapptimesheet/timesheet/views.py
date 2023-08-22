@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, response, request
+from django.http import HttpResponse, HttpResponseRedirect, response, request, QueryDict
 from django.template import loader
 from django.contrib import messages
 from .models import Address, Company, Project, Time
-from .forms import CompanyForm, ProjectForm, TimesheetForm, FilterForm
-from .functions import timeSum, timesheetDateFilter, userAllocTime, getProjectList, getProjectTimesheets, checkProjectEmpty
+from .forms import CompanyForm, ProjectForm, TimesheetForm, FilterForm, TimeNotesForm, CompanyNotesForm, ProjectNotesForm
+from .functions import timeSum, timesheetDateFilter, userAllocTime, getProjectList, getProjectTimesheets, checkProjectEmpty, getUserProjects
 from main.forms import SearchForm
 from main.functions import paginator
 from django.contrib.auth.decorators import login_required
@@ -612,24 +612,24 @@ def user_detail(request, id, a, b):
         if filterform.is_valid():   
             f = filterform.cleaned_data['f']
             q = filterform.cleaned_data['q']
-            timesheets_list = timesheetDateFilter(f).filter(user=muser)
+            project_list = getUserProjects(f, muser)
             if q:
-                timesheets_list = timesheets_list.annotate(search=SearchVector("project__projectName", "project__company__companyName")).filter(search=SearchQuery(q)).order_by('-timeDate')
+                project_list = project_list.annotate(search=SearchVector("projectName", "company__companyName")).filter(search=SearchQuery(q)).order_by('projectName')
             links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
             template = loader.get_template('timesheet/user_detail.html')
-            s = timeSum(timesheets_list)
+            s = project_list.aggregate(Sum('total_alloc_time'))
     
     else:
         filterform = FilterForm(initial={'f':'Current_Month'})
-        timesheets_dataset = timesheetDateFilter('Current_Month').filter(user=muser)
-        s = timeSum(timesheets_dataset)
-        timesheets_list = timesheets_dataset [a:b]
-        length = timesheets_dataset.count()
+        project_dataset = getUserProjects('Current_Month', muser)
+        s = project_dataset.aggregate(Sum('total_alloc_time'))
+        project_list = project_dataset [a:b]
+        length = project_dataset.count()
         links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
         template = loader.get_template('timesheet/user_detail.html')
 
     context = {
-        'timesheets_list': timesheets_list,
+        'project_list': project_list,
         'filterform' : filterform,
         'id' : id,
         's' : s,
@@ -641,6 +641,116 @@ def user_detail(request, id, a, b):
         'idxNR' : idxNR,
     }
     return HttpResponse(template.render(context, request))
+
+
+##############
+# htmx Views #
+##############
+
+# Timesheet Notes
+
+@login_required
+def timeNotes(request, id):
+    '''Esta vista de la de display del partial de timesheet notes de htmx'''
+    timesheet = Time.objects.get(id=id)
+    context = {
+        'timesheet' : timesheet,
+    }
+    return render(request, 'timesheet/partials/timesheet_notes.html', context)
+
+@login_required
+def timeNotesEdit(request, id):
+    '''Esta vista es el tramo de edición del partial de timesheet notes de htmx'''
+    timesheet = Time.objects.get(id=id)
+    if request.method == 'PUT':
+        data = QueryDict(request.body).dict()
+        notesform = TimeNotesForm(data, instance=timesheet)
+        if notesform.is_valid():
+            notesform.save()
+            context = {
+                'notesform' : notesform,
+                'timesheet' : timesheet,
+            }
+            return render(request, 'timesheet/partials/timesheet_notes.html', context)
+
+    else:
+        notesform = TimeNotesForm(instance=timesheet)
+
+    context = {
+        'notesform' : notesform,
+        'timesheet' : timesheet,
+    }
+    return render(request, 'timesheet/partials/timesheet_edit_notes.html', context)
+
+# Company Notes:
+
+@login_required
+def companyNotes(request, id):
+    '''Esta vista de la de display del partial de company notes de htmx'''
+    company = Company.objects.get(id=id)
+    context = {
+        'company' : company,
+    }
+    return render(request, 'timesheet/partials/company_notes.html', context)
+
+@login_required
+def companyNotesEdit(request, id):
+    '''Esta vista es el tramo de edición del partial de company notes de htmx'''
+    company = Company.objects.get(id=id)
+    if request.method == 'PUT':
+        data = QueryDict(request.body).dict()
+        notesform = CompanyNotesForm(data, instance=company)
+        if notesform.is_valid():
+            notesform.save()
+            context = {
+                'notesform' : notesform,
+                'company' : company,
+            }
+            return render(request, 'timesheet/partials/company_notes.html', context)
+
+    else:
+        notesform = CompanyNotesForm(instance=company)
+
+    context = {
+        'notesform' : notesform,
+        'company' : company,
+    }
+    return render(request, 'timesheet/partials/company_edit_notes.html', context)
+
+# Project Notes:
+
+@login_required
+def projectNotes(request, id):
+    '''Esta vista de la de display del partial de project notes de htmx'''
+    project = Project.objects.get(id=id)
+    context = {
+        'project' : project,
+    }
+    return render(request, 'timesheet/partials/project_notes.html', context)
+
+@login_required
+def projectNotesEdit(request, id):
+    '''Esta vista es el tramo de edición del partial de project notes de htmx'''
+    project = Project.objects.get(id=id)
+    if request.method == 'PUT':
+        data = QueryDict(request.body).dict()
+        notesform = ProjectNotesForm(data, instance=project)
+        if notesform.is_valid():
+            notesform.save()
+            context = {
+                'notesform' : notesform,
+                'project' : project,
+            }
+            return render(request, 'timesheet/partials/project_notes.html', context)
+
+    else:
+        notesform = ProjectNotesForm(instance=project)
+
+    context = {
+        'notesform' : notesform,
+        'company' : project,
+    }
+    return render(request, 'timesheet/partials/project_edit_notes.html', context)
 
 # View Project (users w/sumarized time?)
 

@@ -1,0 +1,14 @@
+{% load i18n %} 
+
+<form hx-put="{% url 'timesheet:Timesheet_Edit_Notes' id=timesheet.id %}" hx-target="#notes" hx-swap="outerHTML swap:0.2s" id="notes">
+
+    {% csrf_token %}
+
+    <div class="form-floating my-2">
+        {{notesform.timeNotes}}
+        <label for="id_notes">{% trans "Notes:" %}</label>
+    </div>
+    <button class="btn btn-outline-success btn-sm">{% trans "Save" %}</button>
+    <button class="btn btn-outline-secondary btn-sm" hx-get="{% url 'timesheet:Timesheet_Notes' id=timesheet.id %}" hx-target="#notes">{% trans "Cancel" %}</button>
+
+</form>

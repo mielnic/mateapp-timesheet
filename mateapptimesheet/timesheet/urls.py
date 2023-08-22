@@ -13,6 +13,8 @@ urlpatterns = [
     path('full_delete_company/<int:id>/', views.full_delete_company, name='Full_Delete_Company'),
     path('companies/<int:a>/<int:b>/', views.companies , name='Companies'),
     path('company/<int:id>/<int:a>/<int:b>/', views.company , name='Company'),
+    path('company_notes/<int:id>', views.companyNotes, name='Company_Notes'),
+    path('company_edit_notes/<int:id>', views.companyNotesEdit, name='Company_Edit_Notes'),
 ]
 
 # Projects
@@ -25,6 +27,8 @@ urlpatterns += [
     path('full_delete_project/<int:id>/', views.full_delete_project, name='Full_Delete_Project'),
     path('projects/<int:a>/<int:b>/', views.projects , name='Projects'),
     path('project/<int:id>/<int:a>/<int:b>/', views.project , name='Project'),
+    path('project_notes/<int:id>', views.projectNotes, name='Project_Notes'),
+    path('project_edit_notes/<int:id>', views.projectNotesEdit, name='Project_Edit_Notes'),
 ]
 
 # Timesheet
@@ -42,6 +46,8 @@ urlpatterns += [
     path('timesheets_self/<int:a>/<int:b>/', views.self_timesheets , name='Self_Timesheets'),
     path('timesheet/<int:id>/', views.timesheet , name='Timesheet'),
     path('timesheet_self/<int:id>/', views.timesheet_self , name='Timesheet_Self'),
+    path('timesheet_notes/<int:id>', views.timeNotes, name='Timesheet_Notes'),
+    path('timesheet_edit_notes/<int:id>', views.timeNotesEdit, name='Timesheet_Edit_Notes'),
 ]
 
 # Users

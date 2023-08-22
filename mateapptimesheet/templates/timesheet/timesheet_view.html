@@ -7,35 +7,43 @@
 
 {% block content %}
 
-<div class="row py-3 mx-1 justify-content-center">
-    <div class="col shadow p-3 col-lg-5 rounded border bg-light">
-        <h4><b>{% trans "Timesheet for: " %}{{timesheet.timeDate}}</b></h4>
-        <br>
-        <h5>{% trans "User: " %}{{timesheet.user}}</h5>
-        <br>
-        <h5>{% trans "Logged Time: " %}<b>{{timesheet.timeItem}} Hs.</b></h5>
-        <br>
-        <h5>{% trans "Project: " %} <a class='text-reset text-decoration-none link-success' href={% url 'timesheet:Project' id=timesheet.project.id a=0 b=5%}>{{timesheet.project.projectName}}</a></h5>
-        <br>
-        <h5>{% trans "Customer: " %} <a class='text-reset text-decoration-none link-success' href={% url 'timesheet:Company' id=timesheet.project.company.id a=0 b=5%}>{{timesheet.project.company}}</a></h5>
-        <br>
-        {% if timesheet.timeType == "Business" %}
-        <h5>{% trans "Type: Business Hours" %}</h5>
-        {% else %}
-        <h5>{% trans "Type: Non Business Hours" %}</h5>
-        {% endif %}
-        <br>
-        <p><b>{% trans "Notes: " %}</b>{{timesheet.timeNotes}}</p>
+<div class="row py-3 justify-content-center">
+    <div class="col shadow p-3 mx-1 px-5 col-lg-10 rounded border bg-light">
+        <h3>{{timesheet.timeDate}}</h3>
+        <hr class="separator">
+
+        <div class="row row-col-2 py-3 justify-content-start">
+            <div class="col col-10 col-md-6 py-1 my-2">
+                <div class="ps-1">
+                    <h5>{% trans "User: " %}{{timesheet.user}}</h5>
+                    <h5>{% trans "Time: " %}<b>{{timesheet.timeItem}} Hs.</b></h5>
+                    <h5>{% trans "Project: " %} <a class='text-reset text-decoration-none link-success' href={% url 'timesheet:Project' id=timesheet.project.id a=0 b=5%}>{{timesheet.project.projectName}}</a></h5>
+                </div>
+            </div>
+
+            <div class="col col-10 col-md-6 py-1 light-border">
+                <h5>{% trans "Customer: " %} <a class='text-reset text-decoration-none link-success' href={% url 'timesheet:Company' id=timesheet.project.company.id a=0 b=5%}>{{timesheet.project.company}}</a></h5>
+                {% if timesheet.timeType == "Business" %}
+                <h5>{% trans "Type: Business Hours" %}</h5>
+                {% else %}
+                <h5>{% trans "Type: Non Business Hours" %}</h5>
+                {% endif %}
+            </div>
+        </div>
+
+        <div>
+            {% include 'timesheet/partials/timesheet_notes.html' %}
+        </div>
+
+        <div class="row py-3 mx-1 justify-content-center">
+            <div class="col col-lg-10 d-flex justify-content-center">       
+                <p><a href={% url 'timesheet:Edit_Timesheet' id=timesheet.id %} class="btn btn-outline-success mt-2 px-4 mx-2" role="button">{% trans "Edit" %}</a></p>
+                <p><a href={% url 'timesheet:Timesheets' a=0 b=10 %} class="btn btn-outline-secondary mt-2 px-3 mx-2" role="button">{% trans "Cancel" %}</a></p>
+                <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id u=1%} class="btn btn-outline-danger mt-2 mx-2" role="button">{% trans "Delete" %}</a></p>
+            </div>
+        </div>
+        
     </div>
 </div>
-
-
-<div class="row py-3 mx-1 justify-content-center">
-    <div class="col d-flex justify-content-center shadow rounded border px-5 py-3 col-lg-5">       
-        <p><a href={% url 'timesheet:Edit_Timesheet' id=timesheet.id %} class="btn btn-outline-success mt-2 px-4 mx-2" role="button">{% trans "Edit" %}</a></p>
-        <p><a href={% url 'timesheet:Timesheets' a=0 b=10 %} class="btn btn-outline-secondary mt-2 px-3 mx-2" role="button">{% trans "Cancel" %}</a></p>
-        <p><a href={% url 'timesheet:Delete_Timesheet' id=timesheet.id u=1%} class="btn btn-outline-danger mt-2 mx-2" role="button">{% trans "Delete" %}</a></p>
-    </div>
-    </div>
 
 {% endblock %}

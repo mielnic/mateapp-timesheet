@@ -8,62 +8,67 @@
 
 {% block content %}
 
-
-<div class="row py-3 mx-1 justify-content-center">
-    <div class="col shadow py-3 px-5 col-lg-10 rounded border bg-light">
-        {% if title %}
-        <h2>{{title}}</h2>
-        {% else %}
-        <h2>{{timesheet.project.projectName}}</h2>
-        {% endif %}
-    </div>
-</div>
-
 <form action="" method="post">
 
 {% csrf_token %}
 
-<div class="row row-col-2 mx-1 py-3 justify-content-center">
-    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-lg-5 rounded">
-        <div class="form-floating my-3">
-           {{timesheetform.timeDate}}
-            <label for="id_date">{% trans "Date:" %}</label>
-        </div>
-        <div class="form-floating my-3">
-            {{timesheetform.timeItem}}
-            <label for="id_item">{% trans "Duration:" %}</label>
-        </div>
-        <div class="form-floating my-3">
-            {{timesheetform.timeType}}
-            <label for="id_type">{% trans "Type:" %}</label>
-        </div>
-    </div>
-    <div class="col shadow mx-1 px-5 py-3 mb-2 border col-lg-5 rounded">
-      
-            <div class="my-3">
-                {{timesheetform.project}}
-            </div>          
+<div class="row py-3 justify-content-center">
+    <div class="col shadow p-3 mx-1 col-lg-10 rounded border bg-light">
+        {% if title %}
+        <div class="h2 px-4 py-2">{{title}}</div>
+        {% else %}
+        <div class="h2 px-4 py-2">{{timesheet.project.projectName}}</div>
+        {% endif %}
+    
+        <div class="row row-col-2 py-3 justify-content-center">
+            <div class="col col-10 col-md-6 py-1">
 
-            <div class="col d-flex justify-content-center my-3 px-5 py-3">
-                <button type="submit" class="btn btn-outline-success px-3 mx-2">{% trans "Save" %}</button>
-                {% if project.id %}
-                <a href={% url 'timesheet:Timesheet' id=timesheet.id%} class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</a>
-                {% else %}
-                <a href="{% url 'timesheet:Self_Timesheets' a=0 b=10 %}" class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</a>
-                {% endif %}
+                <div class="form-floating my-3 mx-4">
+                {{timesheetform.timeDate}}
+                    <label for="id_date">{% trans "Date:" %}</label>
+                </div>
+
+                <div class="form-floating my-3 mx-4">
+                    {{timesheetform.timeItem}}
+                    <label for="id_item">{% trans "Duration:" %}</label>
+                </div>
+
+                <div class="form-floating my-3 mx-4">
+                    {{timesheetform.timeType}}
+                    <label for="id_type">{% trans "Type:" %}</label>
+                </div>
+
             </div>
-    </div>
-</div>
-<div class="row py-3 mx-1 justify-content-center">
-    <div class="col shadow py-3 px-5 col-lg-10 border rounded">
-    <p>
-        <div class="form-floating">
-            {{timesheetform.timeNotes}}
-            <label for="id_notes">{% trans "Notes:" %}</label>
+
+            <div class="col col-10 col-md-6 py-1 light-border">
+            
+                    <div class="my-3 mx-4">
+                        {{timesheetform.project}}
+                    </div>          
+
+                    <div class="col d-flex justify-content-center my-3 px-5 py-3">
+                        <button type="submit" class="btn btn-outline-success px-3 mx-2">{% trans "Save" %}</button>
+                        {% if project.id %}
+                        <a href={% url 'timesheet:Timesheet' id=timesheet.id%} class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</a>
+                        {% else %}
+                        <a href="{% url 'timesheet:Self_Timesheets' a=0 b=10 %}" class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</a>
+                        {% endif %}
+                    </div>
+            </div>
         </div>
-        </p>
+        <div class="row py-3 mx-1 justify-content-center">
+            <div class="col p-3 mx-1">
+    
+                <div class="form-floating my-2">
+                    {{timesheetform.timeNotes}}
+                    <label for="id_notes">{% trans "Notes:" %}</label>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
+</form>
 
 <script src="{% static 'timesheet/js/timesheet_create_helper.js' %}"></script>
 

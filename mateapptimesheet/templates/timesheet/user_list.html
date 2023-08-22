@@ -23,6 +23,24 @@
               <h5 class="offcanvas-title" id="offcanvasUsersLabel">{% trans "Users" %}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
+            <!-- Incanvas Form -->
+            <div class="d-none d-lg-block">
+              <div class="collapse navbar-collapse" id="usersNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="btn btn-outline-secondary btn-sm me-1 my-1" href="{% url 'timesheet:Create_Timesheet' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Timesheet" %}</a>
+                  </li>
+                </ul>
+                <form class="d-flex btn-sm" role="search" id="qform">
+                    {{filterform.q}}
+                    {{filterform.f}}
+                  <button class="btn btn-outline-success mx-2" type="submit">{% trans "Search" %}</button>
+                </form>
+                <div>
+                  <a href="{% url 'timesheet:Users' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
+                </div>
+              </div>
+            </div>
             <!-- Offcanvas Form -->
             <div class="d-lg-none">
               <div class="offcanvas-body">
@@ -35,55 +53,65 @@
                 </form>
               </div>
             </div>
-            <!-- Incanvas Form -->
-            <div class="d-none d-lg-block">
-              <div class="collapse navbar-collapse" id="usersNavbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="btn btn-outline-secondary btn-sm me-1 my-1" href="{% url 'timesheet:Create_Timesheet' %}"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Timesheet" %}</a>
-                  </li>
-                </ul>
-                <form class="d-flex btn-sm" role="search" id="qform">
-                  {{filterform.q}}
-                  {{filterform.f}}
-                <button class="btn btn-outline-success mx-2" type="submit">{% trans "Filter" %}</button>
-              </form>
-              <div>
-                <a href="{% url 'timesheet:Users' a=0 b=10 %}" class="btn btn-outline-secondary my-2">{% trans "Clear" %}</a>
-              </div>
-              </div>
-            </div>
+
           </div>
         </div>
 
       </nav>
     {% if users_list %}
-    <div class="table-responsive">
-    <table class="table table-hover" id="users_list" name="Users_List">
-        <!-- Cabecera de Tabla -->
-        <thead class="table-success">
-            <th class="px-3">{% trans "Name" %}</th>
-            <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th>
-            <th class="text-center">{% trans "Unallocated Time: " %}{{ total_unalloc_time.unalloc_time__sum }} hs.</th>
-        </thead>
+    <!-- Table sm --> 
+    <div class="table-responsive d-none d-sm-block">
+      <table class="table table-hover" id="users_list" name="Users_List">
+          <!-- Cabecera de Tabla -->
+          <thead class="table-success">
+              <th class="px-3">{% trans "Name" %}</th>
+              <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th>
+              <th class="text-center">{% trans "Unallocated Time: " %}{{ total_unalloc_time.unalloc_time__sum }} hs.</th>
+          </thead>
 
-        <!-- Cuerpo de Tabla -->
+          <!-- Cuerpo de Tabla -->
 
-        <tbody>
-            {% for User in users_list %}
-            {% if User.alloc_time == 0 and User.is_active == False %}
-            {% else %}
-            <tr>
-                <td class="px-3"><a class="nav-link" href={% url 'timesheet:User' id=User.id a=0 b=10 %}>{{ User.last_name }}, {{ User.first_name }}</a></td>
-                <td class="text-center">{{ User.alloc_time}} hs.</td>
-                <td class="text-center">{{ User.unalloc_time }} hs.</td>
-            </tr>
-            {% endif %}
-            {% endfor %}
-        </tbody>
-
-    </table>
+          <tbody>
+              {% for User in users_list %}
+              {% if User.alloc_time == 0 and User.is_active == False %}
+              {% else %}
+              <tr>
+                  <td class="px-3"><a class="nav-link" href={% url 'timesheet:User' id=User.id a=0 b=10 %}>{{ User.last_name }}, {{ User.first_name }}</a></td>
+                  <td class="text-center">{{ User.alloc_time}} hs.</td>
+                  <td class="text-center">{{ User.unalloc_time }} hs.</td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+          </tbody>
+      </table>
     </div>
+
+    <!-- Table xs --> 
+    <div class="table-responsive d-block d-sm-none">
+      <table class="table table-hover" id="users_list" name="Users_List">
+          <!-- Cabecera de Tabla -->
+          <thead class="table-success">
+              <th class="px-3">{% trans "Name" %}</th>
+              <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th>
+          </thead>
+
+          <!-- Cuerpo de Tabla -->
+
+          <tbody>
+              {% for User in users_list %}
+              {% if User.alloc_time == 0 and User.is_active == False %}
+              {% else %}
+              <tr>
+                  <td class="px-3"><a class="nav-link" href={% url 'timesheet:User' id=User.id a=0 b=10 %}>{{ User.last_name }}, {{ User.first_name }}</a></td>
+                  <td class="text-center">{{ User.alloc_time}} hs.</td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
     {% if links %}
     <nav aria-label="Page navigation" class="m-3">
         <ul class="pagination">

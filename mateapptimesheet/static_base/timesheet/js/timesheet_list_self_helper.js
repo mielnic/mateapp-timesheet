@@ -11,6 +11,7 @@ for (var i =0; i < search.length; i++) {
     }
 }
 
-fSelector.addEventListener('change', (event) => {
-    qForm.submit()
+
+fSelector.addEventListener('change', (event) => { 
+        qForm.submit();
 });
