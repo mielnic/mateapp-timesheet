@@ -84,14 +84,14 @@
               <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
               <td class="text-center text-danger"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
               <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
-              <td class="px-3 text-danger"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
+              <td class="px-3 text-danger"><a class="nav-link" href={% url 'timesheet:User' id=Timesheet.user.id a=0 b=10 %}>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
             </tr>
             {% else %}
             <tr>
               <td class="px-3"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeDate }}</a></td>
               <td class="text-center"><a class="nav-link" href={% url 'timesheet:Timesheet' id=Timesheet.id %}>{{ Timesheet.timeItem }}</a></td>
               <td class="px-3"><a class="nav-link" href={% url 'timesheet:Project' id=Timesheet.project.id a=0 b=5 %}>{{ Timesheet.project }}</a></td>
-              <td class="px-3"><a class="nav-link" href='#'>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
+              <td class="px-3"><a class="nav-link" href={% url 'timesheet:User' id=Timesheet.user.id a=0 b=10 %}>{{ Timesheet.user.last_name }}, {{ Timesheet.user.first_name }}</a></td>
             </tr>
             {% endif %}
             {% endfor %}
