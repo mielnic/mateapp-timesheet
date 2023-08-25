@@ -157,7 +157,7 @@ def admin_home(request, a=0, b=10):
     # Backup files List
     folder = f'{settings.MEDIA_ROOT}/backup/'
     file_list = os.listdir(folder)
-    file_list = file_list[::-1]
+    file_list = sorted(file_list, reverse=True)
     path = f'{settings.MEDIA_URL}backup/'
     template = loader.get_template('main/admin_home.html')
     context = {

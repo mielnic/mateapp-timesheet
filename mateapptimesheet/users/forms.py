@@ -129,7 +129,7 @@ class CustomUserEditForm(UserChangeForm):
             'is_staff' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_active' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_superuser' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
-            'startDate': forms.DateInput(attrs={'class':'form-control'}),
+            'startDate': forms.DateInput(attrs={'type':'date','class':'form-control'}),
         }
 
 class ChangePasswordForm(UserCreationForm):
