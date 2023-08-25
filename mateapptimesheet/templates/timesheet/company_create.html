@@ -39,9 +39,9 @@
                     <div class="col d-flex justify-content-start px-5 py-3">
                         <p><button type="submit" class="btn btn-outline-success px-3 mx-2">{% trans "Save" %}</button></p>
                         {% if company.id %}
-                        <p><a href={% url 'timesheet:Company' id=company.id a=0 b=5%} class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</a></p>
+                        <p><button onclick="history.back()" class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</button></p>
                         {% else %}
-                        <p><a href="{% url 'timesheet:Companies' a=0 b=10 %}" class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</a></p>
+                        <p><button onclick="history.back()" class="btn btn-outline-secondary" role="button">{% trans "Cancel" %}</button></p>
                         {% endif %}
             
                     </div>

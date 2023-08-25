@@ -13,14 +13,14 @@
       <!-- Table Block Header -->
       <nav class="navbar navbar-expand-lg table_nav">
         <div class="container-fluid">
-          <a class="navbar-brand" href=""><h4>{% trans "Users" %}</h4></a>
+          <a class="navbar-brand" href=""><h4>{% trans "Recursos" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usersNavbar" aria-controls="usersNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <!-- Offcanvas Header -->
           <div class="offcanvas offcanvas-end bg-light" tabindex="-1" id="usersNavbar" aria-labelledby="offcanvasUsersLabel">
             <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasUsersLabel">{% trans "Users" %}</h5>
+              <h5 class="offcanvas-title" id="offcanvasUsersLabel">{% trans "Recursos" %}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <!-- Incanvas Form -->
@@ -65,8 +65,8 @@
           <!-- Cabecera de Tabla -->
           <thead class="table-success">
               <th class="px-3">{% trans "Name" %}</th>
-              <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th>
-              <th class="text-center">{% trans "Unallocated Time: " %}{{ total_unalloc_time.unalloc_time__sum }} hs.</th>
+              <th class="text-center">{% trans "Allocated" %}&nbsp;&Sigma;:&nbsp;{{ total_alloc_time.alloc_time__sum }} hs.</th>
+              <th class="text-center">{% trans "Unallocated" %}&nbsp;&Sigma;:&nbsp;{{ total_unalloc_time.unalloc_time__sum }} hs.</th>
           </thead>
 
           <!-- Cuerpo de Tabla -->
@@ -92,7 +92,7 @@
           <!-- Cabecera de Tabla -->
           <thead class="table-success">
               <th class="px-3">{% trans "Name" %}</th>
-              <th class="text-center">{% trans "Allocated Time: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th>
+              <th class="text-center">{% trans "Allocated" %}&nbsp;&Sigma;:&nbsp;{{ total_alloc_time.alloc_time__sum }} hs.</th>
           </thead>
 
           <!-- Cuerpo de Tabla -->

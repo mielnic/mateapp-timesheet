@@ -27,7 +27,7 @@
     <div class="row mx-1 justify-content-center">
         <div class="col col-lg-10 d-flex justify-content-center">       
             <p><a href={% url 'timesheet:Edit_Company' id=company.id %} class="btn btn-outline-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-            <p><a href={% url 'timesheet:Companies' a=0 b=10 %} class="btn btn-outline-secondary px-3 mx-3" role="button">{% trans "Back" %}</a></p>
+            <p><a href={% url 'timesheet:Companies' a=0 b=10 %} class="btn btn-outline-secondary px-3 mx-3" role="button"><i class="bi bi-arrow-left me-2"></i>{% trans "Customers" %}</a></p>
             {% if not project_list %}
             <p><a href={% url 'timesheet:Delete_Company' id=company.id %} class="btn btn-outline-danger mx-3" role="button">{% trans "Delete" %}</a></p>
             {% endif %}

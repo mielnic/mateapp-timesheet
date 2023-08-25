@@ -52,7 +52,7 @@
     <div class="row mx-1 justify-content-center">
         <div class="col col-lg-10 d-flex justify-content-center">       
             <p><a href={% url 'timesheet:Edit_Project' id=project.id %} class="btn btn-outline-success mt-2 px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-            <p><a href={% url 'timesheet:Projects' a=0 b=10 %} class="btn btn-outline-secondary mt-2  px-3 mx-3" role="button">{% trans "Back" %}</a></p>
+            <p><a href={% url 'timesheet:Projects' a=0 b=10 %} class="btn btn-outline-secondary mt-2  px-3 mx-3" role="button"><i class="bi bi-arrow-left me-2"></i>{% trans "Projects" %}</a></p>
             {% if empty %}
             <p><a href={% url 'timesheet:Delete_Project' id=project.id %} class="btn btn-outline-danger mt-2 mx-3" role="button">{% trans "Delete" %}</a></p>
             {% endif %}
@@ -67,7 +67,7 @@
     <div class="col shadow p-3 border rounded col-lg-10">
       <!-- Table Block Header -->
       <nav class="navbar navbar-expand-lg table_nav">
-        <div class="container-fluid px-4">
+        <div class="container-fluid">
           <a class="navbar-brand" href=""><h4>{% trans "Resources" %}</h4></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#timesheetsNavbar" aria-controls="timesheetsNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -115,9 +115,9 @@
     <table class="table table-hover" id="timesheet_list" name="timesheet_List">
         <!-- Cabecera de Tabla -->
         <thead class="table-success">
-            <th class="px-3">{% trans "User" %}</th>
-            <th class="text-center d-none d-sm-block">{% trans "Allocated Time: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th>
-            <th class="text-center d-block d-sm-none">{% trans "Total: " %}{{ total_alloc_time.alloc_time__sum }} hs.</th>
+            <th class="px-3">{% trans "Name" %}</th>
+            <th class="text-center d-none d-sm-block">{% trans "Allocated" %}&nbsp;&Sigma;:&nbsp;{{ total_alloc_time.alloc_time__sum }} hs.</th>
+            <th class="text-center d-block d-sm-none">&nbsp;&Sigma;:&nbsp;{{ total_alloc_time.alloc_time__sum }} hs.</th>
         </thead>
 
         <!-- Cuerpo de Tabla -->
