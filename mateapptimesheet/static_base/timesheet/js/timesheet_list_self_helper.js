@@ -9,7 +9,7 @@ for (var i =0; i < search.length; i++) {
     } else {
         search[i].placeholder = 'Customer, Project:';
     }
-}
+};
 
 
 fSelector.addEventListener('change', (event) => { 

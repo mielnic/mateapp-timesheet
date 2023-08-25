@@ -337,6 +337,8 @@ def timesheets(request, a, b):
             s = timeSum(timesheets_list)
 
     else:
+        filterform = FilterForm(initial={'f':'All'})
+        timesheets_dataset = timesheetDateFilter('All')
         timesheets_dataset = Time.objects.order_by('-timeDate').filter(deleted=False)
         s = timeSum(timesheets_dataset)
         timesheets_list = timesheets_dataset [a:b]
