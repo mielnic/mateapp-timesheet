@@ -130,7 +130,7 @@ def getProjectTimesheets(f, pid):
     ''' Genera el dataset de timesheets para la vista de proyectos'''
     updateMaxAllocMonths()
     start, end, target = timeRange(f)
-    user_dataset = get_user_model().objects.order_by('last_name').filter(time__project=pid, time__timeDate__gte=start, time__timeDate__lte=end)
+    user_dataset = get_user_model().objects.order_by('last_name').filter(time__project=pid, time__timeDate__gte=start, time__timeDate__lte=end, time__deleted=False)
     user_dataset =  user_dataset.annotate(
         alloc_time_sum = Sum("time__timeItem", filter=Q(time__deleted=False, time__timeDate__gte=start, time__timeDate__lte=end, time__project=pid))
         ).annotate(alloc_time = Case(
@@ -149,7 +149,7 @@ def checkProjectEmpty(pid):
 def getUserProjects(f, uid):
     '''Genera el dataset de dedicación de tiempos por proyecto del usuario'''
     start, end, target = timeRange(f)
-    project_dataset = Project.objects.order_by('projectName').filter(time__user=uid, time__timeDate__gte=start, time__timeDate__lte=end)
+    project_dataset = Project.objects.order_by('projectName').filter(time__user=uid, time__timeDate__gte=start, time__timeDate__lte=end, time__deleted=False)
     project_dataset = project_dataset.annotate(
         period_alloc_time_sum=Sum('time__timeItem', filter=Q(time__deleted=False, time__timeDate__gte=start, time__timeDate__lte=end, time__user=uid))
         ).annotate(total_alloc_time = Case(

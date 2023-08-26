@@ -198,9 +198,9 @@ def project(request, id, a, b):
     empty = checkProjectEmpty(id)
 
     if project.projectType == 'onetime':
-            user_dataset = getProjectTimesheets('All', project.id)
-            filterform = FilterForm(initial={'f':'All'})
-            recurrent = False
+        user_dataset = getProjectTimesheets('All', project.id)
+        filterform = FilterForm(initial={'f':'All'})
+        recurrent = False
     else:
         user_dataset = getProjectTimesheets('Current_Month', project.id)
         filterform = FilterForm(initial={'f':'Current_Month'})
