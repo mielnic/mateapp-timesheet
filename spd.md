@@ -66,9 +66,15 @@ Five options are available in in the navigation bar for basic oprations:
 
 ### Management Module ###
 
-The management menu, available to users with supervisor and administrator priviledges, is divided into frour sections:
+The management menu, available to users with supervisor and administrator privileges, is divided into four sections:
 
-1. **Resources:** The option will list a table with the summarized allocated and unallocated time for each resource in the period defined in the date filtering dropdown. Allocated time is calculated with the relevant timesheets. Unallocated time is calculated with the Monthly Target defined in the user profile. If the displayed period is starts befor the resoruce join date, unallocated time for that user is going to be calculated from that point in time.
+1. **Resources:** This option presents a table listing summarized allocated and unallocated time for each resource in the period defined by the date filtering dropdown. Allocated time is calculated using relevant timesheets, while unallocated time is derived from the Monthly Target specified in the user profile. If the displayed period starts before the resource's join date, unallocated time for that user is calculated from that point onward. A button in the table header allows logging of timesheets for any user. The individual user view can be accessed from the table. User profiles are not editable in this view; only the administration section permits such changes. Additionally, alongside user details, another table summarizes the projects the user has been involved in within the selected date range.
+
+2. **Projects:**  This option displays active projects with summarized allocated time from all users. Inactive (thus completed) projects are omitted to ensure clarity. However, a special keyword, **@inactive**, can be used as a search term to list them. New projects can be created using the button in the table header. The individual project view is accessible through the table. It provides relevant project information, project notes with quick edit capabilities, and a table summarizing resource allocated time for the chosen date range. Full edit and delete options are available from this view, with the delete option enabled only if there are no associated timesheets.
+
+3. **Customers:** This option lists all customers and includes a search form as well as a create button in the table header. The individual customer view, accessible via the table, displays customer information and a calculated value termed **Customer Balance**. Customer balance represents the sum of outcomes from all customer projects by comparing project budgets with actual timesheets allocated to the projects. It considers only finished (inactive) projects or recurring projects up to the previous full month period. A table also showcases this and other information summarized by project. In this case, both inactive and active projects are displayed.
+
+4. **Timesheets:** This view contains all registered (and not deleted) individual or team timesheets. It provides options to search, filter, access each record's view, edit, and eventually delete. 
 
 ## Platform ##
 
@@ -87,3 +93,15 @@ Users registered through these processes are designated as Standard Users. Admin
 ### Item Deletion ###
 
 MateApp incorporates a trash bin feature. Items deleted by a user are retained in the user's trash until restored or permanently removed. Nevertheless, by default, MateApp never completely erases records. Deleted entries are stored in the Administration Trash of the Administration module. This principle holds for items kept in a user's trash bin as well, facilitating administrator-initiated restoration without requiring access to the user's profile.
+
+## Administration Section ##
+
+The administration section is accessible to authorized users through the curly brackets icon on the left side of the navigation bar.
+
+It comprises three main sections:
+
+- **Backup:** The system retains the five most recent database backups. These backups can be downloaded from the table view. Administrators can generate new backups at any time using the backup dropdown in the navigation bar.
+
+- **Users:** The users section consists of distinct lists for active and inactive users. This is where users can be edited, activated, or inactivated. Additionally, administrators can create new users using the "create" option in the dropdown menu.
+
+- **System Trash:** This section provides a list of discarded items from the entire system. As the application retains this data indefinitely by default, a search utility has been included to help locate older items. Items are sorted according to their trash date.
