@@ -74,7 +74,7 @@ The management menu, available to users with supervisor and administrator privil
 
 3. **Customers:** This option lists all customers and includes a search form as well as a create button in the table header. The individual customer view, accessible via the table, displays customer information and a calculated value termed **Customer Balance**. Customer balance represents the sum of outcomes from all customer projects by comparing project budgets with actual timesheets allocated to the projects. It considers only finished (inactive) projects or recurring projects up to the previous full month period. A table also showcases this and other information summarized by project. In this case, both inactive and active projects are displayed.
 
-4. **Timesheets:** This view contains all registered (and not deleted) individual or team timesheets. It provides options to search, filter, access each record's view, edit, and eventually delete. 
+4. **Timesheets:** This view contains all registered (and not deleted) individual timesheets. It provides options to search, filter, access each record's view, edit, and eventually delete. 
 
 ## Platform ##
 

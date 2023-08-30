@@ -72,15 +72,19 @@ El menú de gestión, disponible para usuarios con privilegios de supervisor y a
 
 2. **Proyectos:** Esta opción muestra proyectos activos con el tiempo asignado resumido de todos los usuarios. Los proyectos inactivos (y por lo tanto, finalizados) se omiten del listado para evitar confusiones. Sin embargo, se puede utilizar una palabra clave especial, **@inactivo**, como término de búsqueda en el formulario de búsqueda para listarlos. Nuevos proyectos se pueden crear utilizando el botón en el encabezado de la tabla. La vista individual de cada proyecto es accesible a través de la tabla y proporciona información relevante del proyecto, notas del proyecto con capacidades de edición rápida y una tabla que resume el tiempo asignado a los recursos para el rango de fechas elegido. Las opciones completas de edición y borrado están disponibles en esta vista, aunque el botón de borrar solo se habilita si no existen timesheets asociadas.
 
+3. **Clientes:** Esta opción lista los clientes e incluye su formulario de búsqueda, como también un botón para crear nuevos. La vista individual del cliente contiene un valor calculado denominado **Balance del Cliente**. El balance del cliente representa la sumatoria de los saldos de horas de los proyecto del cliente, comparando la cantidad de horas presupuetadas con la carga real. Se computan solamente los proyectos finalizados para el caso de los de única vez, y de los meses previos al corriente en el caso de los proyectos recurrentes. Una tabla lista también los proyectos del cliente, y en este caso se incluye también los finalizados.
+
+4. **Timesheets:** Esta vista contiene todos los timesheets registrados (no borrados). Provee ocpiones para filtrado por fecha y búsqueda, así como el acceso individual, con edición rápida de notas, edición completa y borrado.
+
 ## Plataforma ##
 
 ### Registro de Usuarios ###
 
 MateApp utiliza direcciones de correo electrónico como nombres de usuario. El correo electrónico debe ser válido y accesible para el usuario, ya que se utiliza para el registro de usuarios y para recuperar contraseñas. MateApp ofrece los siguientes métodos de registro de usuarios:
 
-- **Registro Manual:** Un administrador completa el formulario "Crear Usuario" y proporciona al usuario sus credenciales de inicio de sesión, o, siguiendo "mejores prácticas", solo proporciona el correo electrónico del nombre de usuario. Luego, el usuario crea una contraseña a través de la utilidad de recuperación de contraseñas.
+- **Registro Manual:** Un administrador completa el formulario "Crear Usuario" y proporciona al usuario sus credenciales de inicio de sesión, o, siguiendo las "mejores prácticas", solo proporciona el correo electrónico del nombre de usuario. Luego, el usuario crea una contraseña a través de la utilidad de recuperación de contraseñas.
 
-- **Registro Propio con "En Espera":** Los usuarios se registran por sí mismos, pero sus perfiles permanecen inactivos hasta que un administrador los active manualmente.
+- **Registro Propio con "Parking":** Los usuarios se registran por sí mismos, pero sus perfiles permanecen inactivos hasta que un administrador los active manualmente.
 
 - **Registro Propio con Restricción de Dominio:** Para organizaciones con un dominio de correo electrónico registrado, el registro propio está completamente automatizado, y el usuario se activa después de la confirmación del correo electrónico. Sin embargo, solo se aceptan correos electrónicos del dominio de la organización.
 
@@ -89,3 +93,15 @@ Los usuarios registrados a través de estos procesos se designan como Usuarios E
 ### Eliminación de Elementos ###
 
 MateApp incorpora una función de papelera. Los elementos eliminados por un usuario se conservan en la papelera del usuario hasta que se restauren o se eliminen permanentemente. Sin embargo, de manera predeterminada, MateApp nunca elimina completamente los registros. Las entradas eliminadas se almacenan en la Papelera de Administración del módulo de Administración. Este principio también se aplica a los elementos mantenidos en la papelera del usuario, lo que facilita la restauración iniciada por el administrador sin requerir acceso al perfil del usuario.
+
+## Sección de Administración ##
+
+La sección de adminstración esta disponible a los usuarios autorizados clickeando en las llaves sobre la derecha de la barra de navegación.
+
+Se compone de tres secciones:
+
+- **Backup:** El sistema retiene los ultimos 5 backups realizados. Estos se puede descargar desde esta vista. Nuevos backups se puede generar desde el menú desplegable en la barra de navegación.
+
+- **Usuarios:** La sección de usuarios distinge entre activos e inactivos. Es aquí donde los usuarios pueden ser activados, desactivados o modificados. También se pueden crear nuevos desde el menú desplegable de la barra de navegación.
+
+- **System Trash:** Esta sección contiene todos los items borrados del sistema. Como la aplicación los retiene indefinidamente por defecto, se incluye una utilidad de búsqueda para encontrar los items mas antigüos (aparecen ordenados por la fecha de borrado, desde el mas reciente).
