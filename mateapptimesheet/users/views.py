@@ -265,8 +265,8 @@ def create_user(request):
     if request.method == 'POST':
         usercreateform = CustomUserCreationForm(request.POST)
         if usercreateform.is_valid():
-            usercreateform.save()
-            id = get_user_model().objects.last().id
+            user = usercreateform.save()
+            id = user.id
             return HttpResponseRedirect(f'/users/user/{id}')
         else:
             for error in usercreateform.errors.values():

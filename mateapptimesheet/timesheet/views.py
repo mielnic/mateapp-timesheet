@@ -84,8 +84,8 @@ def create_company(request):
     if request.method == 'POST':
         companyform = CompanyForm(request.POST)
         if companyform.is_valid():
-            companyform.save()
-            id = Company.objects.last().id
+            company = companyform.save()
+            id = company.id
             return HttpResponseRedirect(f'/timesheet/company/{id}/0/5/')     
 
     else:
@@ -254,8 +254,8 @@ def create_project(request):
     if request.method == 'POST':
         projectform = ProjectForm(request.POST)
         if projectform.is_valid():
-            projectform.save()
-            id = Project.objects.last().id
+            project = projectform.save()
+            id = project.id
             return HttpResponseRedirect(f'/timesheet/project/{id}/0/5/')     
 
     else:
@@ -433,7 +433,6 @@ def create_timesheet(request):
         timesheetform = TimesheetForm(request.POST)
         if timesheetform.is_valid():
             timesheetform.save()
-            id = Time.objects.last().id
             return HttpResponseRedirect('/timesheet/timesheets/0/10/')
         else:
             for error in timesheetform.errors.values():
@@ -441,7 +440,7 @@ def create_timesheet(request):
 
     else:
         timesheetform = TimesheetForm(initial={'timeItem': '8'})
-        timesheetform.fields["project"].queryset = Project.objects.filter(projectStatus = True)
+        timesheetform.fields["project"].queryset = Project.objects.filter(projectStatus = True, deleted=False)
 
     context = {
         'timesheetform': timesheetform,
@@ -458,11 +457,9 @@ def create_self_timesheet(request):
     if request.method == 'POST':
         timesheetform = TimesheetForm(request.POST)
         if timesheetform.is_valid():
-            timesheetform.save()
-            id = Time.objects.last().id
-            timesheet = Time.objects.get(id=id)
-            timesheet.user = user
-            timesheet.save()
+            time = timesheetform.save(commit=False)
+            time.user = user
+            time.save()
             return HttpResponseRedirect('/timesheet/timesheets_self/0/10/')
         else:
             for error in timesheetform.errors.values():
@@ -470,7 +467,7 @@ def create_self_timesheet(request):
 
     else:
         timesheetform = TimesheetForm(initial={'timeItem': '8'})
-        timesheetform.fields["project"].queryset = Project.objects.filter(projectStatus = True)
+        timesheetform.fields["project"].queryset = Project.objects.filter(projectStatus = True, deleted=False)
 
     context = {
         'timesheetform': timesheetform,
