@@ -86,16 +86,26 @@ class CustomUserRegisterForm(UserCreationForm):
 
 class CustomUserChangeForm(UserChangeForm):
 
+    seniority = forms.ChoiceField(
+        choices=SENIORITY_CHOICES,
+    )
+    seniority.widget.attrs.update({'class': 'form-select'})
+
     class Meta:
         model = CustomUser
         fields = [
             "first_name",
             "last_name",
+            "title",
+            "seniority",
+            "practice",
             ]
         
         widgets = {
             'first_name' : forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}),
             'last_name': forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}),
+            'title': forms.TextInput(attrs={'class':'form-control','placeholder':'Title'}),
+            'practice': forms.TextInput(attrs={'class':'form-control','placeholder':'Practice'}),
         }
 
 class CustomUserEditForm(UserChangeForm):

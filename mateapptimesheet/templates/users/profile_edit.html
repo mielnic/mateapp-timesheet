@@ -32,6 +32,23 @@
                     <label for="last_name" class="form-label">{% trans "Last Name:" %}</label>
                 </div>
             </p>
+            <p>
+                <div class="form-floating">
+                    {{profileform.title}}
+                    <label for="title" class="form-label">{% trans "Title:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div class="form-floating">
+                    {{profileform.practice}}
+                    <label for="practice" class="form-label">{% trans "Practice:" %}</label>
+                </div>
+            </p>
+            <p>
+                <div>
+                    {{profileform.seniority}}
+                </div>
+            </p>
             <a class="btn btn-outline-secondary my-2" href="/users/change_password/">{% trans "Change Password" %}</a>
             <p>
                 <div class="col d-flex justify-content-center px-5 py-3 col-lg-15">

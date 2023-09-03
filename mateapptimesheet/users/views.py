@@ -33,7 +33,7 @@ def activate(request, uidb64, token):
         if settings.REGISTRATION_PARKING == False: 
             user.is_active = True
             user.save()
-            messages.success(request, _('Thank you for your confirmation. Your account is now active'))
+            messages.success(request, _('Thank you for your confirmation. Your account is now active! After logging in, please go to your user profile and complete your personal data.'))
             return redirect('/login/')
         else:
             user.is_active = False
