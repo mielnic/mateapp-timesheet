@@ -62,34 +62,23 @@
             </p>
             {% if user != muser %}
             <div>
+                {% if activeenabled %}
                 <div class="form-check">
                     {{usercreateform.is_active}}
                     <label for="is_active" class="form-check-label">{% trans "Is Active?" %}</label>
                 </div>
-                <div class="form-check">
-                    {{usercreateform.is_staff}}
-                    <label for="is_staff" class="form-check-label">{% trans "Is Supervisor?" %}?</label>
+                {% else %}
+                <div class="px-3">
+                    <small>{% trans "Active users limit reached. You must disable other user to enable this one." %}</small>
                 </div>
-                <div class="form-check">
-                    {{usercreateform.is_superuser}}
-                    <label for="is_admin" class="form-check-label">{% trans "Is Administrator?" %}?</label>
-                </div>
+                {% endif %}
             </div>
-            {% else %}
-            <div class="d-none">
-                <div class="form-check">
-                    {{usercreateform.is_active}}
-                    <label for="is_active" class="form-check-label">{% trans "Is Active?" %}</label>
+            <p>
+                <div class="form-floating">
+                    {{usercreateform.role}}
+                    <label for="id_role" class="form-label">{% trans "Role:" %}</label>
                 </div>
-                <div class="form-check">
-                    {{usercreateform.is_staff}}
-                    <label for="is_staff" class="form-check-label">{% trans "Is Supervisor?" %}?</label>
-                </div>
-                <div class="form-check">
-                    {{usercreateform.is_superuser}}
-                    <label for="is_admin" class="form-check-label">{% trans "Is Administrator?" %}?</label>
-                </div>
-            </div>
+            </p>
             {% endif %}
 
             <p>

@@ -28,13 +28,7 @@
         <br>
         <h6> <strong>{% trans "Join Date:" %}</strong> {{muser.startDate}}</h6>
         <br>
-        {% if muser.is_superuser %} 
-        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Administrator" %}</h6>
-        {% elif muser.is_staff %} 
-        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Supervisor" %}</h6>
-        {% else %}
-        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Regular" %}</h6> 
-        {% endif %}
+        <h6><strong>{% trans "User Role:" %}</strong> {{muser.role}}</h6>
         <br>
         {% if muser.is_active %} 
         <h6><strong>{% trans "User Status:" %}</strong> {% trans "Active" %}</h6>

@@ -4,8 +4,8 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm, ChangePasswordF
 from main.decorators import user_not_authenticated, allowed_users, self_registration_enabled
 from main.functions import paginator
 from django.contrib import messages
-from django.contrib.auth import login as auth_login, logout, authenticate, get_user_model
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -16,6 +16,7 @@ from .tokens import account_activation_token
 from django.db.models.query_utils import Q
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+from .functions import checkUserActivationLimit, checkUserCreationLimit
 
 # Create your views here.
 
@@ -31,10 +32,17 @@ def activate(request, uidb64, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         if settings.REGISTRATION_PARKING == False: 
-            user.is_active = True
-            user.save()
-            messages.success(request, _('Thank you for your confirmation. Your account is now active! After logging in, please go to your user profile and complete your personal data.'))
-            return redirect('/login/')
+            activeEnabled = checkUserCreationLimit()
+            if activeEnabled:
+                user.is_active = True
+                user.save()
+                messages.success(request, _('Thank you for your confirmation. Your account is now active'))
+                return redirect('/login/')
+            else:
+                user.is_active = False
+                user.save()
+                messages.success(request, _('Thank you for your confirmation. The Administrator will enable your account soon.'))
+                return redirect('/login/')
         else:
             user.is_active = False
             user.save()
@@ -206,10 +214,10 @@ def passwordResetConfirm(request, uidb64, token):
 # Users list
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'administrator'])
 def users(request, a, b):
     active = True
-    users_list = get_user_model().objects.order_by('last_name').filter(is_active=True) [a:b]
+    users_list = get_user_model().objects.order_by('last_name').filter(is_active=True).exclude(is_superuser=True) [a:b]
     length = get_user_model().objects.filter(is_active=True).count()
     links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
     template = loader.get_template('users/users.html')
@@ -227,10 +235,10 @@ def users(request, a, b):
 # Deleted Users List
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'administrator'])
 def users_deleted(request, a, b):
     active = False
-    users_list = get_user_model().objects.order_by('last_name').filter(is_active=False) [a:b]
+    users_list = get_user_model().objects.order_by('last_name').filter(is_active=False).exclude(is_superuser=True) [a:b]
     length = get_user_model().objects.filter(is_active=False).count()
     links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
     template = loader.get_template('users/users.html')
@@ -248,24 +256,33 @@ def users_deleted(request, a, b):
 # User profile view (Admin)
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'administrator'])
 def user(request, id):
     muser = get_user_model().objects.get(id=id)
-    template = loader.get_template('users/user.html')
-    context = {
-        'muser' : muser,
-    }
-    return HttpResponse(template.render(context, request))
+    if muser.is_superuser == False:
+        template = loader.get_template('users/user.html')
+        context = {
+            'muser' : muser,
+        }
+        return HttpResponse(template.render(context, request))
+    else:
+        return redirect('/admin_home/0/10/')
 
 # Create User (Admin)
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'administrator'])
 def create_user(request):
+    activeEnabled = checkUserCreationLimit()
     if request.method == 'POST':
         usercreateform = CustomUserCreationForm(request.POST)
         if usercreateform.is_valid():
-            user = usercreateform.save()
+            if activeEnabled:
+                user = usercreateform.save()
+            else:
+                user = usercreateform.save(commit=False)
+                user.is_active = False
+                user.save()
             id = user.id
             return HttpResponseRedirect(f'/users/user/{id}')
         else:
@@ -276,25 +293,31 @@ def create_user(request):
 
     context = {
         'usercreateform' : usercreateform,
+        'activeenabled' : activeEnabled,
     }    
     return render(request, 'users/create_user.html', context)
 
 # Edit User (Admin)
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'administrator'])
 def edit_user(request, id):
     muser = get_user_model().objects.get(id=id)  
+    activeEnabled = checkUserActivationLimit(muser)
     usereditform = CustomUserEditForm(request.POST or None, instance=muser)
-    if usereditform.is_valid():
-        usereditform.save()
-        return HttpResponseRedirect(f'/users/user/{id}')
-    else:
-        for error in usereditform.errors.values():
-            messages.error(request, error)
+    if muser.is_superuser == False:
+        if usereditform.is_valid():
+            usereditform.save()
+            return HttpResponseRedirect(f'/users/user/{id}')
+        else:
+            for error in usereditform.errors.values():
+                messages.error(request, error)
 
-    context = {
-        'usercreateform' : usereditform,
-        'muser' : muser
-    }    
-    return render(request, 'users/edit_user.html', context)
+        context = {
+            'usercreateform' : usereditform,
+            'muser' : muser,
+            'activeenabled' : activeEnabled,
+        }    
+        return render(request, 'users/edit_user.html', context)
+    else:
+        return redirect('/admin_home/0/10/')

@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
     allocTarget = models.IntegerField(default=160, blank=True)
     maxAllocMonths = models.IntegerField(default=0, blank=True)
     startDate = models.DateField(blank=False, null=True, default=date.today)
+    role = models.CharField(max_length=15, default='User', blank=True, null=True)
 
 
     USERNAME_FIELD = "email"

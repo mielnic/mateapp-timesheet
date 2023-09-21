@@ -136,7 +136,7 @@ class TimesheetForm(forms.ModelForm):
         self.fields['project'].queryset = Project.objects.filter(deleted=False).order_by('projectName')
         self.fields['project'].empty_label = _("Select Project:")
 
-        self.fields['user'].queryset = get_user_model().objects.order_by('last_name')
+        self.fields['user'].queryset = get_user_model().objects.order_by('last_name').exclude(is_superuser=True)
         self.fields['user'].empty_label = _("Select User")
 
 class FilterForm(forms.Form):

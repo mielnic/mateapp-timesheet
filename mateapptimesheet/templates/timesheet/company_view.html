@@ -23,7 +23,7 @@
       {% include 'timesheet/partials/company_notes.html' %}
     </div>
 
-    {% if user.is_staff %}
+    {% if user.role == 'Supervisor' or user.role == 'Administrator' %}
     <div class="row mx-1 justify-content-center">
         <div class="col col-lg-10 d-flex justify-content-center">       
             <p><a href={% url 'timesheet:Edit_Company' id=company.id %} class="btn btn-outline-success px-4 mx-3" role="button">{% trans "Edit" %}</a></p>

@@ -24,13 +24,7 @@
         <br>
         <h6> <strong>{% trans "Seniority:" %}</strong> {{user.seniority}}</h6>
         <br>
-        {% if user.is_superuser %} 
-        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Administrator" %}</h6>
-        {% elif user.is_staff %} 
-        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Supervisor" %}</h6>
-        {% else %}
-        <h6><strong>{% trans "User Type:" %}</strong> {% trans "Regular" %}</h6> 
-        {% endif %}
+        <h6><strong>{% trans "User Role:" %}</strong> {{user.role}}</h6>
         <br>
         {% if user.is_active %} 
         <h6><strong>{% trans "User Status:" %}</strong> {% trans "Active" %}</h6>

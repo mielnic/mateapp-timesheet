@@ -38,7 +38,7 @@
                 {% else %}
                 <td class='text-danger'>{% trans "Inactive" %}</td>
                 {% endif %}
-                {% if User.is_staff %}
+                {% if User.role == 'Supervisor' or User.role == 'Administrator' %}
                 <td class='text-success'>{% trans "Yes" %}</td>
                 {% else %}
                 <td>{% trans "No" %}</td>

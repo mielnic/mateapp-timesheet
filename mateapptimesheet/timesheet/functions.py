@@ -87,7 +87,7 @@ def userAllocTime(f):
     ''' Genera el dataset de timesheets para la vista de usuarios'''
     updateMaxAllocMonths()
     start, end, target = timeRange(f)
-    user_dataset = get_user_model().objects.order_by('last_name').annotate(
+    user_dataset = get_user_model().objects.exclude(is_superuser=True).order_by('last_name').annotate(
         alloc_time_sum = Sum("time__timeItem", filter=Q(time__deleted=False, time__timeDate__gte=start, time__timeDate__lte=end))
         ).annotate(alloc_time = Case(
             When(alloc_time_sum = None, then = Value(0, output_field=IntegerField())), default='alloc_time_sum'

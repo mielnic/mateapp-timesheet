@@ -23,7 +23,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery
 # Customer List
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def companies(request, a, b):
     searchform = SearchForm
     if 'q' in request.GET:
@@ -79,7 +79,7 @@ def company(request, id, a, b):
 # Customer Create
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def create_company(request):
     if request.method == 'POST':
         companyform = CompanyForm(request.POST)
@@ -100,7 +100,7 @@ def create_company(request):
 # Customer Update
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def edit_company(request, id):
     company = Company.objects.get(id=id)
     companyform = CompanyForm(request.POST or None, instance=company)
@@ -117,7 +117,7 @@ def edit_company(request, id):
 # Customer Delete
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def delete_company(request, id):
     uid = request.user.id
     company = Company.objects.get(id=id)
@@ -129,7 +129,7 @@ def delete_company(request, id):
 # Customer Restore
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def restore_company(request, id, u):
     company = Company.objects.get(id=id)
     company.deleted = 0
@@ -139,7 +139,7 @@ def restore_company(request, id, u):
 # Customer Full Delete
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def full_delete_company(request, id):
     company = Company.objects.get(id=id)
     company.deletedBy = None
@@ -191,7 +191,7 @@ def projects(request, a, b):
 # Project View
 
 @login_required
-#@allowed_users(allowed_roles=['admin', 'staff'])
+#@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def project(request, id, a, b):
 
     project = Project.objects.get(id=id)
@@ -249,7 +249,7 @@ def project(request, id, a, b):
 # Project Create
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def create_project(request):
     if request.method == 'POST':
         projectform = ProjectForm(request.POST)
@@ -270,7 +270,7 @@ def create_project(request):
 # Project Update
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def edit_project(request, id):
     project = Project.objects.get(id=id)
     projectform = ProjectForm(request.POST or None, instance=project)
@@ -287,7 +287,7 @@ def edit_project(request, id):
 # Project Delete
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def delete_project(request, id):
     uid = request.user.id
     project = Project.objects.get(id=id)
@@ -299,7 +299,7 @@ def delete_project(request, id):
 # Project Restore
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def restore_project(request, id, u):
     project = Project.objects.get(id=id)
     project.deleted = 0
@@ -309,7 +309,7 @@ def restore_project(request, id, u):
 # Project Full Delete
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def full_delete_project(request, id):
     project = Project.objects.get(id=id)
     project.deletedBy = None
@@ -427,7 +427,7 @@ def timesheet_self(request, id):
 # Timesheet Create
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def create_timesheet(request):
     if request.method == 'POST':
         timesheetform = TimesheetForm(request.POST)
@@ -479,7 +479,7 @@ def create_self_timesheet(request):
 # Timesheet Update
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def edit_timesheet(request, id):
     timesheet = Time.objects.get(id=id)
     timesheetform = TimesheetForm(request.POST or None, instance=timesheet)
@@ -560,7 +560,7 @@ def full_delete_timesheet(request, id):
 # Users List
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def users(request, a, b):
     if 'q' in request.GET or 'f' in request.GET:
         filterform = FilterForm(request.GET)
@@ -601,45 +601,47 @@ def users(request, a, b):
 # User Detail
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'staff'])
+@allowed_users(allowed_roles=['admin', 'staff', 'supervisor'])
 def user_detail(request, id, a, b):
     muser = get_user_model().objects.get(id=id)
     s = ''
-    if 'q' in request.GET or 'f' in request.GET:
-        filterform = FilterForm(request.GET)
-        if filterform.is_valid():   
-            f = filterform.cleaned_data['f']
-            q = filterform.cleaned_data['q']
-            project_list = getUserProjects(f, muser)
-            if q:
-                project_list = project_list.annotate(search=SearchVector("projectName", "company__companyName")).filter(search=SearchQuery(q)).order_by('projectName')
-            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+    if muser.is_superuser == False:
+        if 'q' in request.GET or 'f' in request.GET:
+            filterform = FilterForm(request.GET)
+            if filterform.is_valid():   
+                f = filterform.cleaned_data['f']
+                q = filterform.cleaned_data['q']
+                project_list = getUserProjects(f, muser)
+                if q:
+                    project_list = project_list.annotate(search=SearchVector("projectName", "company__companyName")).filter(search=SearchQuery(q)).order_by('projectName')
+                links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+                template = loader.get_template('timesheet/user_detail.html')
+                s = project_list.aggregate(Sum('total_alloc_time'))
+        
+        else:
+            filterform = FilterForm(initial={'f':'Current_Month'})
+            project_dataset = getUserProjects('Current_Month', muser)
+            s = project_dataset.aggregate(Sum('total_alloc_time'))
+            project_list = project_dataset [a:b]
+            length = project_dataset.count()
+            links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
             template = loader.get_template('timesheet/user_detail.html')
-            s = project_list.aggregate(Sum('total_alloc_time'))
-    
+
+        context = {
+            'project_list': project_list,
+            'filterform' : filterform,
+            'id' : id,
+            's' : s,
+            'muser' : muser,
+            'links' : links,
+            'idxPL' : idxPL,
+            'idxPR' : idxPR,
+            'idxNL' : idxNL,
+            'idxNR' : idxNR,
+        }
+        return HttpResponse(template.render(context, request))
     else:
-        filterform = FilterForm(initial={'f':'Current_Month'})
-        project_dataset = getUserProjects('Current_Month', muser)
-        s = project_dataset.aggregate(Sum('total_alloc_time'))
-        project_list = project_dataset [a:b]
-        length = project_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
-        template = loader.get_template('timesheet/user_detail.html')
-
-    context = {
-        'project_list': project_list,
-        'filterform' : filterform,
-        'id' : id,
-        's' : s,
-        'muser' : muser,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
-    }
-    return HttpResponse(template.render(context, request))
-
+        return redirect('/timesheet/users/0/10/')
 
 ##############
 # htmx Views #

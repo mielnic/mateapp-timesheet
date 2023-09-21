@@ -48,7 +48,7 @@
     </div>
 
 
-    {% if user.is_staff %}
+    {% if user.role == 'Supervisor' or user.role == 'Administrator' %}
     <div class="row mx-1 justify-content-center">
         <div class="col col-lg-10 d-flex justify-content-center">       
             <p><a href={% url 'timesheet:Edit_Project' id=project.id %} class="btn btn-outline-success mt-2 px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
@@ -122,7 +122,7 @@
 
         <!-- Cuerpo de Tabla -->
 
-        {% if user.is_staff %}
+        {% if user.role == 'Supervisor' or user.role == 'Administrator' %}
 
         <tbody>
             {% for Users in user_list %}

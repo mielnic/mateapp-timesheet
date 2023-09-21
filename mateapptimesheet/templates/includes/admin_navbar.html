@@ -16,7 +16,7 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-            {% if user.is_superuser %}
+            {% if user.role == 'Administrator' %}
             <div class="dropdown-container">
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><h5 class="text-secondary-emphasis"><i class="bi bi-people"></i>&nbsp;{% trans "Users" %}</h5></a>
@@ -44,7 +44,7 @@
           <div class="d-none d-lg-block">
             <ul class="navbar-nav mx-4 ms-auto mb-2 mb-lg-0">
 
-              {% if user.is_superuser %}
+              {% if user.role == 'Administrator' %}
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="/" data-bs-toggle="tooltip" data-bs-title={% trans "Home" %} data-bs-placement="bottom">
                   <img src="{% static 'main/images/home.svg' %}" alt="Admin">
@@ -61,7 +61,7 @@
           </div>
           <div class="d-lg-none">
             <ul class="navbar-nav mx-4 ms-auto mb-2 mb-lg-0">
-              {% if user.is_superuser %}
+              {% if user.role == 'Administrator' %}
               <li class="nav-item">
                 <a class="nav-link" href="/">
                   <h5><i class="bi bi-house"></i>&nbsp; {% trans "Home" %}</h5>

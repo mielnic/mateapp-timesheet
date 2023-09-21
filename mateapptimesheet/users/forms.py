@@ -13,6 +13,12 @@ SENIORITY_CHOICES = [
     ("Senior", "Senior"),
 ]
 
+ROLE_CHOICES = [
+    ("User", _("User")),
+    ("Supervisor", _("Supervisor")),
+    ("Administrator", _("Administrator")),
+]
+
 class CustomUserCreationForm(UserCreationForm):
 
     password1 = forms.CharField(
@@ -27,6 +33,10 @@ class CustomUserCreationForm(UserCreationForm):
         choices=SENIORITY_CHOICES,
     )
     seniority.widget.attrs.update({'class': 'form-select'})
+    role = forms.ChoiceField(
+        choices=ROLE_CHOICES
+    )
+    role.widget.attrs.update({'class' : 'form-select'})
 
     class Meta:
         model = CustomUser
@@ -37,12 +47,12 @@ class CustomUserCreationForm(UserCreationForm):
             "password1",
             "password2",
             "is_active",
-            "is_staff",
             "title",
             "seniority",
             "practice",
             "allocTarget",
             "startDate",
+            "role",
             ]
 
         widgets = {
@@ -52,7 +62,6 @@ class CustomUserCreationForm(UserCreationForm):
             'title': forms.TextInput(attrs={'class':'form-control','placeholder':'Title'}),
             'practice': forms.TextInput(attrs={'class':'form-control','placeholder':'Practice'}),
             'allocTarget' : forms.NumberInput(attrs={'class':'form-control'}),
-            'is_staff' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_active' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'startDate': forms.DateInput(attrs={'type':'date', 'class':'form-control', 'required':'True'}),
         }
@@ -114,6 +123,11 @@ class CustomUserEditForm(UserChangeForm):
         choices=SENIORITY_CHOICES,
     )
     seniority.widget.attrs.update({'class': 'form-select'})
+    role = forms.ChoiceField(
+        choices=ROLE_CHOICES
+    )
+    role.widget.attrs.update({'class' : 'form-select'})
+
 
     class Meta:
         model = CustomUser
@@ -121,13 +135,12 @@ class CustomUserEditForm(UserChangeForm):
             "first_name",
             "last_name",
             "is_active",
-            "is_staff",
-            "is_superuser",
             "title",
             "seniority",
             "practice",
             "allocTarget",
             "startDate",
+            "role",
             ]
         
         widgets = {
@@ -136,9 +149,7 @@ class CustomUserEditForm(UserChangeForm):
             'title': forms.TextInput(attrs={'class':'form-control','placeholder':'Title'}),
             'practice': forms.TextInput(attrs={'class':'form-control','placeholder':'Practice'}),
             'allocTarget' : forms.NumberInput(attrs={'class':'form-control'}),
-            'is_staff' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'is_active' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
-            'is_superuser' : forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'startDate': forms.DateInput(attrs={'type':'date','class':'form-control'}),
         }
 
