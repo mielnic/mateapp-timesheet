@@ -13,7 +13,7 @@ sandbox.html
 notepad.txt
 *.pyc
 settings.py
-todo.txt
+todo.md
 Search-Materialized-View.pgsql
 document.pgsql
 !login.html
