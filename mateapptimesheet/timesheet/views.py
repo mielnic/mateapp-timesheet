@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
 from main.decorators import allowed_users
 from django.contrib.auth import get_user_model
-import datetime
 from django.db.models import Sum, Q
 from django.contrib.postgres.search import SearchVector, SearchQuery
 
@@ -31,23 +30,19 @@ def companies(request, a, b):
         if searchform.is_valid():
             q = searchform.cleaned_data['q']
             companies_list = Company.objects.filter(companyName__icontains=q, deleted=False)
-            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+            pgx = ''
             template = loader.get_template('timesheet/company_list.html')
 
     else:
         companies_list = Company.objects.order_by('companyName').filter(deleted=False) [a:b]
         length = Company.objects.filter(deleted=False).count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+        pgx = paginator(a, length, b)
         template = loader.get_template('timesheet/company_list.html')
 
     context = {
         'companies_list': companies_list,
         'searchform' : searchform,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx,
     }
     return HttpResponse(template.render(context, request))
 
@@ -61,17 +56,13 @@ def company(request, id, a, b):
     project_list = project_dataset.filter(company_id=id).order_by('-projectStatus', 'projectName') [a:b]
     total_balance = project_dataset.filter(company_id=id).filter(Q(projectType='recurrent') | Q(projectStatus=False)).aggregate(Sum('balance'))
     length = Project.objects.filter(company_id=id).filter(deleted=False).count()
-    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+    pgx = paginator(a, length, b)
     template = loader.get_template('timesheet/company_view.html')
     context = {
         'company' : company,
         'project_list' : project_list,
         'total_balance' : total_balance,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx,
     }
     return HttpResponse(template.render(context, request))
 
@@ -168,23 +159,19 @@ def projects(request, a, b):
                 project_list = project_dataset.annotate(search=SearchVector("projectName", "company__companyName")).filter(search=SearchQuery(q), projectStatus=status)
             else:
                 project_list = project_dataset.filter(projectStatus=status)
-            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+            pgx = ''
             template = loader.get_template('timesheet/project_list.html')
     else:
         project_dataset = getProjectList().filter(projectStatus=True)
         project_list = project_dataset [a:b]
         length = project_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+        pgx = paginator(a, length, b)
         template = loader.get_template('timesheet/project_list.html')
 
     context = {
         'project_list': project_list,
         'searchform' : searchform,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx,
     }
     return HttpResponse(template.render(context, request))
 
@@ -220,14 +207,14 @@ def project(request, id, a, b):
             user_list = getProjectTimesheets(f, project.id)
             if q:       
                 user_list = user_list.annotate(search=SearchVector("last_name", "first_name")).filter(search=SearchQuery(q))
-            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+            pgx = ''
             template = loader.get_template('timesheet/project_view.html')
             view_total_alloc_time = user_list.aggregate(Sum('alloc_time'))           
     else:
         view_total_alloc_time = total_alloc_time
         user_list = user_dataset [a:b]
         length = user_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+        pgx = paginator(a, length, b)
         template = loader.get_template('timesheet/project_view.html')
         
     context = {
@@ -238,11 +225,7 @@ def project(request, id, a, b):
         'pending_time' : pending_time,
         'recurrent' : recurrent,
         'empty' : empty,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx,
     }
     return HttpResponse(template.render(context, request))
 
@@ -332,7 +315,7 @@ def timesheets(request, a, b):
             timesheets_list = timesheetDateFilter(f)
             if q:
                 timesheets_list = timesheets_list.annotate(search=SearchVector("project__projectName", "project__company__companyName", "user__first_name", "user__last_name")).filter(search=SearchQuery(q), deleted=False).order_by('-timeDate')
-            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+            pgx = ''
             template = loader.get_template('timesheet/timesheet_list.html')
             s = timeSum(timesheets_list)
 
@@ -343,18 +326,14 @@ def timesheets(request, a, b):
         s = timeSum(timesheets_dataset)
         timesheets_list = timesheets_dataset [a:b]
         length = Time.objects.filter(deleted=False).count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+        pgx = paginator(a, length, b)
         template = loader.get_template('timesheet/timesheet_list.html')
 
     context = {
         'timesheets_list': timesheets_list,
         'filterform' : filterform,
         's' : s,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx,
     }
     return HttpResponse(template.render(context, request))
 
@@ -375,7 +354,7 @@ def self_timesheets(request, a=0, b=10):
             timesheets_list = timesheets_list.filter(user=user)
             if q:
                 timesheets_list = timesheets_list.annotate(search=SearchVector("project__projectName", "project__company__companyName")).filter(search=SearchQuery(q), user=user, deleted=False).order_by('-timeDate')
-            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+            pgx = ''
             template = loader.get_template('timesheet/timesheet_list_self.html')
             s = timeSum(timesheets_list)
 
@@ -386,18 +365,14 @@ def self_timesheets(request, a=0, b=10):
         s = timeSum(timesheets_dataset)
         timesheets_list = timesheets_dataset [a:b]
         length = timesheets_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+        pgx = paginator(a, length, b)
         template = loader.get_template('timesheet/timesheet_list_self.html')
 
     context = {
         'timesheets_list': timesheets_list,
         'filterform' : filterform,
         's' : s,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx,
     }
     return HttpResponse(template.render(context, request))
 
@@ -570,7 +545,7 @@ def users(request, a, b):
             users_list = userAllocTime(f)
             if q:       
                 users_list = users_list.annotate(search=SearchVector("last_name", "first_name")).filter(search=SearchQuery(q))
-            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+            pgx = ''
             template = loader.get_template('timesheet/user_list.html')
             total_alloc_time = users_list.aggregate(Sum('alloc_time'))
             total_unalloc_time = users_list.aggregate(Sum('unalloc_time'))
@@ -581,7 +556,7 @@ def users(request, a, b):
         total_alloc_time = users_dataset.aggregate(Sum('alloc_time'))
         total_unalloc_time = users_dataset.aggregate(Sum('unalloc_time'))
         length = users_dataset.count()
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+        pgx = paginator(a, length, b)
         template = loader.get_template('timesheet/user_list.html')
     
     context = {
@@ -589,11 +564,7 @@ def users(request, a, b):
         'filterform' : filterform,
         'total_alloc_time' : total_alloc_time,
         'total_unalloc_time' : total_unalloc_time,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx,
     }
     return HttpResponse(template.render(context, request))
 
@@ -614,7 +585,7 @@ def user_detail(request, id, a, b):
                 project_list = getUserProjects(f, muser)
                 if q:
                     project_list = project_list.annotate(search=SearchVector("projectName", "company__companyName")).filter(search=SearchQuery(q)).order_by('projectName')
-                links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+                pgx = ''
                 template = loader.get_template('timesheet/user_detail.html')
                 s = project_list.aggregate(Sum('total_alloc_time'))
         
@@ -624,7 +595,7 @@ def user_detail(request, id, a, b):
             s = project_dataset.aggregate(Sum('total_alloc_time'))
             project_list = project_dataset [a:b]
             length = project_dataset.count()
-            links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+            pgx = paginator(a, length, b)
             template = loader.get_template('timesheet/user_detail.html')
 
         context = {
@@ -633,11 +604,7 @@ def user_detail(request, id, a, b):
             'id' : id,
             's' : s,
             'muser' : muser,
-            'links' : links,
-            'idxPL' : idxPL,
-            'idxPR' : idxPR,
-            'idxNL' : idxNL,
-            'idxNR' : idxNR,
+            'pgx' : pgx,
         }
         return HttpResponse(template.render(context, request))
     else:

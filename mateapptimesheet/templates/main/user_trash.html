@@ -52,24 +52,26 @@
     </tbody>
     </table>
     </div>
-
-    <nav aria-label="Page navigation" class="m-3">
+    <!--Pagination-->
+      {% if pgx.pgs > 1 %}
+      <nav aria-label="Page navigation" class="m-3">
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" href="/user_trash/{{idxPL}}/{{idxPR}}/" aria-label="Previous">
+            <a class="page-link" href="/user_trash/{{pgx.idxpl}}/{{pgx.idxpr}}/" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          {% for link in links %}
+          {% for link in pgx.lks %}
           <li class="page-item"><a class="page-link" id="page-link" href="/user_trash/{{link.pl}}/{{link.pr}}/">{{link.page}}</a></li>
           {% endfor %}
           <li class="page-item">
-            <a class="page-link" href="/user_trash/{{idxNL}}/{{idxNR}}/" aria-label="Next">
+            <a class="page-link" href="/user_trash/{{pgx.idxnl}}/{{pgx.idxnr}}/" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
         </ul>
       </nav>
+      {% endif %}
 
     {% else %}
         <p>{% trans "Trash is empty." %}</p>

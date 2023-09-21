@@ -95,15 +95,11 @@ def user_trash(request, a, b):
                     )
     trash_list = trash [a:b]
     length = len(trash)
-    links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+    pgx = paginator(a, length, b)
     template = loader.get_template('main/user_trash.html')
     context = {
         'trash_list': trash_list,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx
     }
     return HttpResponse(template.render(context, request))
 
@@ -121,7 +117,7 @@ def admin_trash(request, a, b):
             deleted_projects_list = Project.objects.filter(deleted=True).annotate(search=SearchVector("projectName", "company__companyName")).filter(search=SearchQuery(q))
             deleted_timesheets_list = Time.objects.filter(deleted=True).annotate(search=SearchVector("user__last_name", "user__first_name", "timeDate", "project__projectName", "project__company__companyName")).filter(search=SearchQuery(q))
             trash_list = list(chain(deleted_companies_list, deleted_projects_list, deleted_timesheets_list))
-            links, idxPL, idxPR, idxNL, idxNR = '', '', '', '', ''
+            pgx =  ''
             template = loader.get_template('main/admin_trash.html')
             if trash_list == []:
                 messages.warning(request, _("The search didn't return any result."))
@@ -135,17 +131,13 @@ def admin_trash(request, a, b):
                         )
         trash_list = trash [a:b]
         length = len(trash)
-        links, idxPL, idxPR, idxNL, idxNR = paginator(a, length, b)
+        pgx = paginator(a, length, b)
         template = loader.get_template('main/admin_trash.html')
     
     context = {
         'searchform' : searchform,
         'trash_list': trash_list,
-        'links' : links,
-        'idxPL' : idxPL,
-        'idxPR' : idxPR,
-        'idxNL' : idxNL,
-        'idxNR' : idxNR,
+        'pgx' : pgx,
     }
     return HttpResponse(template.render(context, request))
 

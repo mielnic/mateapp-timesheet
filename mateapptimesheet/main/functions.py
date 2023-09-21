@@ -51,4 +51,13 @@ def paginator(index, length, b):
     
     # Return the variables.
 
-    return links, idxPreviousL, idxPreviousR, idxNextL, idxNextR
+    class pgx:
+        lks = links
+        idxpl = idxPreviousL
+        idxpr = idxPreviousR
+        idxnl = idxNextL
+        idxnr = idxNextR
+        pn = pageNumber
+        pgs = pages
+    
+    return pgx

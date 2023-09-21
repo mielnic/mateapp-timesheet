@@ -112,19 +112,19 @@
     </div>
 
     <!-- Pagination -->
-    {% if links %}
+    {% if pgx.pgs > 1 %}
     <nav aria-label="Page navigation" class="m-3">
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" href="/timesheet/users/{{idxPL}}/{{idxPR}}/" aria-label="Previous">
+            <a class="page-link" href="/timesheet/users/{{pgx.idxpl}}/{{pgx.idxpr}}/" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          {% for link in links %}
+          {% for link in pgx.lks %}
           <li class="page-item"><a class="page-link" id="page-link" href="/timesheet/users/{{link.pl}}/{{link.pr}}/">{{link.page}}</a></li>
           {% endfor %}
           <li class="page-item">
-            <a class="page-link" href="/timesheet/users/{{idxNL}}/{{idxNR}}/" aria-label="Next">
+            <a class="page-link" href="/timesheet/users/{{pgx.idxnl}}/{{pgx.idxnr}}/" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
