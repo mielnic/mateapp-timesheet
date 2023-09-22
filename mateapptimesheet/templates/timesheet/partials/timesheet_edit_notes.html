@@ -9,6 +9,6 @@
         <label for="id_notes">{% trans "Notes:" %}</label>
     </div>
     <button class="btn btn-outline-success btn-sm">{% trans "Save" %}</button>
-    <button class="btn btn-outline-secondary btn-sm" hx-get="{% url 'timesheet:Timesheet_Notes' id=timesheet.id %}" hx-target="#notes">{% trans "Cancel" %}</button>
+    <button class="btn btn-outline-secondary btn-sm" hx-get="{% url 'timesheet:Timesheet_Notes_Title' id=timesheet.id %}" hx-target="#notes">{% trans "Cancel" %}</button>
 
 </form>

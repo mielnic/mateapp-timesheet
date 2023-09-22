@@ -30,9 +30,18 @@ class Company(BaseModel):
     address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, blank=True, null=True)
     website = models.CharField(max_length=100, blank=True)
     companyPhone = models.CharField(max_length=25, blank=True)
-    companyNotes = models.CharField(max_length=500, blank=True)
+    companyNotes = models.CharField(max_length=2000, blank=True)
+    companyNotesTitle = models.CharField(max_length=200, blank=True, null=True)
     deleted = models.BooleanField(blank=True, default=0)
     deletedBy = models.BigIntegerField(blank=True, null=True)
+
+    def title(self):
+        title = self.companyNotes.split('\n', 1)[0]
+        return title
+
+    def save(self, *args, **kwargs):
+        self.companyNotesTitle = self.title()
+        super(Company, self).save(*args, **kwargs)
     
     def __str__(self):
         return self.companyName
@@ -45,9 +54,18 @@ class Project(BaseModel):
     budget = models.IntegerField(default=0, blank=True)
     startDate = models.DateField(blank=False, null=True, default=date.today)
     projectAge = models.IntegerField(default=0, blank=True)
-    projectNotes = models.CharField(max_length=500, blank=True)
+    projectNotes = models.CharField(max_length=2000, blank=True)
+    projectNotesTitle = models.CharField(max_length=200, blank=True, null=True)
     deleted = models.BooleanField(blank=True, default=0)
     deletedBy = models.BigIntegerField(blank=True, null=True)
+
+    def title(self):
+        title = self.projectNotes.split('\n', 1)[0]
+        return title
+
+    def save(self, *args, **kwargs):
+        self.projectNotesTitle = self.title()
+        super(Project, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.projectName} - {self.company}'
@@ -59,9 +77,18 @@ class Time(BaseModel):
     timeType = models.CharField(max_length=100, blank=True)
     timeRevenue = models.BooleanField(blank=True, default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, blank=True, null=True)
-    timeNotes = models.CharField(max_length=500, blank=True)
+    timeNotes = models.CharField(max_length=2000, blank=True)
+    timeNotesTitle = models.CharField(max_length=200, blank=True, null=True)
     deleted = models.BooleanField(blank=True, default=0)
     deletedBy = models.BigIntegerField(blank=True, null=True)
+
+    def title(self):
+        title = self.timeNotes.split('\n', 1)[0]
+        return title
+
+    def save(self, *args, **kwargs):
+        self.timeNotesTitle = self.title()
+        super(Time, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.timeDate}, {self.project}, {self.user}'

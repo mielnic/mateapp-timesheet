@@ -14,6 +14,7 @@ urlpatterns = [
     path('companies/<int:a>/<int:b>/', views.companies , name='Companies'),
     path('company/<int:id>/<int:a>/<int:b>/', views.company , name='Company'),
     path('company_notes/<int:id>/', views.companyNotes, name='Company_Notes'),
+    path('company_notes_title/<int:id>/', views.companyNotesTitle, name='Company_Notes_Title'),
     path('company_edit_notes/<int:id>/', views.companyNotesEdit, name='Company_Edit_Notes'),
 ]
 
@@ -28,6 +29,7 @@ urlpatterns += [
     path('projects/<int:a>/<int:b>/', views.projects , name='Projects'),
     path('project/<int:id>/<int:a>/<int:b>/', views.project , name='Project'),
     path('project_notes/<int:id>/', views.projectNotes, name='Project_Notes'),
+    path('project_notes_title/<int:id>/', views.projectNotesTitle, name='Project_Notes_Title'),
     path('project_edit_notes/<int:id>/', views.projectNotesEdit, name='Project_Edit_Notes'),
 ]
 
@@ -47,6 +49,7 @@ urlpatterns += [
     path('timesheet/<int:id>/', views.timesheet , name='Timesheet'),
     path('timesheet_self/<int:id>/', views.timesheet_self , name='Timesheet_Self'),
     path('timesheet_notes/<int:id>/', views.timeNotes, name='Timesheet_Notes'),
+    path('timesheet_notes_title/<int:id>/', views.timeNotesTitle, name='Timesheet_Notes_Title'),
     path('timesheet_edit_notes/<int:id>/', views.timeNotesEdit, name='Timesheet_Edit_Notes'),
 ]
 

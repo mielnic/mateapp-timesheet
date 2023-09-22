@@ -626,6 +626,15 @@ def timeNotes(request, id):
     return render(request, 'timesheet/partials/timesheet_notes.html', context)
 
 @login_required
+def timeNotesTitle(request, id):
+    '''Esta vista de la de display del partial de timesheet notes de htmx'''
+    timesheet = Time.objects.get(id=id)
+    context = {
+        'timesheet' : timesheet,
+    }
+    return render(request, 'timesheet/partials/timesheet_notes_title.html', context)
+
+@login_required
 def timeNotesEdit(request, id):
     '''Esta vista es el tramo de edición del partial de timesheet notes de htmx'''
     timesheet = Time.objects.get(id=id)
@@ -638,7 +647,7 @@ def timeNotesEdit(request, id):
                 'notesform' : notesform,
                 'timesheet' : timesheet,
             }
-            return render(request, 'timesheet/partials/timesheet_notes.html', context)
+            return render(request, 'timesheet/partials/timesheet_notes_title.html', context)
 
     else:
         notesform = TimeNotesForm(instance=timesheet)
@@ -661,6 +670,15 @@ def companyNotes(request, id):
     return render(request, 'timesheet/partials/company_notes.html', context)
 
 @login_required
+def companyNotesTitle(request, id):
+    '''Esta vista de la de display del partial de company notes de htmx'''
+    company = Company.objects.get(id=id)
+    context = {
+        'company' : company,
+    }
+    return render(request, 'timesheet/partials/company_notes_title.html', context)
+
+@login_required
 def companyNotesEdit(request, id):
     '''Esta vista es el tramo de edición del partial de company notes de htmx'''
     company = Company.objects.get(id=id)
@@ -673,7 +691,7 @@ def companyNotesEdit(request, id):
                 'notesform' : notesform,
                 'company' : company,
             }
-            return render(request, 'timesheet/partials/company_notes.html', context)
+            return render(request, 'timesheet/partials/company_notes_title.html', context)
 
     else:
         notesform = CompanyNotesForm(instance=company)
@@ -696,6 +714,15 @@ def projectNotes(request, id):
     return render(request, 'timesheet/partials/project_notes.html', context)
 
 @login_required
+def projectNotesTitle(request, id):
+    '''Esta vista de la de display del partial de project notes de htmx'''
+    project = Project.objects.get(id=id)
+    context = {
+        'project' : project,
+    }
+    return render(request, 'timesheet/partials/project_notes_title.html', context)
+
+@login_required
 def projectNotesEdit(request, id):
     '''Esta vista es el tramo de edición del partial de project notes de htmx'''
     project = Project.objects.get(id=id)
@@ -708,7 +735,7 @@ def projectNotesEdit(request, id):
                 'notesform' : notesform,
                 'project' : project,
             }
-            return render(request, 'timesheet/partials/project_notes.html', context)
+            return render(request, 'timesheet/partials/project_notes_title.html', context)
 
     else:
         notesform = ProjectNotesForm(instance=project)
