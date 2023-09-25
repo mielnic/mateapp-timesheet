@@ -139,7 +139,7 @@ msgstr "Perfil"
 #: .\templates\includes\navbar.html:79 .\templates\includes\navbar.html:126
 #: .\templates\users\registration.html:68
 msgid "Register"
-msgstr "Registro"
+msgstr "Registrarse"
 
 #: .\templates\main\admin_home.html:26
 #: .\templates\timesheet\company_list.html:63
