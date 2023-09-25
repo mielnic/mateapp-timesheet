@@ -1,11 +1,20 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block navbar %}
 {% include 'includes/navbar.html' %}
 {% endblock navbar %}
 
 {% block content %}
+
+<div id="spinner">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
 
 <form method="post" autocomplete="off">
 
@@ -73,5 +82,7 @@
 
 
 </form>
+
+<script src="{% static 'users/js/registration_helper.js' %}"></script>
 
 {% endblock %}
