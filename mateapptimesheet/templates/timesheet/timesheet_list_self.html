@@ -7,13 +7,13 @@
 {% endblock navbar %}
 
 {% block content %}
-<!-- Header -->
+<!-- Quick log. Only visible in sm screens -->
 <div class="row mt-3 mx-1 justify-content-md-center d-sm-none">
   <div class="col bg-white p-2 col-lg-10 rounded border text-center">
     <a class="nav-link" href={% url 'timesheet:Create_Self_Timesheet'%}><h5 class="text-success-emphasis"><i class="bi bi-plus-square"></i>&nbsp;{% trans "Log Timesheet" %}</h5></a>
   </div>
 </div>
-
+<!-- Header -->
 <div class="row mt-3 mx-1 justify-content-md-center">
   <div class="col bg-white p-2 col-lg-10 rounded border ">
     <nav class="navbar navbar-expand-lg ">

@@ -60,7 +60,12 @@ class Project(BaseModel):
     deletedBy = models.BigIntegerField(blank=True, null=True)
 
     def title(self):
-        title = self.projectNotes.split('\n', 1)[0]
+        fline = self.post.split('\n', 1)[0]
+        if len(fline) > 25:
+            fline = fline[:25]
+            title = f'{fline}...'
+        else:
+            title = fline
         return title
 
     def save(self, *args, **kwargs):
@@ -83,7 +88,12 @@ class Time(BaseModel):
     deletedBy = models.BigIntegerField(blank=True, null=True)
 
     def title(self):
-        title = self.timeNotes.split('\n', 1)[0]
+        fline = self.post.split('\n', 1)[0]
+        if len(fline) > 25:
+            fline = fline[:25]
+            title = f'{fline}...'
+        else:
+            title = fline
         return title
 
     def save(self, *args, **kwargs):
