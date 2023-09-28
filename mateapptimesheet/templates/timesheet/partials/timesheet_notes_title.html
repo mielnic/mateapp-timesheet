@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <div class="row justify-content-start" id="notes" hx-swap="outerHTML swap:0.2s" hx-target="#notes">
-    <div class="col py-1 col-lg-10">
+    <div class="col py-3 mb-3 col-lg-10">
         <span><i class="bi bi-pencil-square text-success h5 hx-pointer me-2" hx-get="{% url 'timesheet:Timesheet_Edit_Notes' id=timesheet.id %}"></i></span>{{ timesheet.timeNotesTitle }} 
         <span class="hx-pointer" hx-get="{% url 'timesheet:Timesheet_Notes' id=timesheet.id %}"><small>&nbsp;|&nbsp;{% trans "more >" %}</small></span>
     </div>

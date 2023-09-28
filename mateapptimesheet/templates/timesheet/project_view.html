@@ -52,7 +52,7 @@
     <div class="row mx-1 justify-content-center">
         <div class="col col-lg-10 d-flex justify-content-center">       
             <p><a href={% url 'timesheet:Edit_Project' id=project.id %} class="btn btn-outline-success mt-2 px-4 mx-3" role="button">{% trans "Edit" %}</a></p>
-            <p><a href={% url 'timesheet:Projects' a=0 b=10 %} class="btn btn-outline-secondary mt-2  px-3 mx-3" role="button"><i class="bi bi-arrow-left me-2"></i>{% trans "Projects" %}</a></p>
+            <p><a href={% url 'timesheet:Projects' a=0 b=10 %} class="btn btn-outline-secondary mt-2 px-3 mx-3" role="button">{% trans "Projects" %}</a></p>
             {% if empty %}
             <p><a href={% url 'timesheet:Delete_Project' id=project.id %} class="btn btn-outline-danger mt-2 mx-3" role="button">{% trans "Delete" %}</a></p>
             {% endif %}
